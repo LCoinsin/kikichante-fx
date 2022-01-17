@@ -8,6 +8,7 @@ module com.kikichante.kikichantefx {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires javafx.media;
 
     opens com.kikichante.kikichantefx to javafx.fxml;
     exports com.kikichante.kikichantefx;
