@@ -1,5 +1,6 @@
 package com.kikichante.controller;
 
+import com.kikichante.client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -31,17 +32,14 @@ public class ControllerSigninSignup {
     private VBox VBoxButtonInscription;
 
     private Scene sceneMenu;
-    //private BddConnection bdd;
-    //private Client client;
+    private Client client;
 
     //Changement de scene
     public void setSceneMenu(Scene sceneMenu) {
         this.sceneMenu = sceneMenu;
     }
 
-    //public void setBdd(BddConnection bdd) { this.bdd = bdd; }
-
-    //public void setClient(Client client) { this.client = client; }
+    public void setClient(Client client) { this.client = client; }
 
     private void switchToMenu() {
         Stage primaryStage = (Stage)VBoxTextFieldConnexion.getScene().getWindow();
