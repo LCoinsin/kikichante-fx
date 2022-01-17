@@ -1,0 +1,63 @@
+.root{
+    /*-fx-background-image: url("background_image.jpg");
+    -fx-background-size: stretch;*/
+}
+
+.buttonStyle {
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+}
+
+.buttonStyle:hover {
+    -fx-border-width: 4px;
+}
+
+.buttonBig {
+    -fx-font-size: 25px;
+}
+
+.buttonMedium {
+    -fx-font-size: 15px;
+}
+
+.buttonSmall {
+    -fx-font-size: 10px;
+}
+
+.buttonGreen {
+    -fx-background-color: #8FD14F;
+}
+
+.buttonYellow {
+    -fx-background-color: #FAC710;
+}
+
+.buttonWhite {
+    -fx-background-color: #fff;
+}
+
+.textfieldStyle{
+    -fx-alignment: center;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+}
+
+.textfieldError {
+    -fx-border-color: red;
+}
+
+.textfieldBig {
+    -fx-font-size: 30px;
+}
+
+.textfieldMedium {
+    -fx-font-size: 20px;
+}
+
+.textfieldSmall {
+    -fx-font-size: 15px;
+}
+
+.textfieldWhite {
+    -fx-background-color: white;
+}

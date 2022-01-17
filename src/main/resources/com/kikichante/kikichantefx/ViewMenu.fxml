@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerMenu">
+    <children>
+        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="titleTest" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" text="Kikichante" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Book Antiqua" size="49.0" />
+                    </font></Label>
+                <Button alignment="CENTER" mnemonicParsing="false" onAction="#onClickGotoJoinGameList" prefHeight="66.0" prefWidth="154.0" text="Join Server" />
+                <HBox alignment="CENTER">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onClickGotoCreateGame" text="CreateGame" />
+                        <Button mnemonicParsing="false" onAction="#onClickGotoStatistique" text="Statistique" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
