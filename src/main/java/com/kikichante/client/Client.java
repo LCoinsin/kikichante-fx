@@ -22,9 +22,18 @@ public class Client {
     public Client() {
         try (Socket socket = new Socket("localhost", 5000);
         ) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), false);
-            out.println("test");
+
+            String event = "";
+            do {
+                event = scanner.nextLine();
+                if (event.equals("exit"))
+                    break;
+                choiveEvent(event);
+            } while (!event.equals("exit"));
+
+            //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            //out = new PrintWriter(socket.getOutputStream(), false);
+            //out.println("test");
 
             /*
             mapperMessage = new MapperMessage();

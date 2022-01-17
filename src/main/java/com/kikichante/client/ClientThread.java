@@ -24,8 +24,8 @@ public class ClientThread extends Thread{
         try {
             while (true) {
                 String response = in.readLine();
-                choiceEvent(mapperMessage.jsonToObject(response));
-                System.out.println(response);
+                //choiceEvent(mapperMessage.jsonToObject(response));
+                //System.out.println(response);
             }
         } catch (IOException e) {
             e.printStackTrace();
