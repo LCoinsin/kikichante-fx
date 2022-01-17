@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerJoin">
     <children>
-        <ProgressBar fx:id="soundProgressBar" layoutX="131.0" layoutY="131.0" prefHeight="20.0" prefWidth="369.0" progress="0.0" />
+        <ProgressBar fx:id="songProgressBar" layoutX="131.0" layoutY="131.0" prefHeight="20.0" prefWidth="369.0" progress="0.0" />
         <Button id="buttonRetour" layoutX="28.0" layoutY="50.0" mnemonicParsing="false" onAction="#onClickGotoMenu" prefHeight="47.0" prefWidth="118.0" text="Retour" />
         <Button id="buttonJoinPrivateGame" layoutX="306.0" layoutY="200.0" mnemonicParsing="false" text="join private game" />
         <Button id="buttonJoinGame" layoutX="306.0" layoutY="320.0" mnemonicParsing="false" text="rejoindre" />

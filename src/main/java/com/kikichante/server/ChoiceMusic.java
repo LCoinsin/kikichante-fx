@@ -34,12 +34,13 @@ public class ChoiceMusic {
         }
     }
 
-    public boolean queryConnexionMusic() {
+    public Music queryConnexionMusic() {
         Random r = new Random();
         int n = r.nextInt(3);
 
         boolean retour = false;
         ResultSet resultats = null;
+        Music randomMusicChoice = null;
         try
         {
             PreparedStatement titreMusique = this.con.prepareStatement("Select * from kikichante.musique where Code_musique = ?;");
@@ -57,12 +58,12 @@ public class ChoiceMusic {
                     int annee = resultats.getInt(4);
                     String theme = resultats.getString(5);
 
-                    Music randomMusicChoice = new Music( codeMusic,titre,interprete,url,annee,theme);
+                    randomMusicChoice = new Music(codeMusic,titre,interprete,url,annee,theme);
 
                     System.out.println("randomMusicChoice = " + randomMusicChoice.toString());
                 }
             } else {
-                return false;
+                return null;
             }
             //System.out.println( resultats.getString(1));
 
@@ -70,7 +71,7 @@ public class ChoiceMusic {
         catch(Exception e){
             System.out.println(e);
         }
-        return true;
+        return randomMusicChoice;
     }
 
 

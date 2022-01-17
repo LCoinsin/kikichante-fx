@@ -71,7 +71,7 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        client = new Client();
-        //launch();
+//        client = new Client();
+        launch();
     }
 }
