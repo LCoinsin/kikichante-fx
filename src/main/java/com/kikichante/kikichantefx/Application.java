@@ -1,5 +1,6 @@
 package com.kikichante.kikichantefx;
 
+import com.kikichante.client.Client;
 import com.kikichante.controller.ControllerJoin;
 import com.kikichante.controller.ControllerMenu;
 import com.kikichante.controller.ControllerSigninSignup;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
+
+    static Client client;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -38,7 +41,7 @@ public class Application extends javafx.application.Application {
         //****************
         ControllerSigninSignup controllerSignInSignUp = (ControllerSigninSignup)loginLoader.getController();
         controllerSignInSignUp.setSceneMenu(viewMenu);
-        //controllerSignInSignUp.setClient(client);
+        controllerSignInSignUp.setClient(client);
 
         ControllerMenu controllerMenu = (ControllerMenu)menuLoader.getController();
         controllerMenu.setSceneStatistique(viewStatistique);
@@ -68,6 +71,7 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        client = new Client();
+        //launch();
     }
 }
