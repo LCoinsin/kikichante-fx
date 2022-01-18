@@ -15,14 +15,16 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
+import java.security.PublicKey;
 import java.sql.SQLException;
 import java.util.*;
 
+import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.control.ProgressBar;
-import javafx.util.Duration;
+
 
 public class ControllerJoin implements Initializable {
     @FXML
@@ -48,6 +50,10 @@ public class ControllerJoin implements Initializable {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneMenu);
         primaryStage.setFullScreen(true);
+    }
+
+    public void go(ActionEvent actionEvent){
+
     }
 
     public void playMusic(String path){
@@ -111,12 +117,13 @@ public class ControllerJoin implements Initializable {
         System.out.println("player = " + player.toString());
         bgView.setMediaPlayer(player);
         player.play();
-//        DoubleProperty mvw = bgView.fitWidthProperty();
-//        DoubleProperty mvh = bgView.fitHeightProperty();
-//        mvw.bind(Bindings.selectDouble(bgView.sceneProperty(), "width"));
-//        mvh.bind(Bindings.selectDouble(bgView.sceneProperty(), "height"));
-//        bgView.setPreserveRatio(true);
-//        player.play();
+        DoubleProperty mvw = bgView.fitWidthProperty();
+        DoubleProperty mvh = bgView.fitHeightProperty();
+        mvw.bind(Bindings.selectDouble(bgView.sceneProperty(), "width"));
+        mvh.bind(Bindings.selectDouble(bgView.sceneProperty(), "height"));
+        bgView.setPreserveRatio(true);
+        player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
+        player.play();
 
     }
 }

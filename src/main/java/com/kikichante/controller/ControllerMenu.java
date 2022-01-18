@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
@@ -53,6 +54,7 @@ public class ControllerMenu implements Initializable {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneJoinGameList);
         primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
     }
 
 
@@ -67,7 +69,7 @@ public class ControllerMenu implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Media media;
-        media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
+        media = new Media(new File("src/main/resources/video/fond.mp4").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
         mediaView.setMediaPlayer(player);
         DoubleProperty mvw = mediaView.fitWidthProperty();
@@ -75,7 +77,7 @@ public class ControllerMenu implements Initializable {
         mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
         mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
         mediaView.setPreserveRatio(true);
+        player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
         player.play();
-
     }
 }
