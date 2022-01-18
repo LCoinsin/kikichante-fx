@@ -9,11 +9,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 public class Application extends javafx.application.Application {
 
-    static Client client;
+    static Client client = null;
+    static final String ADRESS = "localhost";
+    static final int PORT = 5000;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -70,8 +76,19 @@ public class Application extends javafx.application.Application {
         System.out.println("Stage is closing");
     }
 
-    public static void main(String[] args) {
-        //client = new Client();
+    public static void main(String[] args) throws IOException {
+        Socket socket;
+
+        try {
+            socket = new Socket(ADRESS, PORT);
+            client = new Client(socket);
+        } catch (IOException e) {
+            System.out.println("Serveur eteint");
+            e.printStackTrace();
+            //TODO -> Afficher une fenetre erreur avec le message serveur eteint
+            System.exit(0);
+        }
+
         launch();
     }
 }

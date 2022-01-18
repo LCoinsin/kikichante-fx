@@ -11,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class ControllerSigninSignup {
     @FXML
     private TextField textfieldInscriptionUsername;
@@ -101,12 +103,20 @@ public class ControllerSigninSignup {
 
     public void onClickConnexion(ActionEvent actionEvent) {
         if(textfieldConnexionUsername.getText() != "" && textfieldConnexionPassword.getText() != "") {
-            //client.connexion(textfieldConnexionUsername.getText(), textfieldConnexionPassword.getText());
-            //Account accountConnexion = new Connexion(textfieldConnexionUsername.getText(), textfieldConnexionPassword.getText());
+            client.connexion(textfieldConnexionUsername.getText(), textfieldConnexionPassword.getText());
+            boolean isConnected = false;
+            try {
+                String res = client.readLine();
+                if(res.startsWith("LOGIN")) {
+                    String[] resMessage = res.split(":");
+                    if (resMessage[1].equals("OK"))
+                        isConnected = true;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            //if(this.bdd.queryConnection(textfieldConnexionUsername.getText(), textfieldConnexionPassword.getText())) {
-            if(true) {
-                //this.bdd.queryTest();
+            if(isConnected) {
                 switchToMenu();
             } else {
                 textfieldConnexionUsername.getStyleClass().add("textfieldError");

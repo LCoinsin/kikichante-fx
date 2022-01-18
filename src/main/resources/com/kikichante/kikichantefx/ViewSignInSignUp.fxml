@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="864.0" prefWidth="1536.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerSigninSignup">
     <children>
-        <Button layoutX="488.0" layoutY="816.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="560.0" styleClass="buttonStyle, buttonSmall, buttonWhite" text="Jouer en tant qu'invité ..." />
+        <Button layoutX="488.0" layoutY="816.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="560.0" styleClass="buttonStyle, buttonSmall, buttonWhite" text="Jouer en tant qu'invité ..."/>
         <VBox fx:id="VBoxTextFieldConnexion" layoutX="447.0" layoutY="256.0" prefHeight="176.0" prefWidth="642.0">
             <children>
                 <TextField styleClass="textfieldBig, textfieldWhite, textfieldStyle" onKeyReleased="#deleteErrorKey" onMouseClicked="#deleteErrorMouse" fx:id="textfieldConnexionUsername" prefHeight="65.0" prefWidth="642.0" promptText="Username">
