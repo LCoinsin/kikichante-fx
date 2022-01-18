@@ -40,16 +40,19 @@ public class ControllerMenu implements Initializable {
     public void onClickGotoStatistique(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneStatistique);
+        primaryStage.setFullScreen(true);
     }
 
     public void onClickGotoCreateGame(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneCreateGame);
+        primaryStage.setFullScreen(true);
     }
 
     public void onClickGotoJoinGameList(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneJoinGameList);
+        primaryStage.setFullScreen(true);
     }
 
 
@@ -63,7 +66,6 @@ public class ControllerMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Media media;
         //media = new Media(this.getClass().getResource("video/bg.mp4").toExternalForm());
         media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());

@@ -43,7 +43,9 @@ public class ControllerSigninSignup {
 
     private void switchToMenu() {
         Stage primaryStage = (Stage)VBoxTextFieldConnexion.getScene().getWindow();
+
         primaryStage.setScene(this.sceneMenu);
+        primaryStage.setFullScreen(true);
     }
 
     //true -> switch vers l'inscription

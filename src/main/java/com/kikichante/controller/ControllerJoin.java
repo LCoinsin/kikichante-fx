@@ -39,6 +39,7 @@ public class ControllerJoin  {
         System.out.println("test");
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneMenu);
+        primaryStage.setFullScreen(true);
     }
 
     public void playMusic(String path){
