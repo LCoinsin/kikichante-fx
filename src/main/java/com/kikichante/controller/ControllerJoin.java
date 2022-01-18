@@ -83,6 +83,7 @@ public class ControllerJoin  {
 
     @FXML
     void initialize() throws SQLException {
+        /*
         int idMus;
 
         idMus = (new Random()).nextInt(4);
@@ -91,7 +92,7 @@ public class ControllerJoin  {
         Music mus = choix.queryConnexionMusic();
 
         System.out.println(mus.getUrl());
-        playMusic(mus.getUrl());
+        playMusic(mus.getUrl());*/
     }
 
 }

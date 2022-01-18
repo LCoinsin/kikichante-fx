@@ -21,24 +21,18 @@ public class Client {
 
     public Client() {
         try (Socket socket = new Socket("localhost", 5000);
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         ) {
+            out = new PrintWriter(socket.getOutputStream(), false);
 
-            String event = "";
-            do {
-                event = scanner.nextLine();
-                if (event.equals("exit"))
-                    break;
-                choiveEvent(event);
-            } while (!event.equals("exit"));
+            clientThread = new ClientThread(socket);
+            clientThread.start();
 
-            //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //out = new PrintWriter(socket.getOutputStream(), false);
-            //out.println("test");
+            out.println("test");
 
             /*
             mapperMessage = new MapperMessage();
-            clientThread = new ClientThread(socket);
-            clientThread.start();
+
 
             userId = String.valueOf(UUID.randomUUID());
             out.println(mapperMessage.objectToJson(new Message(userId, 0, "Auth")));
