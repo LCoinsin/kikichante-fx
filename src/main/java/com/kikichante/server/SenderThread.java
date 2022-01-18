@@ -39,6 +39,9 @@ public class SenderThread extends Thread {
                 this.clientServer.println("LOGIN:KO");
             }
 
+        } else if (message.startsWith("CREATEACCOUNT")) {
+            //TODO -> Creation de compte
+            System.out.println("message = " + message);
         } else {
             System.out.println("message = " + message);
         }

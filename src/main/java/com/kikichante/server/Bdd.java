@@ -42,4 +42,18 @@ public class Bdd {
         }
         return false;
     }
+
+    public boolean queryInscription(String username, String password) {
+        try {
+            PreparedStatement inscriptionUser = this.connection.prepareStatement("INSERT INTO users VALUE (?,?)");
+
+            inscriptionUser.setString(1, username);
+            inscriptionUser.setString(2, password);
+
+            inscriptionUser.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
 }

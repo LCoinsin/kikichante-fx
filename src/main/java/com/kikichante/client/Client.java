@@ -38,4 +38,9 @@ public class Client {
         String message = "LOGIN:" + username + ":" + password;
         println(message);
     }
+
+    public void inscription(String username, String password) {
+        String message = "CREATEACCOUNT:" + username + ":" + password;
+        println(message);
+    }
 }

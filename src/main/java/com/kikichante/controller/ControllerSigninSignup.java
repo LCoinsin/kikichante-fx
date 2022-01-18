@@ -134,7 +134,8 @@ public class ControllerSigninSignup {
 
     public void onClickInscription(ActionEvent actionEvent) {
         if (textfieldInscriptionUsername.getText()!="" && textfieldInscriptionPassword.getText()!="" && textfieldInscriptionPasswordConfirm.getText()!="")  {
-            //this.bdd.queryInscription(textfieldInscriptionUsername.getText(), textfieldInscriptionPassword.getText());
+            //TODO -> Si le retour de la creation de compte est false
+            client.inscription(textfieldInscriptionUsername.getText(), textfieldInscriptionPassword.getText());
             //Button et TextField
             switchFormButton(false);
             //TextField
