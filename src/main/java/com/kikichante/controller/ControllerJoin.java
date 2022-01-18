@@ -25,11 +25,13 @@ import javafx.scene.control.ProgressBar;
 import javafx.util.Duration;
 
 public class ControllerJoin implements Initializable {
-    private Scene sceneMenu;
     @FXML
-    private MediaView mediaView2;
+    private MediaView bgView;
     @FXML
     private ProgressBar songProgressBar;
+
+    private Scene sceneMenu;
+
     private Media media;
     private MediaPlayer mediaPlayer;
     private int songNumber;
@@ -103,17 +105,18 @@ public class ControllerJoin implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       Media media;
-        //media = new Media(this.getClass().getResource("video/bg.mp4").toExternalForm());
-       media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
+        Media media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
+        System.out.println("media = " + media);
         MediaPlayer player = new MediaPlayer(media);
-        mediaView2.setMediaPlayer(player);
-        DoubleProperty mvw = mediaView2.fitWidthProperty();
-        DoubleProperty mvh = mediaView2.fitHeightProperty();
-       mvw.bind(Bindings.selectDouble(mediaView2.sceneProperty(), "width"));
-       mvh.bind(Bindings.selectDouble(mediaView2.sceneProperty(), "height"));
-       mediaView2.setPreserveRatio(true);
+        System.out.println("player = " + player.toString());
+        bgView.setMediaPlayer(player);
         player.play();
+//        DoubleProperty mvw = bgView.fitWidthProperty();
+//        DoubleProperty mvh = bgView.fitHeightProperty();
+//        mvw.bind(Bindings.selectDouble(bgView.sceneProperty(), "width"));
+//        mvh.bind(Bindings.selectDouble(bgView.sceneProperty(), "height"));
+//        bgView.setPreserveRatio(true);
+//        player.play();
 
     }
 }

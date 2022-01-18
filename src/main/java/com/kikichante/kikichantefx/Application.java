@@ -51,7 +51,7 @@ public class Application extends javafx.application.Application {
 
         ControllerMenu controllerMenu = (ControllerMenu)menuLoader.getController();
         controllerMenu.setSceneStatistique(viewStatistique);
-        controllerMenu.setSceneCreateGame(viewCreateGameSettings);
+        //controllerMenu.setSceneCreateGame(viewCreateGameSettings);
         controllerMenu.setSceneJoinGameList(viewJoinGameList);
 
         ControllerStatistique controllerStatistique = (ControllerStatistique)statistiqueLoader.getController();

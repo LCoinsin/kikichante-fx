@@ -67,7 +67,6 @@ public class ControllerMenu implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Media media;
-        //media = new Media(this.getClass().getResource("video/bg.mp4").toExternalForm());
         media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
         mediaView.setMediaPlayer(player);
