@@ -2,26 +2,32 @@ package com.kikichante.controller;
 
 import com.kikichante.server.ChoiceMusic;
 import com.kikichante.server.Music;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import java.io.File;
+import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.control.ProgressBar;
 import javafx.util.Duration;
 
-public class ControllerJoin  {
+public class ControllerJoin implements Initializable {
     private Scene sceneMenu;
+    @FXML
+    private MediaView mediaView2;
     @FXML
     private ProgressBar songProgressBar;
     private Media media;
@@ -95,6 +101,22 @@ public class ControllerJoin  {
         System.out.println(mus.getUrl());
         playMusic(mus.getUrl());*/
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+       Media media;
+        //media = new Media(this.getClass().getResource("video/bg.mp4").toExternalForm());
+       media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        mediaView2.setMediaPlayer(player);
+        DoubleProperty mvw = mediaView2.fitWidthProperty();
+        DoubleProperty mvh = mediaView2.fitHeightProperty();
+       mvw.bind(Bindings.selectDouble(mediaView2.sceneProperty(), "width"));
+       mvh.bind(Bindings.selectDouble(mediaView2.sceneProperty(), "height"));
+       mediaView2.setPreserveRatio(true);
+        player.play();
 
+    }
 }
+
+
 
