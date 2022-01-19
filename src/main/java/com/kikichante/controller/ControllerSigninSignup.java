@@ -133,15 +133,27 @@ public class ControllerSigninSignup {
     }
 
     public void onClickInscription(ActionEvent actionEvent) {
-        if (textfieldInscriptionUsername.getText()!="" && textfieldInscriptionPassword.getText()!="" && textfieldInscriptionPasswordConfirm.getText()!="")  {
-            //TODO -> Si le retour de la creation de compte est false
+        if (textfieldInscriptionUsername.getText()!="" && textfieldInscriptionPassword.getText()!="" && textfieldInscriptionPasswordConfirm.getText()!="" && textfieldInscriptionPassword.getText().equals(textfieldInscriptionPasswordConfirm.getText()))  {
             client.inscription(textfieldInscriptionUsername.getText(), textfieldInscriptionPassword.getText());
-            //Button et TextField
-            switchFormButton(false);
-            //TextField
-            switchFormTextField(false);
-            resetInscription();
-            resetConnexion();
+            boolean isInscription = false;
+            try {
+                String res = client.readLine();
+                if (res.startsWith("INSCRIPTION")) {
+                    String[] resMessage = res.split(":");
+                    if (resMessage[1].equals("OK"))
+                        isInscription = true;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (isInscription) {
+                switchToMenu();
+            } else {
+                textfieldInscriptionUsername.getStyleClass().add("textfieldError");
+                textfieldInscriptionPassword.getStyleClass().add("textfieldError");
+                textfieldInscriptionPasswordConfirm.getStyleClass().add("textfieldError");
+            }
         } else {
             if (textfieldInscriptionUsername.getText() == "") {
                 textfieldInscriptionUsername.getStyleClass().add("textfieldError");
