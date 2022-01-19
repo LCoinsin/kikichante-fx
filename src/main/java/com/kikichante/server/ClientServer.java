@@ -13,13 +13,16 @@ public class ClientServer {
     private BufferedReader reader;
     private PrintWriter writer;
     private ArrayList<ClientServer> activeClient;
+    private ArrayList<GameServerThread> activeGames;
     private String userId;
+    private GameServerThread game;
 
-    public ClientServer(Socket socket, ArrayList<ClientServer> activeClient) throws IOException {
+    public ClientServer(Socket socket, ArrayList<ClientServer> activeClient, ArrayList<GameServerThread> activeGames) throws IOException {
         this.socket = socket;
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer = new PrintWriter(socket.getOutputStream(), true);
         this.activeClient = activeClient;
+        this.activeGames = activeGames;
     }
 
     // !! WARNING !! if IOException -> disconnect
@@ -39,9 +42,33 @@ public class ClientServer {
         return line;
     }
 
+    /**************************/
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    /**************************/
+
+    public GameServerThread getGame() {
+        return game;
+    }
+
+    public void setGame(GameServerThread game) {
+        this.game = game;
+    }
+
+    /**************************/
+
+    public ArrayList<GameServerThread> getActiveGames() {
+        return activeGames;
+    }
+
+    /**************************/
 
     //Permet l'envoie d'un message
     public void println(String message){
