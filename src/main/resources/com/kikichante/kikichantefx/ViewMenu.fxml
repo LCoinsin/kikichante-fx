@@ -17,17 +17,24 @@
                     <font>
                         <Font name="Book Antiqua" size="49.0" />
                     </font>
-            </Label>
+                </Label>
                 <Button alignment="CENTER" mnemonicParsing="false" onAction="#onClickGotoJoinGameList" prefHeight="66.0" prefWidth="154.0" text="Join Game">
-               <font>
-                  <Font name="Arial Nova Light" size="24.0" />
-               </font></Button>
+                   <font>
+                      <Font name="Arial Nova Light" size="24.0" />
+                   </font>
+                </Button>
+                <Button alignment="CENTER" mnemonicParsing="false" onAction="#onClickGotoCreateGame" prefHeight="66.0" prefWidth="154.0" text="Create Game">
+                    <font>
+                        <Font name="Arial Nova Light" size="24.0" />
+                    </font>
+                </Button>
                 <HBox alignment="CENTER">
                     <children>
                         <Button mnemonicParsing="false" onAction="#onClickGotoStatistique" prefHeight="68.0" prefWidth="154.0" text="Statistique">
-                     <font>
-                        <Font size="24.0" />
-                     </font></Button>
+                             <font>
+                                <Font size="24.0" />
+                             </font>
+                        </Button>
                     </children>
                 </HBox>
             </children>

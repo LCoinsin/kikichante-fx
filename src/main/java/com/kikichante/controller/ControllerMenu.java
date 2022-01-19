@@ -47,7 +47,7 @@ public class ControllerMenu implements Initializable {
     public void onClickGotoCreateGame(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneCreateGame);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
     }
 
     public void onClickGotoJoinGameList(ActionEvent actionEvent) {

@@ -23,8 +23,9 @@ public class Server {
 
         try (ServerSocket serverSocket  = new ServerSocket(5000)) {
             while (true) {
+                System.out.println("Wainting new client");
                 Socket socket = serverSocket.accept();
-                ClientServer clientServer = new ClientServer(socket);
+                ClientServer clientServer = new ClientServer(socket, activeClient);
                 new SenderThread(clientServer, bdd).start();
                 activeClient.add(clientServer);
             }

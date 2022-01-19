@@ -13,6 +13,7 @@ public class Bdd {
             this.connection = DriverManager.getConnection("jdbc:mysql://cl401116-001.eu.clouddb.ovh.net:35686/kikichante?characterEncoding=latin1", "Mysql", "9PmXX46ev");
         } catch (Exception e) {
             System.out.println("Erreur de connexion");
+            System.exit(0);
         }
     }
 

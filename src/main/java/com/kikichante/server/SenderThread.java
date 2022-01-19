@@ -26,7 +26,11 @@ public class SenderThread extends Thread {
     }
 
     public void handleLine(String message) {
-        if (message.startsWith("LOGIN")) {
+        if (message.startsWith("UUID")) {
+            String[] messageUUID = message.split(":");
+            this.clientServer.setUserId(messageUUID[1]);
+        }
+        else if (message.startsWith("LOGIN")) {  //LOGIN:USERNAME:PASSWORD
             String[] messageConnexion = message.split(":");
             String username = messageConnexion[1];
             String password = messageConnexion[2];
@@ -39,7 +43,8 @@ public class SenderThread extends Thread {
                 this.clientServer.println("LOGIN:KO");
             }
 
-        } else if (message.startsWith("CREATEACCOUNT")) {
+        }
+        else if (message.startsWith("CREATEACCOUNT")) {
             String[] messageInscription = message.split(":");
             String username = messageInscription[1];
             String password = messageInscription[2];
@@ -51,7 +56,16 @@ public class SenderThread extends Thread {
                 System.out.println("ERROR inscription : " + username);
                 this.clientServer.println("INSCRIPTION:KO");
             }
-        } else {
+        }
+        else if (message.startsWith("CREATEGAME")) {
+            //TODO -> Creation d'une partie
+            System.out.println("Creation d'une partie");
+        }
+        else if (message.startsWith("GETCURRENTLISTGAME")) {
+            //TODO -> Return la liste des games
+            System.out.println("Current game list");
+        }
+        else {
             System.out.println("message = " + message);
         }
     }

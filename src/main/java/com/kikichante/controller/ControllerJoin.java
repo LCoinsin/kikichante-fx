@@ -1,5 +1,6 @@
 package com.kikichante.controller;
 
+import com.kikichante.client.Client;
 import com.kikichante.server.ChoiceMusic;
 import com.kikichante.server.Music;
 import javafx.beans.binding.Bindings;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
@@ -28,11 +30,14 @@ import javafx.scene.control.ProgressBar;
 
 public class ControllerJoin implements Initializable {
     @FXML
+    private TextField textfieldGameName;
+    @FXML
     private MediaView bgView;
     @FXML
     private ProgressBar songProgressBar;
 
     private Scene sceneMenu;
+    private Client client;
 
     private Media media;
     private MediaPlayer mediaPlayer;
@@ -43,6 +48,10 @@ public class ControllerJoin implements Initializable {
 
     public void setSceneMenu(Scene sceneMenu) {
         this.sceneMenu = sceneMenu;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public void onClickGotoMenu(ActionEvent actionEvent) {
@@ -124,6 +133,11 @@ public class ControllerJoin implements Initializable {
         bgView.setPreserveRatio(true);
         player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
         player.play();
+
+    }
+
+    public void onClickCreateGame(ActionEvent actionEvent) {
+        client.createGame(textfieldGameName.getText());
 
     }
 }

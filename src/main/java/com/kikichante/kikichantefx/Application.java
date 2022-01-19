@@ -51,7 +51,7 @@ public class Application extends javafx.application.Application {
 
         ControllerMenu controllerMenu = (ControllerMenu)menuLoader.getController();
         controllerMenu.setSceneStatistique(viewStatistique);
-        //controllerMenu.setSceneCreateGame(viewCreateGameSettings);
+        controllerMenu.setSceneCreateGame(viewCreateGameSettings);
         controllerMenu.setSceneJoinGameList(viewJoinGameList);
 
         ControllerStatistique controllerStatistique = (ControllerStatistique)statistiqueLoader.getController();
@@ -59,9 +59,11 @@ public class Application extends javafx.application.Application {
 
         ControllerJoin controllerGameMenuCreateSettings = (ControllerJoin)createGameSettingsLoader.getController();
         controllerGameMenuCreateSettings.setSceneMenu(viewMenu);
+        controllerGameMenuCreateSettings.setClient(client);
 
         ControllerJoin controllerGameMenuJoinList = (ControllerJoin)joinGameListLoader.getController();
         controllerGameMenuJoinList.setSceneMenu(viewMenu);
+        controllerGameMenuJoinList.setClient(client);
 
         //****************
         // Start app
@@ -82,6 +84,7 @@ public class Application extends javafx.application.Application {
         try {
             socket = new Socket(ADRESS, PORT);
             client = new Client(socket);
+            client.uuid();
         } catch (IOException e) {
             System.out.println("Serveur eteint");
             e.printStackTrace();
