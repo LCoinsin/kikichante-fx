@@ -1,9 +1,12 @@
 package com.kikichante.controller;
 
+import com.kikichante.client.Client;
+import com.kikichante.kikichantefx.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,16 +18,20 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerMenu implements Initializable {
     @FXML
     private MediaView mediaView;
+    @FXML
+    private Label titleTest;
 
     private Scene sceneStatistique;
     private Scene sceneCreateGame;
     private Scene sceneJoinGameList;
+    private Client client;
 
     public void setSceneStatistique(Scene sceneStatistique) {
         this.sceneStatistique = sceneStatistique;
@@ -38,10 +45,40 @@ public class ControllerMenu implements Initializable {
         this.sceneJoinGameList = sceneJoinGameList;
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+
+    private void switchSceneStatistique(Stage primaryStage) {
+        try {
+            FXMLLoader statistiqueLoader = new FXMLLoader(Application.class.getResource("ViewStatistique.fxml"));
+            Scene viewStatistique = new Scene(statistiqueLoader.load());
+
+            ControllerStatistique controllerStatistique = (ControllerStatistique)statistiqueLoader.getController();
+            Scene currentScene = mediaView.getScene();
+            controllerStatistique.setSceneMenu(currentScene);
+
+            primaryStage.setScene(viewStatistique);
+            primaryStage.setFullScreen(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void switchSceneListGame() {
+
+    }
+
+    private void switchSceneCreateGame() {
+
+    }
+
     public void onClickGotoStatistique(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(this.sceneStatistique);
-        primaryStage.setFullScreen(true);
+        this.switchSceneStatistique(primaryStage);
+        //primaryStage.setScene(this.sceneStatistique);
+        //primaryStage.setFullScreen(true);
     }
 
     public void onClickGotoCreateGame(ActionEvent actionEvent) {
@@ -56,11 +93,6 @@ public class ControllerMenu implements Initializable {
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
     }
-
-
-
-    @FXML
-    private Label titleTest;
 
     public void onTestClick(ActionEvent actionEvent) {
         titleTest.setText("banane");

@@ -1,8 +1,10 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import com.kikichante.kikichantefx.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -46,8 +48,19 @@ public class ControllerSigninSignup {
     private void switchToMenu() {
         Stage primaryStage = (Stage)VBoxTextFieldConnexion.getScene().getWindow();
 
-        primaryStage.setScene(this.sceneMenu);
-        primaryStage.setFullScreen(true);
+        try {
+            FXMLLoader menuLoader = new FXMLLoader(Application.class.getResource("ViewMenu.fxml"));
+            Scene viewMenu = new Scene(menuLoader.load());
+
+            ControllerMenu controllerMenu = (ControllerMenu) menuLoader.getController();
+            controllerMenu.setClient(client);
+
+            primaryStage.setScene(viewMenu);
+            primaryStage.setFullScreen(true);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //true -> switch vers l'inscription

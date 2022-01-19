@@ -48,6 +48,8 @@ public class ControllerJoin implements Initializable {
     private TimerTask task;
     private boolean running;
 
+    /***********************/
+
     public void setSceneMenu(Scene sceneMenu) {
         this.sceneMenu = sceneMenu;
     }
@@ -60,12 +62,16 @@ public class ControllerJoin implements Initializable {
         this.sceneWaitingRoom = sceneWaitingRoom;
     }
 
+    /***********************/
+
     public void onClickGotoMenu(ActionEvent actionEvent) {
         System.out.println("test");
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneMenu);
         primaryStage.setFullScreen(true);
     }
+
+    /***********************/
 
     public void go(ActionEvent actionEvent){
 
@@ -113,6 +119,7 @@ public class ControllerJoin implements Initializable {
 
     @FXML
     void initialize() throws SQLException {
+        System.out.println("La je suis init");
         /*
         int idMus;
 
@@ -139,8 +146,9 @@ public class ControllerJoin implements Initializable {
         bgView.setPreserveRatio(true);
         player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
         player.play();
-
     }
+
+    /***********************/
 
     private void switchInGame() {
         Stage primaryStage = (Stage)textfieldGameName.getScene().getWindow();
