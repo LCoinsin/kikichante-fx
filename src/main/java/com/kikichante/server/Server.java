@@ -16,10 +16,11 @@ public class Server {
             System.exit(0);
         }
 
-        new CommandServer(bdd).start();
-
         ArrayList<ClientServer> activeClient = new ArrayList<>();
         ArrayList<GameServer> activeGames = new ArrayList<>();
+
+        new CommandServer(bdd, activeClient, activeGames).start();
+
 
         try (ServerSocket serverSocket  = new ServerSocket(5000)) {
             while (true) {
