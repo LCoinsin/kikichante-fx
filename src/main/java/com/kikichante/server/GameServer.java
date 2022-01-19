@@ -2,14 +2,14 @@ package com.kikichante.server;
 
 import java.util.ArrayList;
 
-public class GameServerThread extends Thread {
+public class GameServer {
 
     private String gameName;
     private ArrayList<ClientServer> currentPlayer = new ArrayList<ClientServer>();
 
     /*****************************/
 
-    public  GameServerThread(String gameName) {
+    public GameServer(String gameName) {
         this.gameName = gameName;
     }
 
@@ -17,14 +17,6 @@ public class GameServerThread extends Thread {
 
     public String getGameName() {
         return gameName;
-    }
-
-    /*****************************/
-
-    @Override
-    public void run() {
-        //TODO -> lancement de la partie, ecoute des clients
-        System.out.println("Lancement de la partie");
     }
 
     /*****************************/

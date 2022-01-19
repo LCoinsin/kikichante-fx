@@ -19,13 +19,13 @@ public class Server {
         new CommandServer(bdd).start();
 
         ArrayList<ClientServer> activeClient = new ArrayList<>();
-        ArrayList<GameServerThread> activeGames = new ArrayList<>();
+        ArrayList<GameServer> activeGames = new ArrayList<>();
 
         try (ServerSocket serverSocket  = new ServerSocket(5000)) {
             while (true) {
                 System.out.println("Wainting new client");
                 Socket socket = serverSocket.accept();
-                ClientServer clientServer = new ClientServer(socket, activeClient, activeGames);
+                ClientServer clientServer = new ClientServer(socket, activeClient);
                 new SenderThread(clientServer, bdd, activeGames).start();
                 activeClient.add(clientServer);
             }

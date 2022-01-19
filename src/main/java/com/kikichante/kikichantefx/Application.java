@@ -1,10 +1,7 @@
 package com.kikichante.kikichantefx;
 
 import com.kikichante.client.Client;
-import com.kikichante.controller.ControllerJoin;
-import com.kikichante.controller.ControllerMenu;
-import com.kikichante.controller.ControllerSigninSignup;
-import com.kikichante.controller.ControllerStatistique;
+import com.kikichante.controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -41,6 +38,9 @@ public class Application extends javafx.application.Application {
         FXMLLoader loginLoader = new FXMLLoader(Application.class.getResource("ViewSignInSignUp.fxml"));
         Scene viewLoginLoader = new Scene(loginLoader.load());
 
+        FXMLLoader waitingRommLoader = new FXMLLoader(Application.class.getResource("ViewWaitingRoom.fxml"));
+        Scene viewWaitingRoom = new Scene(waitingRommLoader.load());
+
 
         //****************
         // Set controller
@@ -60,10 +60,14 @@ public class Application extends javafx.application.Application {
         ControllerJoin controllerGameMenuCreateSettings = (ControllerJoin)createGameSettingsLoader.getController();
         controllerGameMenuCreateSettings.setSceneMenu(viewMenu);
         controllerGameMenuCreateSettings.setClient(client);
+        controllerGameMenuCreateSettings.setSceneWaitingRoom(viewWaitingRoom);
 
         ControllerJoin controllerGameMenuJoinList = (ControllerJoin)joinGameListLoader.getController();
         controllerGameMenuJoinList.setSceneMenu(viewMenu);
         controllerGameMenuJoinList.setClient(client);
+        controllerGameMenuJoinList.setSceneWaitingRoom(viewWaitingRoom);
+
+        ControllerWaitingRoom controllerWaitingRoom = (ControllerWaitingRoom) waitingRommLoader.getController();
 
         //****************
         // Start app

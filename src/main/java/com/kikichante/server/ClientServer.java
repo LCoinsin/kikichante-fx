@@ -12,17 +12,16 @@ public class ClientServer {
     private Socket socket;
     private BufferedReader reader;
     private PrintWriter writer;
-    private ArrayList<ClientServer> activeClient;
-    private ArrayList<GameServerThread> activeGames;
-    private String userId;
-    private GameServerThread game;
 
-    public ClientServer(Socket socket, ArrayList<ClientServer> activeClient, ArrayList<GameServerThread> activeGames) throws IOException {
+    private String userId;
+    private ArrayList<ClientServer> activeClient;
+    private GameServer game;
+
+    public ClientServer(Socket socket, ArrayList<ClientServer> activeClient) throws IOException {
         this.socket = socket;
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer = new PrintWriter(socket.getOutputStream(), true);
         this.activeClient = activeClient;
-        this.activeGames = activeGames;
     }
 
     // !! WARNING !! if IOException -> disconnect
@@ -54,18 +53,12 @@ public class ClientServer {
 
     /**************************/
 
-    public GameServerThread getGame() {
+    public GameServer getGame() {
         return game;
     }
 
-    public void setGame(GameServerThread game) {
+    public void setGame(GameServer game) {
         this.game = game;
-    }
-
-    /**************************/
-
-    public ArrayList<GameServerThread> getActiveGames() {
-        return activeGames;
     }
 
     /**************************/

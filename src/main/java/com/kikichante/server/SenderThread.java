@@ -7,9 +7,9 @@ public class SenderThread extends Thread {
 
     private ClientServer clientServer;
     private Bdd bdd;
-    private ArrayList<GameServerThread> activeGame;
+    private ArrayList<GameServer> activeGame;
 
-    public SenderThread (ClientServer clientServer, Bdd bdd, ArrayList<GameServerThread> activeGame) {
+    public SenderThread (ClientServer clientServer, Bdd bdd, ArrayList<GameServer> activeGame) {
         this.clientServer = clientServer;
         this.bdd = bdd;
         this.activeGame = activeGame;
@@ -61,22 +61,24 @@ public class SenderThread extends Thread {
             }
         }
         else if (message.startsWith("CREATEGAME")) {
+            System.out.println("Creation d'une partie");
             //TODO -> Creation d'une partie
             String[] messageCreateGame = message.split(":");
             String gameName = messageCreateGame[1];
             boolean createGame = true;
             //Creation de la partie et run
-            for (GameServerThread game : activeGame) {
+            for (GameServer game : activeGame) {
                 if (game.getGameName().equals(gameName)) {
                     createGame = false;
                     this.clientServer.println("CREATEGAME:KO");
                 }
             }
             if (createGame) {
-                GameServerThread game = new GameServerThread(messageCreateGame[1]);
+                GameServer game = new GameServer(messageCreateGame[1]);
                 this.activeGame.add(game);
                 this.clientServer.setGame(game);
                 game.addClient(this.clientServer);
+                System.out.println("activeGame = " + activeGame);
                 this.clientServer.println("CREATEGAME:OK");
             }
         }

@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.security.PublicKey;
 import java.sql.SQLException;
@@ -37,6 +38,7 @@ public class ControllerJoin implements Initializable {
     private ProgressBar songProgressBar;
 
     private Scene sceneMenu;
+    private Scene sceneWaitingRoom;
     private Client client;
 
     private Media media;
@@ -52,6 +54,10 @@ public class ControllerJoin implements Initializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void setSceneWaitingRoom(Scene sceneWaitingRoom) {
+        this.sceneWaitingRoom = sceneWaitingRoom;
     }
 
     public void onClickGotoMenu(ActionEvent actionEvent) {
@@ -136,9 +142,27 @@ public class ControllerJoin implements Initializable {
 
     }
 
+    private void switchInGame() {
+        Stage primaryStage = (Stage)textfieldGameName.getScene().getWindow();
+        primaryStage.setScene(this.sceneWaitingRoom);
+    }
+
     public void onClickCreateGame(ActionEvent actionEvent) {
         client.createGame(textfieldGameName.getText());
-
+        boolean createGame = false;
+        try {
+            String res = client.readLine();
+            if (res.startsWith("CREATEGAME")) {
+                String[] resMessage = res.split(":");
+                if (resMessage[1].equals("OK")) {
+                    createGame = true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (createGame)
+            switchInGame();
     }
 }
 
