@@ -26,8 +26,8 @@ public class Server {
                 System.out.println("Wainting new client");
                 Socket socket = serverSocket.accept();
                 ClientServer clientServer = new ClientServer(socket, activeClient);
-                new SenderThread(clientServer, bdd, activeGames).start();
                 activeClient.add(clientServer);
+                new SenderThread(clientServer, bdd, activeGames, activeClient).start();
             }
         }
     }

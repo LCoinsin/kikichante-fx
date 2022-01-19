@@ -1,5 +1,7 @@
 package com.kikichante.server;
 
+import com.kikichante.client.Client;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -8,11 +10,13 @@ public class SenderThread extends Thread {
     private ClientServer clientServer;
     private Bdd bdd;
     private ArrayList<GameServer> activeGame;
+    private ArrayList<ClientServer> activeClient;
 
-    public SenderThread (ClientServer clientServer, Bdd bdd, ArrayList<GameServer> activeGame) {
+    public SenderThread (ClientServer clientServer, Bdd bdd, ArrayList<GameServer> activeGame, ArrayList<ClientServer> activeClient) {
         this.clientServer = clientServer;
         this.bdd = bdd;
         this.activeGame = activeGame;
+        this.activeClient = activeClient;
     }
 
     @Override
@@ -40,7 +44,18 @@ public class SenderThread extends Thread {
 
             if (bdd.queryConnexion(username, password)) {
                 System.out.println("Connexion OK");
-                this.clientServer.println("LOGIN:OK");
+                boolean isAlreadyConnected = false;
+                for (ClientServer c : activeClient) {
+                    if (!(c.getUsernameFromBdd() == null))
+                        if (c.getUsernameFromBdd().equals(username))
+                            isAlreadyConnected = true;
+                }
+                if (isAlreadyConnected) {
+                    this.clientServer.println("LOGIN:KO");
+                } else {
+                    this.clientServer.setUsernameFromBdd(username);
+                    this.clientServer.println("LOGIN:OK");
+                }
             } else {
                 System.out.println("Connexion KO");
                 this.clientServer.println("LOGIN:KO");

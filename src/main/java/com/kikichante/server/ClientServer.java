@@ -14,6 +14,7 @@ public class ClientServer {
     private PrintWriter writer;
 
     private String userId;
+    private String usernameFromBdd;
     private ArrayList<ClientServer> activeClient;
     private GameServer game;
 
@@ -49,6 +50,16 @@ public class ClientServer {
 
     public String getUserId() {
         return userId;
+    }
+
+    /**************************/
+
+    public String getUsernameFromBdd() {
+        return usernameFromBdd;
+    }
+
+    public void setUsernameFromBdd(String usernameFromBdd) {
+        this.usernameFromBdd = usernameFromBdd;
     }
 
     /**************************/
