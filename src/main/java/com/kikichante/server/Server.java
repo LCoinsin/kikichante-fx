@@ -13,8 +13,6 @@ public class Server {
         try {
             bdd = new Bdd();
         } catch (Exception e) {
-            System.out.println("Erreur connexion BDD");
-            e.printStackTrace();
             System.exit(0);
         }
 

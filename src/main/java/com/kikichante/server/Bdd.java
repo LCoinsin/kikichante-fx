@@ -1,17 +1,18 @@
 package com.kikichante.server;
 
+import com.kikichante.exception.ExceptionBddConnexion;
+
 import java.sql.*;
 
 public class Bdd {
 
     private Connection connection;
 
-    public Bdd() {
+    public Bdd() throws ExceptionBddConnexion {
         try {
             this.connection = DriverManager.getConnection("jdbc:mysql://cl401116-001.eu.clouddb.ovh.net:35686/kikichante?characterEncoding=latin1", "Mysql", "9PmXX46ev");
         } catch (Exception e) {
             System.out.println("Erreur de connexion");
-            e.printStackTrace();
         }
     }
 
