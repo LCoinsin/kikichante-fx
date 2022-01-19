@@ -40,8 +40,17 @@ public class SenderThread extends Thread {
             }
 
         } else if (message.startsWith("CREATEACCOUNT")) {
-            //TODO -> Creation de compte
-            System.out.println("message = " + message);
+            String[] messageInscription = message.split(":");
+            String username = messageInscription[1];
+            String password = messageInscription[2];
+
+            if (bdd.queryInscription(username, password)) {
+                System.out.println("Nouvelle inscription : " + username);
+                this.clientServer.println("INSCRIPTION:OK");
+            } else {
+                System.out.println("ERROR inscription : " + username);
+                this.clientServer.println("INSCRIPTION:KO");
+            }
         } else {
             System.out.println("message = " + message);
         }
