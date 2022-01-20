@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
@@ -29,6 +30,7 @@ public class ControllerWaitingRoom {
     private Client client;
     private boolean listen = true;
     private List<String> listPlayers = new ArrayList<>();
+    private boolean isReady = false;
 
     /******************************************************************************************************************/
 
@@ -100,6 +102,7 @@ public class ControllerWaitingRoom {
                         hBox = new HBox();
                         hBox.setAlignment(Pos.CENTER);
                         Label label = new Label();
+                        //TODO => Set le style pour l'affichage des clients
                         label.setText(playersList.get(i));
                         label.setAlignment(Pos.CENTER);
                         label.prefHeight(60);
@@ -117,6 +120,20 @@ public class ControllerWaitingRoom {
                 }
             }
         });
+    }
+
+    /******************************************************************************************************************/
+
+    public void onClickReady(ActionEvent actionEvent) {
+        if (isReady) {
+            this.isReady = false;
+            client.setNotReady();
+            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: red");
+        } else {
+            this.isReady = true;
+            client.setReady();
+            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: green");
+        }
     }
 
     /******************************************************************************************************************/
