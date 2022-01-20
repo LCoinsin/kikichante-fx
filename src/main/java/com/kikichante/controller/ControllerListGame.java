@@ -61,6 +61,10 @@ public class ControllerListGame implements Initializable {
 
     }
 
+    public void joinGame(ActionEvent actionEvent) {
+        System.out.println(textfieldGameName.getText());
+    }
+
     /******************************************************************************************************************/
 
     @Override

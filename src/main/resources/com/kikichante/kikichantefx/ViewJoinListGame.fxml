@@ -18,6 +18,10 @@
 <AnchorPane prefHeight="692.0" prefWidth="909.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerListGame">
    <children>
         <MediaView fx:id="bgView" />
+      <VBox layoutX="250.0">
+         <TextField fx:id="textfieldGameName"></TextField>
+         <Button onAction="#joinGame" text="join game"></Button>
+      </VBox>
       <VBox layoutX="7.0" layoutY="14.0" prefHeight="42.0" prefWidth="90.0">
          <children>
                 <Button id="buttonRetour" mnemonicParsing="false" onAction="#onClickReturn" prefHeight="38.0" prefWidth="82.0" text="Retour" />
