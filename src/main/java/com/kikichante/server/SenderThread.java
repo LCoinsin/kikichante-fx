@@ -138,9 +138,21 @@ public class SenderThread extends Thread {
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
             String messageCurrentPlayer = "LISTCURRENTPLAYERINWAITINGROOM";
             for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
-                messageCurrentPlayer = messageCurrentPlayer.concat(":"+client.getUsernameFromBdd());
+                messageCurrentPlayer = messageCurrentPlayer.concat(":"+client.getUsernameFromBdd()+"-"+(client.isReady() ? "OK" : "KO"));
             }
             this.clientServer.println(messageCurrentPlayer);
+        }
+        else if (message.startsWith("SETREADY")) {
+            String[] resMessage = message.split(":");
+            System.out.println("SETREADY");
+            if (resMessage[1].equals("OK")) {
+                clientServer.setReady(true);
+                this.clientServer.getGame().updateListPlayerStateWaitingRoom();
+                System.out.println("Peut on lancer la partie ? : " + this.clientServer.getGame().canLaunchGame());
+            } else if (resMessage[1].equals("KO")) {
+                clientServer.setReady(false);
+                this.clientServer.getGame().updateListPlayerStateWaitingRoom();
+            }
         }
         //DEFAULT
         else {

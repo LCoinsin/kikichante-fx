@@ -6,6 +6,7 @@ public class GameServer {
 
     private String gameName;
     private ArrayList<ClientServer> currentPlayer = new ArrayList<ClientServer>();
+    private final int numberMiniLaunchGame = 2;
 
     /******************************************************************************************************************/
 
@@ -42,17 +43,11 @@ public class GameServer {
 
     /******************************************************************************************************************/
 
-    public void sendToAll(String message) {
-        for (ClientServer client : currentPlayer) {
-            client.println(message);
-        }
-    }
-
     public void updateListPlayerWaitingRoom(ClientServer clientServer) {
         String message = "UPDATECURRENTPLAYER";
         //Recupere le nom de tous les clients
         for (ClientServer client : currentPlayer) {
-            message = message.concat(":"+client.getUsernameFromBdd());
+            message = message.concat(":"+client.getUsernameFromBdd()+"-"+(client.isReady() ? "OK" : "KO"));
         }
         //Envoie le message a tous les clients
         for (ClientServer client : currentPlayer) {
@@ -61,4 +56,24 @@ public class GameServer {
         }
     }
 
+    public void updateListPlayerStateWaitingRoom() {
+        String message = "UPDATECURRENTPLAYER";
+        //Recupere le nom de tous les clients
+        for (ClientServer client : currentPlayer) {
+            message = message.concat(":"+client.getUsernameFromBdd()+"-"+(client.isReady() ? "OK" : "KO"));
+        }
+        for (ClientServer client : currentPlayer) {
+            client.println(message);
+        }
+    }
+
+    public boolean canLaunchGame() {
+        if (currentPlayer.size() >= 2) {
+            for (ClientServer c : currentPlayer) {
+                if (!c.isReady())
+                    return false;
+            }
+            return true;
+        } else return false;
+    }
 }
