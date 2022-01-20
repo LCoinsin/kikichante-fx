@@ -111,7 +111,25 @@ public class SenderThread extends Thread {
         }
         else if (message.startsWith("JOINGAME")) {
             //TODO -> Rejoindre une game
-            System.out.println("Join game ");
+            String[] messageJoinGame = message.split(":");
+            String gameName = messageJoinGame[1];
+            boolean gameExist = false;
+            for (GameServer game : activeGame) {
+                if (game.getGameName().equals(gameName)){
+                    game.addClient(this.clientServer);
+                    this.clientServer.setGame(game);
+                    gameExist = true;
+                    break;
+                }
+            }
+
+            if (gameExist) {
+                System.out.println("Join game ok");
+                this.clientServer.println("JOINGAME:OK");
+            } else {
+                System.out.println("la partie existe pas !!");
+                this.clientServer.println("JOINGAME:KO");
+            }
         }
         else {
             System.out.println("message = " + message);

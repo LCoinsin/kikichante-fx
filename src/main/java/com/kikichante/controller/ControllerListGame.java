@@ -1,8 +1,10 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import com.kikichante.kikichantefx.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -61,8 +63,41 @@ public class ControllerListGame implements Initializable {
 
     }
 
+    public void switchWaitingRoom() {
+        try {
+            Stage primaryStage = (Stage)textfieldGameName.getScene().getWindow();
+
+            FXMLLoader waitingRoomLoader = new FXMLLoader(Application.class.getResource("ViewWaitingRoom.fxml"));
+            Scene viewWaitingRoom = new Scene(waitingRoomLoader.load());
+
+            ControllerWaitingRoom controllerWaitingRoom = (ControllerWaitingRoom)waitingRoomLoader.getController();
+            Scene currentScene = textfieldGameName.getScene();
+            controllerWaitingRoom.setSceneBack(currentScene);
+            controllerWaitingRoom.setClient(client);
+
+            primaryStage.setScene(viewWaitingRoom);
+            primaryStage.setFullScreen(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void joinGame(ActionEvent actionEvent) {
-        System.out.println(textfieldGameName.getText());
+        client.joinGame(textfieldGameName.getText());
+        boolean isJoin = false;
+        try {
+            var res = client.readLine();
+            if(res.startsWith("JOINGAME")) {
+                String[] resMessage = res.split(":");
+                if (resMessage[1].equals("OK"))
+                    isJoin = true;
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (isJoin)
+            switchWaitingRoom();
+        //System.out.println(textfieldGameName.getText());
     }
 
     /******************************************************************************************************************/

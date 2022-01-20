@@ -66,9 +66,8 @@ public class ControllerCreateGame {
             String res = client.readLine();
             if (res.startsWith("CREATEGAME")) {
                 String[] resMessage = res.split(":");
-                if (resMessage[1].equals("OK")) {
+                if (resMessage[1].equals("OK"))
                     createGame = true;
-                }
             }
         } catch (IOException e) {
             e.printStackTrace();
