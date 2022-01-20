@@ -41,4 +41,23 @@ public class GameServer {
     }
 
     /******************************************************************************************************************/
+
+    public void sendToAll(String message) {
+        for (ClientServer client : currentPlayer) {
+            client.println(message);
+        }
+    }
+
+    public void updateListPlayerWaitingRoom(ClientServer clientServer) {
+        String message = "UPDATECURRENTPLAYER";
+        //Recupere le nom de tous les clients
+        for (ClientServer client : currentPlayer) {
+            message = message.concat(":"+client.getUsernameFromBdd());
+        }
+        //Envoie le message a tous les clients
+        for (ClientServer client : currentPlayer) {
+            if (!(client.getUserId().equals(clientServer.getUserId())))
+                client.println(message);
+        }
+    }
 }

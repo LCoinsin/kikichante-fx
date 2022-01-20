@@ -57,6 +57,11 @@ public class Client {
         println(message);
     }
 
+    public void getListPlayerInWaitingRoom() {
+        String message = "GETCURRENTPLAYERINWAITINGROOM";
+        println(message);
+    }
+
     public void createGame(String gameName) {
         String message = "CREATEGAME:"+gameName;
         println(message);
