@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -27,22 +27,20 @@
     <loaded-nodes>
       <connection connection-id="089f4e08-8e59-4991-99ae-ed6384e21610">
         <schema name="kikichante" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
-        <schema name="test" object-types="table, view, procedure, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="089f4e08-8e59-4991-99ae-ed6384e21610">
-      <console name="Connection" type="STANDARD" schema="" session="Main"><![CDATA[select * FROM kikichante.musique;]]></console>
+      <console name="Connection" type="STANDARD" schema="kikichante" session="Main"><![CDATA[INSERT INTO kikichante.musique (titre, interprete, url, annee, Theme, Code_Musique) VALUES ('SaveYourTears','TheWeeknd','./musiques/SaveYourTears.mp3', 2021, 'pop', 6);
+select * FROM kikichante.musique;]]></console>
     </connection>
     <connection id="f8df66dd-25d1-45b1-876c-9f08a4d761a1">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="089f4e08-8e59-4991-99ae-ed6384e21610" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="089f4e08-8e59-4991-99ae-ed6384e21610" />
