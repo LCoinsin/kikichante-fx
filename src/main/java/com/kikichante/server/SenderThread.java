@@ -76,6 +76,7 @@ public class SenderThread extends Thread {
                 this.clientServer.println("INSCRIPTION:KO");
             }
         }
+        //OUT GAME
         else if (message.startsWith("CREATEGAME")) {
             String[] messageCreateGame = message.split(":");
             String gameName = messageCreateGame[1];
@@ -131,6 +132,8 @@ public class SenderThread extends Thread {
                 this.clientServer.println("JOINGAME:KO");
             }
         }
+        //WAITING ROOM
+        //DEFAULT
         else {
             System.out.println("message = " + message);
         }

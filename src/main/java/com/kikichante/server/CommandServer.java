@@ -39,7 +39,24 @@ public class CommandServer extends Thread {
         } else if (cmd.equals("games")) {
             System.out.println("Listes des parties : ");
             for (GameServer game : activeGames) {
-                System.out.println(game.getGameName() + " - ");
+                System.out.print(game.getGameName() + " - ");
+            }
+        } else if (cmd.equals("game")) {
+            System.out.print("Listes des parties : ");
+            for (GameServer game : activeGames) {
+                System.out.print(game.getGameName() + " - ");
+            }
+            System.out.println("");
+            System.out.print("Nom de la partie : ");
+            String info = scanner.nextLine();
+            for (GameServer game : activeGames) {
+                if (game.getGameName().equals(info)) {
+                    for (ClientServer c : game.getCurrentPlayer()) {
+                        System.out.print(c.getUsernameFromBdd() + "  ");
+                    }
+                    System.out.println("");
+                    break;
+                }
             }
         }
     }

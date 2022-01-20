@@ -27,7 +27,9 @@ public class ControllerListGame implements Initializable {
     private ProgressBar songProgressBar;
     @FXML
     private VBox VBox_radiobutton;
+    private ToggleGroup groupeListGame = new ToggleGroup();
 
+    private String nameGameToJoin;
     private Scene sceneBack;
     private Client client;
 
@@ -55,14 +57,12 @@ public class ControllerListGame implements Initializable {
         String[] resListGame = listGame.split(":");
         resListGame = Arrays.copyOfRange(resListGame, 1, resListGame.length);
 
-        ToggleGroup groupeListGame = new ToggleGroup();
         for (String name : resListGame) {
             RadioButton rb = new RadioButton(name);
             rb.setToggleGroup(groupeListGame);
+            rb.setUserData(name);
             VBox_radiobutton.getChildren().add(rb);
         }
-        //VBox_radiobutton.getChildren().add(new Button("Click me !"));
-        //System.out.println("listGame = " + listGame);
     }
 
     /******************************************************************************************************************/
@@ -97,21 +97,27 @@ public class ControllerListGame implements Initializable {
     }
 
     public void joinGame(ActionEvent actionEvent) {
-        client.joinGame(textfieldGameName.getText());
-        boolean isJoin = false;
-        try {
-            var res = client.readLine();
-            if(res.startsWith("JOINGAME")) {
-                String[] resMessage = res.split(":");
-                if (resMessage[1].equals("OK"))
-                    isJoin = true;
+        if (groupeListGame.getSelectedToggle() != null) {
+
+            client.joinGame(groupeListGame.getSelectedToggle().getUserData().toString());
+            boolean isJoin = false;
+
+            try {
+                var res = client.readLine();
+                if(res.startsWith("JOINGAME")) {
+                    String[] resMessage = res.split(":");
+                    if (resMessage[1].equals("OK"))
+                        isJoin = true;
+                }
+            }catch (IOException e) {
+                e.printStackTrace();
             }
-        }catch (IOException e) {
-            e.printStackTrace();
+            if (isJoin)
+                switchWaitingRoom();
         }
-        if (isJoin)
-            switchWaitingRoom();
-        //System.out.println(textfieldGameName.getText());
+        else {
+            //TODO -> Faire une erreur visuel pour le client
+        }
     }
 
     /******************************************************************************************************************/
