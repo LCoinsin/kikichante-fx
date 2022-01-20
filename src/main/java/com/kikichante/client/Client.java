@@ -77,8 +77,13 @@ public class Client {
         println(message);
     }
 
-    public void closeClient() {
-        String message = "CLOSECLIENT";
+    public void setReady() {
+        String message = "SETREADY:OK";
+        println(message);
+    }
+
+    public void setNotReady() {
+        String message = "SETREADY:KO";
         println(message);
     }
 }

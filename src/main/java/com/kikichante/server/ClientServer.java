@@ -18,6 +18,7 @@ public class ClientServer {
     private ArrayList<ClientServer> activeClient;
     private ArrayList<GameServer> activeGame;
     private GameServer game;
+    private boolean isReady = false;
 
     public ClientServer(Socket socket, ArrayList<ClientServer> activeClient, ArrayList<GameServer> activeGame) throws IOException {
         this.socket = socket;
@@ -73,6 +74,16 @@ public class ClientServer {
 
     public void setUsernameFromBdd(String usernameFromBdd) {
         this.usernameFromBdd = usernameFromBdd;
+    }
+
+    /**************************/
+
+    public boolean isReady() {
+        return isReady;
+    }
+
+    public void setReady(boolean ready) {
+        isReady = ready;
     }
 
     /**************************/

@@ -23,7 +23,7 @@ public class ControllerListGame implements Initializable {
     @FXML
     private Button retour;
     @FXML
-    private VBox VBox_radiobutton;
+    private VBox Vbox;
     private ToggleGroup groupeListGame = new ToggleGroup();
 
     private String nameGameToJoin;
@@ -58,7 +58,7 @@ public class ControllerListGame implements Initializable {
             RadioButton rb = new RadioButton(name);
             rb.setToggleGroup(groupeListGame);
             rb.setUserData(name);
-            VBox_radiobutton.getChildren().add(rb);
+            Vbox.getChildren().add(rb);
         }
     }
 

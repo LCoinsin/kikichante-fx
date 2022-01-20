@@ -1,21 +1,36 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
 
 public class ControllerWaitingRoom {
+    @FXML
+    private VBox VBoxRowClient;
 
     private Scene sceneBack;
     private Client client;
     private boolean listen = true;
     private List<String> listPlayers = new ArrayList<>();
+    private boolean isReady = false;
 
     /******************************************************************************************************************/
 
@@ -72,7 +87,53 @@ public class ControllerWaitingRoom {
         String[] resListPlayer = message.split(":");
         resListPlayer = Arrays.copyOfRange(resListPlayer, 1 , resListPlayer.length);
         listPlayers = Arrays.asList(resListPlayer);
+        printListToIhm(listPlayers);
         System.out.println("resListPlayer = " + listPlayers);
+    }
+
+    public void printListToIhm(List<String> playersList) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                VBoxRowClient.getChildren().clear();
+                HBox hBox = null;
+                for (int i = 0; i<playersList.size(); i++) {
+                    if (i%3 == 0) {
+                        hBox = new HBox();
+                        hBox.setAlignment(Pos.CENTER);
+                        Label label = new Label();
+                        //TODO => Set le style pour l'affichage des clients
+                        label.setText(playersList.get(i));
+                        label.setAlignment(Pos.CENTER);
+                        label.prefHeight(60);
+                        label.prefWidth(120);
+                        label.setStyle("--fxbackground-color: red; -fx-border-color: transparent; -fx-border-width: 3;");
+                        hBox.getChildren().add(label);
+                        VBoxRowClient.getChildren().add(hBox);
+                    } else {
+                        Label label = new Label();
+                        label.setText(playersList.get(i));
+                        label.setAlignment(Pos.CENTER);
+                        label.setStyle("--fxbackground-color: red; -fx-border-color: transparent; -fx-border-width: 3;");
+                        hBox.getChildren().add(label);
+                    }
+                }
+            }
+        });
+    }
+
+    /******************************************************************************************************************/
+
+    public void onClickReady(ActionEvent actionEvent) {
+        if (isReady) {
+            this.isReady = false;
+            client.setNotReady();
+            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: red");
+        } else {
+            this.isReady = true;
+            client.setReady();
+            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: green");
+        }
     }
 
     /******************************************************************************************************************/

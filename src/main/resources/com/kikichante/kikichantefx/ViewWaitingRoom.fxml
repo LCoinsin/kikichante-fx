@@ -17,11 +17,11 @@
                         <Font size="24.0" />
                     </font>
                 </Text>
-                <VBox alignment="CENTER" prefHeight="246.0" prefWidth="412.0" />
+                <VBox fx:id="VBoxRowClient" alignment="CENTER" prefHeight="246.0" prefWidth="412.0" />
             </children>
         </VBox>
         <Button onAction="#onClickReturn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="retour" />
-        <Button layoutX="214.0" layoutY="385.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="297.0" text="Pret" />
+        <Button layoutX="214.0" layoutY="385.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="297.0" text="Pret" onAction="#onClickReady" style="-fx-background-color: red" />
     </children>
 
 </AnchorPane>
