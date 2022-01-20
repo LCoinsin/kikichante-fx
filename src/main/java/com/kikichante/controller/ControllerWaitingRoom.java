@@ -82,7 +82,7 @@ public class ControllerWaitingRoom {
         client.leaveGame();
         listen = false;
         primaryStage.setScene(this.sceneBack);
-        primaryStage.setFullScreen(true);
+       // primaryStage.setFullScreen(true);
     }
 
 }

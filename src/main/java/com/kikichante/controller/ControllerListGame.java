@@ -67,7 +67,7 @@ public class ControllerListGame implements Initializable {
     public void onClickReturn(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneBack);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
     }
 
     public void go(ActionEvent actionEvent) {
@@ -88,7 +88,7 @@ public class ControllerListGame implements Initializable {
             controllerWaitingRoom.getPlayerInit();
 
             primaryStage.setScene(viewWaitingRoom);
-            primaryStage.setFullScreen(true);
+           // primaryStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }

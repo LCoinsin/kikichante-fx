@@ -8,6 +8,12 @@
     -fx-border-width: 3px;
 }
 
+.buttonStyle2 {
+
+    -fx-border-radius:10px;
+}
+
+
 .buttonStyle:hover {
     -fx-border-width: 4px;
 }
