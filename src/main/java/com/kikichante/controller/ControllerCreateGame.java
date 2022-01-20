@@ -47,7 +47,7 @@ public class ControllerCreateGame {
             FXMLLoader waitingRoomLoader = new FXMLLoader(Application.class.getResource("ViewWaitingRoom.fxml"));
             Scene viewWaitingRoom = new Scene(waitingRoomLoader.load());
 
-            ControllerStatistique controllerWaitingRoom = (ControllerStatistique)waitingRoomLoader.getController();
+            ControllerWaitingRoom controllerWaitingRoom = (ControllerWaitingRoom)waitingRoomLoader.getController();
             Scene currentScene = textfieldGameName.getScene();
             controllerWaitingRoom.setSceneBack(currentScene);
             controllerWaitingRoom.setClient(client);
