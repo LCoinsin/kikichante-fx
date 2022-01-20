@@ -43,6 +43,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void stop() {
         System.out.println("Stage is closing");
+        System.exit(0);
     }
 
     public static void main(String[] args) throws IOException {
