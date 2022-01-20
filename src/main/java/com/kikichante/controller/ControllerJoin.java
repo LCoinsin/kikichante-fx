@@ -61,7 +61,7 @@ public class ControllerJoin implements Initializable {
         System.out.println("test");
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneBack);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
     }
 
     /******************************************************************************************************************/

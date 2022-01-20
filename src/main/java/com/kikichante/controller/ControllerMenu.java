@@ -48,7 +48,7 @@ public class ControllerMenu implements Initializable {
             controllerStatistique.setClient(client);
 
             primaryStage.setScene(viewStatistique);
-            primaryStage.setFullScreen(true);
+           // primaryStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class ControllerMenu implements Initializable {
             controllerListGame.getActiveGames();
 
             primaryStage.setScene(viewListGame);
-            primaryStage.setFullScreen(true);
+           // primaryStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,7 +83,8 @@ public class ControllerMenu implements Initializable {
             controllerCreateGame.setClient(client);
 
             primaryStage.setScene(viewCreateGame);
-            primaryStage.setFullScreen(true);
+            //primaryStage.setFullScreen(true);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,6 +105,9 @@ public class ControllerMenu implements Initializable {
     public void onClickGotoJoinGameList(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         switchSceneListGame(primaryStage);
+        //primaryStage.setFullScreen(false);
+       // primaryStage.setResizable(false);
+
     }
 
     /******************************************************************************************************************/
@@ -121,6 +125,7 @@ public class ControllerMenu implements Initializable {
         DoubleProperty mvw = mediaView.fitWidthProperty();
         DoubleProperty mvh = mediaView.fitHeightProperty();
         mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+        //System.out.println(mvh);
         mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
         mediaView.setPreserveRatio(true);
         player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);

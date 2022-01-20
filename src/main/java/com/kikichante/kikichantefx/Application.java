@@ -36,7 +36,7 @@ public class Application extends javafx.application.Application {
         // Start app
         //****************
         stage.setScene(viewLoginLoader);
-        stage.setResizable(false);
+
         stage.show();
     }
 

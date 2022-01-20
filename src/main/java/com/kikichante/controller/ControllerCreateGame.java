@@ -34,7 +34,7 @@ public class ControllerCreateGame {
     public void onClickReturn(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneBack);
-        primaryStage.setFullScreen(true);
+       // primaryStage.setFullScreen(true);
     }
 
     /******************************************************************************************************************/
@@ -53,7 +53,7 @@ public class ControllerCreateGame {
             controllerWaitingRoom.setClient(client);
 
             primaryStage.setScene(viewWaitingRoom);
-            primaryStage.setFullScreen(true);
+           // primaryStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }

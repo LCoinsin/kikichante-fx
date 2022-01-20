@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -58,7 +59,10 @@ public class ControllerSigninSignup {
             controllerMenu.setClient(client);
 
             primaryStage.setScene(viewMenu);
-            primaryStage.setFullScreen(true);
+            //primaryStage.setWidth(600);
+            //primaryStage.setHeight(600);
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -117,6 +121,8 @@ public class ControllerSigninSignup {
     }
 
     public void onClickConnexion(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)VBoxTextFieldConnexion.getScene().getWindow();
+        primaryStage.setResizable(false);
         if(textfieldConnexionUsername.getText() != "" && textfieldConnexionPassword.getText() != "") {
             client.connexion(textfieldConnexionUsername.getText(), textfieldConnexionPassword.getText());
             boolean isConnected = false;
@@ -126,6 +132,7 @@ public class ControllerSigninSignup {
                     String[] resMessage = res.split(":");
                     if (resMessage[1].equals("OK"))
                         isConnected = true;
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
