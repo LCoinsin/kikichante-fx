@@ -21,6 +21,12 @@ public class Server {
 
         new CommandServer(bdd, activeClient, activeGames).start();
 
+        //TODO -> Supprimer apres
+        activeGames.add(new GameServer("e"));
+        activeGames.add(new GameServer("g"));
+        activeGames.add(new GameServer("b"));
+        activeGames.add(new GameServer("a"));
+        activeGames.add(new GameServer("s"));
 
         try (ServerSocket serverSocket  = new ServerSocket(5000)) {
             while (true) {

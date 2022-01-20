@@ -64,7 +64,6 @@ public class Client {
 
     public void joinGame(String gameName) {
         String message = "JOINGAME:" + gameName;
-        //TODO -> Ecouter la reponse + changer de scene
         println(message);
     }
 

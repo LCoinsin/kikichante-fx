@@ -8,13 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ControllerListGame implements Initializable {
@@ -24,6 +25,8 @@ public class ControllerListGame implements Initializable {
     private MediaView bgView;
     @FXML
     private ProgressBar songProgressBar;
+    @FXML
+    private VBox VBox_radiobutton;
 
     private Scene sceneBack;
     private Client client;
@@ -49,6 +52,17 @@ public class ControllerListGame implements Initializable {
             e.printStackTrace();
         }
         System.out.println("listGame = " + listGame);
+        String[] resListGame = listGame.split(":");
+        resListGame = Arrays.copyOfRange(resListGame, 1, resListGame.length);
+
+        ToggleGroup groupeListGame = new ToggleGroup();
+        for (String name : resListGame) {
+            RadioButton rb = new RadioButton(name);
+            rb.setToggleGroup(groupeListGame);
+            VBox_radiobutton.getChildren().add(rb);
+        }
+        //VBox_radiobutton.getChildren().add(new Button("Click me !"));
+        //System.out.println("listGame = " + listGame);
     }
 
     /******************************************************************************************************************/
