@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -20,13 +21,13 @@ public class ControllerSigninSignup {
     @FXML
     private TextField textfieldInscriptionUsername;
     @FXML
-    private TextField textfieldInscriptionPassword;
+    private PasswordField textfieldInscriptionPassword;
     @FXML
-    private TextField textfieldInscriptionPasswordConfirm;
+    private PasswordField textfieldConnexionPassword;
+    @FXML
+    private PasswordField textfieldInscriptionPasswordConfirm;
     @FXML
     private TextField textfieldConnexionUsername;
-    @FXML
-    private TextField textfieldConnexionPassword;
     @FXML
     private VBox VBoxTextFieldConnexion;
     @FXML
