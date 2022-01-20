@@ -23,52 +23,14 @@ public class Application extends javafx.application.Application {
         //****************
         // Scene init
         //****************
-        //FXMLLoader menuLoader = new FXMLLoader(Application.class.getResource("ViewMenu.fxml"));
-        //Scene viewMenu = new Scene(menuLoader.load());
-
-        //FXMLLoader statistiqueLoader = new FXMLLoader(Application.class.getResource("ViewStatistique.fxml"));
-        //Scene viewStatistique = new Scene(statistiqueLoader.load());
-
-        //FXMLLoader createGameSettingsLoader = new FXMLLoader(Application.class.getResource("ViewCreateGame.fxml"));
-        //Scene viewCreateGameSettings = new Scene(createGameSettingsLoader.load());
-
-        //FXMLLoader joinGameListLoader = new FXMLLoader(Application.class.getResource("ViewJoinListGame.fxml"));
-        //Scene viewJoinGameList = new Scene(joinGameListLoader.load());
-
         FXMLLoader loginLoader = new FXMLLoader(Application.class.getResource("ViewSignInSignUp.fxml"));
         Scene viewLoginLoader = new Scene(loginLoader.load());
-
-        //FXMLLoader waitingRommLoader = new FXMLLoader(Application.class.getResource("ViewWaitingRoom.fxml"));
-        //Scene viewWaitingRoom = new Scene(waitingRommLoader.load());
-
 
         //****************
         // Set controller
         //****************
         ControllerSigninSignup controllerSignInSignUp = (ControllerSigninSignup)loginLoader.getController();
         controllerSignInSignUp.setClient(client);
-
-
-
-        //ControllerMenu controllerMenu = (ControllerMenu)menuLoader.getController();
-        //controllerMenu.setSceneStatistique(viewStatistique);
-        //controllerMenu.setSceneCreateGame(viewCreateGameSettings);
-        //controllerMenu.setSceneJoinGameList(viewJoinGameList);
-
-        //ControllerStatistique controllerStatistique = (ControllerStatistique)statistiqueLoader.getController();
-        //controllerStatistique.setSceneMenu(viewMenu);
-
-        //ControllerJoin controllerGameMenuCreateSettings = (ControllerJoin)createGameSettingsLoader.getController();
-        //controllerGameMenuCreateSettings.setSceneMenu(viewMenu);
-        //controllerGameMenuCreateSettings.setClient(client);
-        //controllerGameMenuCreateSettings.setSceneWaitingRoom(viewWaitingRoom);
-
-        //ControllerJoin controllerGameMenuJoinList = (ControllerJoin)joinGameListLoader.getController();
-        //controllerGameMenuJoinList.setSceneMenu(viewMenu);
-        //controllerGameMenuJoinList.setClient(client);
-        //controllerGameMenuJoinList.setSceneWaitingRoom(viewWaitingRoom);
-
-        //ControllerWaitingRoom controllerWaitingRoom = (ControllerWaitingRoom) waitingRommLoader.getController();
 
         //****************
         // Start app

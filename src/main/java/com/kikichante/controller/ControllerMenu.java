@@ -15,7 +15,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,27 +27,15 @@ public class ControllerMenu implements Initializable {
     @FXML
     private Label titleTest;
 
-    private Scene sceneStatistique;
-    private Scene sceneCreateGame;
-    private Scene sceneJoinGameList;
     private Client client;
 
-    public void setSceneStatistique(Scene sceneStatistique) {
-        this.sceneStatistique = sceneStatistique;
-    }
-
-    public void setSceneCreateGame(Scene sceneCreateGame) {
-        this.sceneCreateGame = sceneCreateGame;
-    }
-
-    public void setSceneJoinGameList(Scene sceneJoinGameList) {
-        this.sceneJoinGameList = sceneJoinGameList;
-    }
+    /******************************************************************************************************************/
 
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /******************************************************************************************************************/
 
     private void switchSceneStatistique(Stage primaryStage) {
         try {
@@ -57,7 +44,8 @@ public class ControllerMenu implements Initializable {
 
             ControllerStatistique controllerStatistique = (ControllerStatistique)statistiqueLoader.getController();
             Scene currentScene = mediaView.getScene();
-            controllerStatistique.setSceneMenu(currentScene);
+            controllerStatistique.setSceneBack(currentScene);
+            controllerStatistique.setClient(client);
 
             primaryStage.setScene(viewStatistique);
             primaryStage.setFullScreen(true);
@@ -66,33 +54,58 @@ public class ControllerMenu implements Initializable {
         }
     }
 
-    private void switchSceneListGame() {
+    private void switchSceneListGame(Stage primaryStage) {
+        try {
+            FXMLLoader listGameLoader = new FXMLLoader(Application.class.getResource("ViewJoinListGame.fxml"));
+            Scene viewListGame = new Scene(listGameLoader.load());
 
+            ControllerListGame controllerListGame = (ControllerListGame) listGameLoader.getController();
+            Scene currentScene = mediaView.getScene();
+            controllerListGame.setSceneBack(currentScene);
+            controllerListGame.setClient(client);
+
+            primaryStage.setScene(viewListGame);
+            primaryStage.setFullScreen(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void switchSceneCreateGame() {
+    private void switchSceneCreateGame(Stage primaryStage) {
+        try {
+            FXMLLoader createGameLoader = new FXMLLoader(Application.class.getResource("ViewCreateGame.fxml"));
+            Scene viewCreateGame = new Scene(createGameLoader.load());
+            
+            ControllerCreateGame controllerCreateGame = (ControllerCreateGame) createGameLoader.getController();
+            Scene currentScene = mediaView.getScene();
+            controllerCreateGame.setSceneBack(currentScene);
+            controllerCreateGame.setClient(client);
 
+            primaryStage.setScene(viewCreateGame);
+            primaryStage.setFullScreen(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    /******************************************************************************************************************/
 
     public void onClickGotoStatistique(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         this.switchSceneStatistique(primaryStage);
-        //primaryStage.setScene(this.sceneStatistique);
-        //primaryStage.setFullScreen(true);
     }
 
     public void onClickGotoCreateGame(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(this.sceneCreateGame);
-        //primaryStage.setFullScreen(true);
+        switchSceneCreateGame(primaryStage);
     }
 
     public void onClickGotoJoinGameList(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(this.sceneJoinGameList);
-        primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitHint("");
+        switchSceneListGame(primaryStage);
     }
+
+    /******************************************************************************************************************/
 
     public void onTestClick(ActionEvent actionEvent) {
         titleTest.setText("banane");

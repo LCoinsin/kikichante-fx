@@ -1,31 +1,24 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
-import com.kikichante.server.ChoiceMusic;
-import com.kikichante.server.Music;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.security.PublicKey;
 import java.sql.SQLException;
 import java.util.*;
 
-import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.control.ProgressBar;
 
 
@@ -37,7 +30,7 @@ public class ControllerJoin implements Initializable {
     @FXML
     private ProgressBar songProgressBar;
 
-    private Scene sceneMenu;
+    private Scene sceneBack;
     private Scene sceneWaitingRoom;
     private Client client;
 
@@ -48,10 +41,10 @@ public class ControllerJoin implements Initializable {
     private TimerTask task;
     private boolean running;
 
-    /***********************/
+    /******************************************************************************************************************/
 
-    public void setSceneMenu(Scene sceneMenu) {
-        this.sceneMenu = sceneMenu;
+    public void setSceneBack(Scene sceneBack) {
+        this.sceneBack = sceneBack;
     }
 
     public void setClient(Client client) {
@@ -62,16 +55,16 @@ public class ControllerJoin implements Initializable {
         this.sceneWaitingRoom = sceneWaitingRoom;
     }
 
-    /***********************/
+    /******************************************************************************************************************/
 
     public void onClickGotoMenu(ActionEvent actionEvent) {
         System.out.println("test");
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(this.sceneMenu);
+        primaryStage.setScene(this.sceneBack);
         primaryStage.setFullScreen(true);
     }
 
-    /***********************/
+    /******************************************************************************************************************/
 
     public void go(ActionEvent actionEvent){
 
