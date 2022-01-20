@@ -32,7 +32,7 @@ public class Server {
             while (true) {
                 System.out.println("Wainting new client");
                 Socket socket = serverSocket.accept();
-                ClientServer clientServer = new ClientServer(socket, activeClient);
+                ClientServer clientServer = new ClientServer(socket, activeClient, activeGames);
                 activeClient.add(clientServer);
                 new SenderThread(clientServer, bdd, activeGames, activeClient).start();
             }

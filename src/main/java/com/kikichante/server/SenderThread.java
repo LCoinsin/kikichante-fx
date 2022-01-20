@@ -1,7 +1,5 @@
 package com.kikichante.server;
 
-import com.kikichante.client.Client;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -109,6 +107,9 @@ public class SenderThread extends Thread {
             clientServer.getGame().removeClient(clientServer);
             if(clientServer.getGame().getCurrentPlayer().size() < 1)
                 activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
+            else
+                clientServer.getGame().updateListPlayerWaitingRoom(clientServer);
+            clientServer.println("LEAVEGAME");
         }
         else if (message.startsWith("JOINGAME")) {
             //TODO -> Rejoindre une game
@@ -118,6 +119,7 @@ public class SenderThread extends Thread {
             for (GameServer game : activeGame) {
                 if (game.getGameName().equals(gameName)){
                     game.addClient(this.clientServer);
+                    game.updateListPlayerWaitingRoom(clientServer);
                     this.clientServer.setGame(game);
                     gameExist = true;
                     break;
@@ -133,6 +135,13 @@ public class SenderThread extends Thread {
             }
         }
         //WAITING ROOM
+        else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
+            String messageCurrentPlayer = "LISTCURRENTPLAYERINWAITINGROOM";
+            for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
+                messageCurrentPlayer = messageCurrentPlayer.concat(":"+client.getUsernameFromBdd());
+            }
+            this.clientServer.println(messageCurrentPlayer);
+        }
         //DEFAULT
         else {
             System.out.println("message = " + message);

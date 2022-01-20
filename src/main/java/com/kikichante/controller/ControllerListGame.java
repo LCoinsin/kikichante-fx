@@ -20,12 +20,6 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ControllerListGame implements Initializable {
-    //@FXML
-    //private TextField textfieldGameName;
-    //@FXML
-    //private MediaView bgView;
-    //@FXML
-    //private ProgressBar songProgressBar;
     @FXML
     private Button retour;
     @FXML
@@ -70,7 +64,6 @@ public class ControllerListGame implements Initializable {
 
     /******************************************************************************************************************/
 
-
     public void onClickReturn(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneBack);
@@ -92,6 +85,7 @@ public class ControllerListGame implements Initializable {
             Scene currentScene = retour.getScene();
             controllerWaitingRoom.setSceneBack(currentScene);
             controllerWaitingRoom.setClient(client);
+            controllerWaitingRoom.getPlayerInit();
 
             primaryStage.setScene(viewWaitingRoom);
             primaryStage.setFullScreen(true);

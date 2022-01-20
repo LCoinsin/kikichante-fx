@@ -16,13 +16,15 @@ public class ClientServer {
     private String userId;
     private String usernameFromBdd;
     private ArrayList<ClientServer> activeClient;
+    private ArrayList<GameServer> activeGame;
     private GameServer game;
 
-    public ClientServer(Socket socket, ArrayList<ClientServer> activeClient) throws IOException {
+    public ClientServer(Socket socket, ArrayList<ClientServer> activeClient, ArrayList<GameServer> activeGame) throws IOException {
         this.socket = socket;
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer = new PrintWriter(socket.getOutputStream(), true);
         this.activeClient = activeClient;
+        this.activeGame = activeGame;
     }
 
     // !! WARNING !! if IOException -> disconnect
@@ -34,6 +36,17 @@ public class ClientServer {
                 if (c.userId.equals(this.userId)) {
                     activeClient.remove(c);
                     break;
+                }
+            }
+            if (game != null) {
+                if (game.getCurrentPlayer().size() <= 1) {
+                    activeGame.removeIf(g -> g.getGameName().equals(game.getGameName()));
+                }
+                for (ClientServer c : game.getCurrentPlayer()) {
+                    if (c.getUserId().equals(this.userId)) {
+                        game.removeClient(c);
+                        break;
+                    }
                 }
             }
 

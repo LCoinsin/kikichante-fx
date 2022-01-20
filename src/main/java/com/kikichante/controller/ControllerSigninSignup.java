@@ -37,6 +37,7 @@ public class ControllerSigninSignup {
 
     private Scene sceneMenu;
     private Client client;
+    private String stageUsername;
 
     //Changement de scene
     public void setSceneMenu(Scene sceneMenu) {
@@ -47,6 +48,7 @@ public class ControllerSigninSignup {
 
     private void switchToMenu() {
         Stage primaryStage = (Stage)VBoxTextFieldConnexion.getScene().getWindow();
+        primaryStage.setTitle(stageUsername);
 
         try {
             FXMLLoader menuLoader = new FXMLLoader(Application.class.getResource("ViewMenu.fxml"));
@@ -130,6 +132,7 @@ public class ControllerSigninSignup {
             }
 
             if(isConnected) {
+                stageUsername = textfieldConnexionUsername.getText();
                 switchToMenu();
             } else {
                 textfieldConnexionUsername.getStyleClass().add("textfieldError");
@@ -161,6 +164,7 @@ public class ControllerSigninSignup {
             }
 
             if (isInscription) {
+                stageUsername = textfieldInscriptionUsername.getText();
                 switchToMenu();
             } else {
                 textfieldInscriptionUsername.getStyleClass().add("textfieldError");
