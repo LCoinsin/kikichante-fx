@@ -11,7 +11,7 @@ public class SenderThread extends Thread {
     private Bdd bdd;
     private ArrayList<GameServer> activeGame;
     private ArrayList<ClientServer> activeClient;
-    private boolean isInGame = false;
+    private boolean isLeaved = false;
 
     public SenderThread (ClientServer clientServer, Bdd bdd, ArrayList<GameServer> activeGame, ArrayList<ClientServer> activeClient) {
         this.clientServer = clientServer;
@@ -23,7 +23,7 @@ public class SenderThread extends Thread {
     @Override
     public void run() {
         try {
-            while (!isInGame) {
+            while (!isLeaved) {
                 var line = this.clientServer.readLine();
                 handleLine(line);
             }

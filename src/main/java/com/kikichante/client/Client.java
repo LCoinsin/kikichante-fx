@@ -71,4 +71,9 @@ public class Client {
         String message = "LEAVEGAME";
         println(message);
     }
+
+    public void closeClient() {
+        String message = "CLOSECLIENT";
+        println(message);
+    }
 }

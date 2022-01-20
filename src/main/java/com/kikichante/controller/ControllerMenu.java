@@ -56,7 +56,7 @@ public class ControllerMenu implements Initializable {
 
     private void switchSceneListGame(Stage primaryStage) {
         try {
-            FXMLLoader listGameLoader = new FXMLLoader(Application.class.getResource("ViewJoinListGame.fxml"));
+            FXMLLoader listGameLoader = new FXMLLoader(Application.class.getResource("ViewListGame.fxml"));
             Scene viewListGame = new Scene(listGameLoader.load());
 
             ControllerListGame controllerListGame = (ControllerListGame) listGameLoader.getController();

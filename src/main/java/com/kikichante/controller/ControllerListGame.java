@@ -13,18 +13,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ControllerListGame implements Initializable {
+    //@FXML
+    //private TextField textfieldGameName;
+    //@FXML
+    //private MediaView bgView;
+    //@FXML
+    //private ProgressBar songProgressBar;
     @FXML
-    private TextField textfieldGameName;
-    @FXML
-    private MediaView bgView;
-    @FXML
-    private ProgressBar songProgressBar;
+    private Button retour;
     @FXML
     private VBox VBox_radiobutton;
     private ToggleGroup groupeListGame = new ToggleGroup();
@@ -67,6 +70,7 @@ public class ControllerListGame implements Initializable {
 
     /******************************************************************************************************************/
 
+
     public void onClickReturn(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(this.sceneBack);
@@ -79,13 +83,13 @@ public class ControllerListGame implements Initializable {
 
     public void switchWaitingRoom() {
         try {
-            Stage primaryStage = (Stage)textfieldGameName.getScene().getWindow();
+            Stage primaryStage = (Stage)retour.getScene().getWindow();
 
             FXMLLoader waitingRoomLoader = new FXMLLoader(Application.class.getResource("ViewWaitingRoom.fxml"));
             Scene viewWaitingRoom = new Scene(waitingRoomLoader.load());
 
             ControllerWaitingRoom controllerWaitingRoom = (ControllerWaitingRoom)waitingRoomLoader.getController();
-            Scene currentScene = textfieldGameName.getScene();
+            Scene currentScene = retour.getScene();
             controllerWaitingRoom.setSceneBack(currentScene);
             controllerWaitingRoom.setClient(client);
 
