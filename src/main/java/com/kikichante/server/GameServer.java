@@ -7,26 +7,28 @@ public class GameServer {
     private String gameName;
     private ArrayList<ClientServer> currentPlayer = new ArrayList<ClientServer>();
 
-    /*****************************/
+    /******************************************************************************************************************/
 
     public GameServer(String gameName) {
         this.gameName = gameName;
     }
 
-    /*****************************/
+    /******************************************************************************************************************/
 
     public String getGameName() {
         return gameName;
     }
 
-    /*****************************/
+    public ArrayList<ClientServer> getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /******************************************************************************************************************/
 
     public boolean addClient(ClientServer client) {
         this.currentPlayer.add(client);
         return true;
     }
-
-    /*****************************/
 
     public boolean removeClient(ClientServer client) {
         for (ClientServer c : currentPlayer) {
@@ -38,4 +40,5 @@ public class GameServer {
         return false;
     }
 
+    /******************************************************************************************************************/
 }

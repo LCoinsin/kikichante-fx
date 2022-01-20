@@ -63,6 +63,7 @@ public class ControllerMenu implements Initializable {
             Scene currentScene = mediaView.getScene();
             controllerListGame.setSceneBack(currentScene);
             controllerListGame.setClient(client);
+            controllerListGame.getActiveGames();
 
             primaryStage.setScene(viewListGame);
             primaryStage.setFullScreen(true);

@@ -11,4 +11,11 @@
             fx:controller="com.kikichante.controller.ControllerWaitingRoom"
             prefHeight="400.0" prefWidth="600.0">
     <Label fx:id="titleTest" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" text="ingame" textAlignment="CENTER" textFill="#efe9e9"> </Label>
+
+    <VBox>
+        <children>
+            <Button onAction="#onClickReturn" text="Retour"></Button>
+        </children>
+    </VBox>
+
 </AnchorPane>

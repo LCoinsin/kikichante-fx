@@ -61,4 +61,9 @@ public class Client {
         String message = "CREATEGAME:"+gameName;
         println(message);
     }
+
+    public void leaveGame() {
+        String message = "LEAVEGAME";
+        println(message);
+    }
 }

@@ -11,6 +11,7 @@ public class SenderThread extends Thread {
     private Bdd bdd;
     private ArrayList<GameServer> activeGame;
     private ArrayList<ClientServer> activeClient;
+    private boolean isInGame = false;
 
     public SenderThread (ClientServer clientServer, Bdd bdd, ArrayList<GameServer> activeGame, ArrayList<ClientServer> activeClient) {
         this.clientServer = clientServer;
@@ -22,7 +23,7 @@ public class SenderThread extends Thread {
     @Override
     public void run() {
         try {
-            while (true) {
+            while (!isInGame) {
                 var line = this.clientServer.readLine();
                 handleLine(line);
             }
@@ -76,8 +77,6 @@ public class SenderThread extends Thread {
             }
         }
         else if (message.startsWith("CREATEGAME")) {
-            System.out.println("Creation d'une partie");
-            //TODO -> Creation d'une partie
             String[] messageCreateGame = message.split(":");
             String gameName = messageCreateGame[1];
             boolean createGame = true;
@@ -93,13 +92,26 @@ public class SenderThread extends Thread {
                 this.activeGame.add(game);
                 this.clientServer.setGame(game);
                 game.addClient(this.clientServer);
+                new GameThread(game).start();
                 System.out.println("activeGame = " + activeGame);
                 this.clientServer.println("CREATEGAME:OK");
             }
         }
         else if (message.startsWith("GETCURRENTLISTGAME")) {
-            //TODO -> Return la liste des games
-            System.out.println("Current game list");
+            String messageListGame = "LISTGAME";
+            for (GameServer game : activeGame) {
+                messageListGame = messageListGame.concat(":" + game.getGameName());
+            }
+            clientServer.println(messageListGame);
+        }
+        else if (message.startsWith("LEAVEGAME")) {
+            clientServer.getGame().removeClient(clientServer);
+            if(clientServer.getGame().getCurrentPlayer().size() < 1)
+                activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
+        }
+        else if (message.startsWith("JOINGAME")) {
+            //TODO -> Rejoindre une game
+            System.out.println("Join game ");
         }
         else {
             System.out.println("message = " + message);

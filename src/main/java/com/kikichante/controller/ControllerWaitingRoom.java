@@ -1,7 +1,10 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class ControllerWaitingRoom {
 
@@ -19,5 +22,12 @@ public class ControllerWaitingRoom {
     }
 
     /******************************************************************************************************************/
+
+    public void onClickReturn(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        client.leaveGame();
+        primaryStage.setScene(this.sceneBack);
+        primaryStage.setFullScreen(true);
+    }
 
 }
