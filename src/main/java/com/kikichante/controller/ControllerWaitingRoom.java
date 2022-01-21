@@ -43,9 +43,7 @@ public class ControllerWaitingRoom {
     public void getPlayerInit() {
         client.getListPlayerInWaitingRoom();
         try {
-            System.out.println("------------------------INIT");
             var message = client.readLine();
-            System.out.println("MESSAGE ================ " + message);
             if (message.startsWith("LISTCURRENTPLAYERINWAITINGROOM")) {
                 messageToListPlayer(message);
             }
