@@ -1,7 +1,9 @@
 package com.kikichante.kikichantefx;
 
+import com.kikichante.controller.ControllerInGame;
 import com.kikichante.controller.ControllerListGame;
 import com.kikichante.kikichantefx.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,30 +13,25 @@ import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 
 public class TestView extends javafx.application.Application {
-    @FXML
-    private HBox Hbox;
+
+    private int x = 5;
 
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(Application.class.getResource("ViewJoinListGame.fxml"));
         Scene view = new Scene(loader.load());
 
-        //ControllerListGame controllerListGame = (ControllerListGame) loader.getController();
+        //****************
+        // Set controller
+        //****************
+        ControllerInGame controllerInGame = (ControllerInGame) loader.getController();
 
+        //ControllerListGame controllerListGame = (ControllerListGame) loader.getController();
         stage.setScene(view);
         stage.show();
+        controllerInGame.setTimer();
+//        countDown();
     }
-    static void countDown( int x ) {
-        while (x > 0 ) {
-            System.out.println("x = " + x);
-            TextField rb = new TextField(String.valueOf(x));
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {}
-            x--;
-        }
-    }
-
 
     public static void main(String[] args) {
         launch();

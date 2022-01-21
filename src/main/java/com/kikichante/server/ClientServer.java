@@ -1,5 +1,7 @@
 package com.kikichante.server;
 
+import com.kikichante.exception.ClientDisconnectedException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,31 +34,37 @@ public class ClientServer {
     }
 
     // !! WARNING !! if IOException -> disconnect
-    public String readLine() throws IOException{
-        var line = this.reader.readLine();
-        if (line == null) {
-            //Delete le client de la liste des clients
-            for (ClientServer c : activeClient) {
-                if (c.userId.equals(this.userId)) {
-                    activeClient.remove(c);
-                    break;
-                }
-            }
-            if (game != null) {
-                if (game.getCurrentPlayer().size() <= 1) {
-                    activeGame.removeIf(g -> g.getGameName().equals(game.getGameName()));
-                }
-                for (ClientServer c : game.getCurrentPlayer()) {
-                    if (c.getUserId().equals(this.userId)) {
-                        game.removeClient(c);
+    public String readLine() throws ClientDisconnectedException {
+        try {
+            var line = this.reader.readLine();
+            if (line == null) {
+                //Delete le client de la liste des clients
+                for (ClientServer c : activeClient) {
+                    if (c.userId.equals(this.userId)) {
+                        activeClient.remove(c);
                         break;
                     }
                 }
-            }
+                if (game != null) {
+                    if (game.getCurrentPlayer().size() <= 1) {
+                        activeGame.removeIf(g -> g.getGameName().equals(game.getGameName()));
+                    }
+                    for (ClientServer c : game.getCurrentPlayer()) {
+                        if (c.getUserId().equals(this.userId)) {
+                            game.removeClient(c);
+                            break;
+                        }
+                    }
+                }
 
-            throw new IOException("Client disconnected");
+//            throw new IOException("Client disconnected");
+
+            }
+            return line;
+        }catch (IOException e){
+            throw new ClientDisconnectedException();
         }
-        return line;
+
     }
 
     /**************************/
