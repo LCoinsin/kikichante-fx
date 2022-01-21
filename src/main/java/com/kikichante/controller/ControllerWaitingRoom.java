@@ -43,11 +43,11 @@ public class ControllerWaitingRoom {
     public void getPlayerInit() {
         client.getListPlayerInWaitingRoom();
         try {
+            System.out.println("------------------------INIT");
             var message = client.readLine();
+            System.out.println("MESSAGE ================ " + message);
             if (message.startsWith("LISTCURRENTPLAYERINWAITINGROOM")) {
-                //TODO -> Traiter la liste de joueurs
                 messageToListPlayer(message);
-                //System.out.println("message = " + message);
             }
             listenner.start();
         } catch (IOException e) {
@@ -62,6 +62,7 @@ public class ControllerWaitingRoom {
         public void run() {
             while (listen) {
                 try {
+                    System.out.println("CONTROLLER WAITING ROOM THREAD");
                     var message = client.readLine();
                     System.out.println("message = " + message);
                     if (message.startsWith("LEAVEGAME"))
@@ -142,6 +143,8 @@ public class ControllerWaitingRoom {
             ControllerListGame controllerListGame = (ControllerListGame) listGameLoader.getController();
             controllerListGame.setClient(client);
             controllerListGame.getActiveGames();
+
+            client.goInListGame();
 
             primaryStage.setScene(viewListGame);
         } catch (IOException e ) {

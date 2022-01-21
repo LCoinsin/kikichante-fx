@@ -60,6 +60,8 @@ public class ControllerMenu implements Initializable {
             controllerListGame.setClient(client);
             controllerListGame.getActiveGames();
 
+            client.goInListGame();
+
             primaryStage.setScene(viewListGame);
            // primaryStage.setFullScreen(true);
         } catch (IOException e) {

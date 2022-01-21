@@ -1,5 +1,7 @@
 package com.kikichante.server;
 
+import com.kikichante.client.Client;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -75,6 +77,13 @@ public class SenderThread extends Thread {
                 this.clientServer.println("INSCRIPTION:KO");
             }
         }
+        //TO LIST GAME
+        else if (message.startsWith("GOVIEWLISTGAME")) {
+            this.clientServer.setInListGame(true);
+        }
+        else if (message.startsWith("GOOUTVIEWLISTGAME")) {
+            this.clientServer.setInListGame(false);
+        }
         //OUT GAME
         else if (message.startsWith("CREATEGAME")) {
             String[] messageCreateGame = message.split(":");
@@ -95,6 +104,7 @@ public class SenderThread extends Thread {
                 new GameThread(game).start();
                 System.out.println("activeGame = " + activeGame);
                 this.clientServer.println("CREATEGAME:OK");
+                updateListGames();
             }
         }
         else if (message.startsWith("GETCURRENTLISTGAME")) {
@@ -106,8 +116,10 @@ public class SenderThread extends Thread {
         }
         else if (message.startsWith("LEAVEGAME")) {
             clientServer.getGame().removeClient(clientServer);
-            if(clientServer.getGame().getCurrentPlayer().size() < 1)
+            if(clientServer.getGame().getCurrentPlayer().size() < 1) {
                 activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
+                updateListGames();
+            }
             else
                 clientServer.getGame().updateListPlayerWaitingRoom(clientServer);
             clientServer.println("LEAVEGAME");
@@ -156,8 +168,23 @@ public class SenderThread extends Thread {
             }
         }
         //DEFAULT
+        else if (message.startsWith("EXIT")) {
+            this.clientServer.println("EXIT");
+        }
         else {
             System.out.println("message = " + message);
+        }
+    }
+
+    public void updateListGames() {
+        String messageListGame = "LISTGAME";
+        for (GameServer game : activeGame) {
+            messageListGame = messageListGame.concat(":" + game.getGameName());
+        }
+        for (ClientServer c : activeClient) {
+            if (c.isInListGame()) {
+                c.println(messageListGame);
+            }
         }
     }
 }
