@@ -110,7 +110,8 @@ public class SenderThread extends Thread {
         else if (message.startsWith("GETCURRENTLISTGAME")) {
             String messageListGame = "LISTGAME";
             for (GameServer game : activeGame) {
-                messageListGame = messageListGame.concat(":" + game.getGameName());
+                if (game.isAccessible())
+                    messageListGame = messageListGame.concat(":" + game.getGameName());
             }
             clientServer.println(messageListGame);
         }
@@ -161,7 +162,11 @@ public class SenderThread extends Thread {
             if (resMessage[1].equals("OK")) {
                 clientServer.setReady(true);
                 this.clientServer.getGame().updateListPlayerStateWaitingRoom();
-                System.out.println("Peut on lancer la partie ? : " + this.clientServer.getGame().canLaunchGame());
+                //TODO Check si on peut lancer une partie ? START GAME : RIEN
+                if (this.clientServer.getGame().canLaunchGame()) {
+                    this.clientServer.getGame().startGame();
+                    updateListGames();
+                }
             } else if (resMessage[1].equals("KO")) {
                 clientServer.setReady(false);
                 this.clientServer.getGame().updateListPlayerStateWaitingRoom();
@@ -179,10 +184,12 @@ public class SenderThread extends Thread {
     public void updateListGames() {
         String messageListGame = "LISTGAME";
         for (GameServer game : activeGame) {
-            messageListGame = messageListGame.concat(":" + game.getGameName());
+            if (game.isAccessible())
+                messageListGame = messageListGame.concat(":" + game.getGameName());
         }
         for (ClientServer c : activeClient) {
             if (c.isInListGame()) {
+                System.out.println(c.getUsernameFromBdd());
                 c.println(messageListGame);
             }
         }

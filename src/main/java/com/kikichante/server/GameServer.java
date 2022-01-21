@@ -7,6 +7,7 @@ public class GameServer {
     private String gameName;
     private ArrayList<ClientServer> currentPlayer = new ArrayList<ClientServer>();
     private final int numberMiniLaunchGame = 2;
+    private boolean isAccessible = true;
 
     /******************************************************************************************************************/
 
@@ -22,6 +23,10 @@ public class GameServer {
 
     public ArrayList<ClientServer> getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public boolean isAccessible() {
+        return isAccessible;
     }
 
     /******************************************************************************************************************/
@@ -76,4 +81,17 @@ public class GameServer {
             return true;
         } else return false;
     }
+
+    public void startGame() {
+        this.isAccessible = false;
+        for (ClientServer c : currentPlayer) {
+            c.setInGame(true);
+            c.println("STARTGAME");
+        }
+    }
+
+    /******************************************************************************************************************/
+
+
+
 }
