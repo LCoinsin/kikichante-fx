@@ -68,6 +68,7 @@ public class SenderThread extends Thread {
 
             if (bdd.queryInscription(username, password)) {
                 System.out.println("Nouvelle inscription : " + username);
+                this.clientServer.setUsernameFromBdd(username);
                 this.clientServer.println("INSCRIPTION:OK");
             } else {
                 System.out.println("ERROR inscription : " + username);

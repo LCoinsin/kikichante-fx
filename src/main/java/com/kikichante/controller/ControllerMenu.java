@@ -43,12 +43,9 @@ public class ControllerMenu implements Initializable {
             Scene viewStatistique = new Scene(statistiqueLoader.load());
 
             ControllerStatistique controllerStatistique = (ControllerStatistique)statistiqueLoader.getController();
-            Scene currentScene = mediaView.getScene();
-            controllerStatistique.setSceneBack(currentScene);
             controllerStatistique.setClient(client);
 
             primaryStage.setScene(viewStatistique);
-           // primaryStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,8 +57,6 @@ public class ControllerMenu implements Initializable {
             Scene viewListGame = new Scene(listGameLoader.load());
 
             ControllerListGame controllerListGame = (ControllerListGame) listGameLoader.getController();
-            Scene currentScene = mediaView.getScene();
-            controllerListGame.setSceneBack(currentScene);
             controllerListGame.setClient(client);
             controllerListGame.getActiveGames();
 
@@ -78,8 +73,6 @@ public class ControllerMenu implements Initializable {
             Scene viewCreateGame = new Scene(createGameLoader.load());
             
             ControllerCreateGame controllerCreateGame = (ControllerCreateGame) createGameLoader.getController();
-            Scene currentScene = mediaView.getScene();
-            controllerCreateGame.setSceneBack(currentScene);
             controllerCreateGame.setClient(client);
 
             primaryStage.setScene(viewCreateGame);
@@ -118,6 +111,7 @@ public class ControllerMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        /*
         Media media;
         media = new Media(new File("src/main/resources/video/fond.mp4").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
@@ -130,5 +124,6 @@ public class ControllerMenu implements Initializable {
         mediaView.setPreserveRatio(true);
         player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
         player.play();
+         */
     }
 }
