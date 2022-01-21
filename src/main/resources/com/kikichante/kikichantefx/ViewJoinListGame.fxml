@@ -2,8 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,17 +12,9 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="692.0" prefWidth="909.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerListGame">
+<AnchorPane prefHeight="692.0" prefWidth="909.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerInGame">
    <children>
         <MediaView fx:id="bgView" />
-      <VBox layoutX="250.0">
-         <TextField fx:id="textfieldGameName"></TextField>
-         <Button onAction="#joinGame" text="join game"></Button>
-         <VBox fx:id="VBox_radiobutton">
-
-         </VBox>
-      </VBox>
       <VBox layoutX="7.0" layoutY="14.0" prefHeight="42.0" prefWidth="90.0">
          <children>
                 <Button id="buttonRetour" mnemonicParsing="false" onAction="#onClickReturn" prefHeight="38.0" prefWidth="82.0" text="Retour" />
@@ -54,7 +44,10 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="222.0" text="Valider" />
+                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="222.0" text="Valider">
+                     <font>
+                        <Font name="Cooper Black" size="12.0" />
+                     </font></Button>
                   <ProgressBar fx:id="songProgressBar" prefHeight="20.0" prefWidth="981.0" progress="0.0" />
                </children>
                <HBox.margin>
@@ -63,7 +56,6 @@
             </VBox>
          </children>
       </HBox>
-      <CheckBox fx:id="go" layoutX="709.0" layoutY="14.0" mnemonicParsing="false" onAction="#go" prefHeight="50.0" prefWidth="67.0" text="GO?" textFill="#faf6f6" AnchorPane.rightAnchor="58.799999999999955" />
-      <Label fx:id="compteur" layoutX="359.0" layoutY="64.0" prefHeight="79.0" prefWidth="171.0" />
+      <HBox fx:id="hBox" layoutX="374.0" layoutY="35.0" prefHeight="100.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

@@ -1,5 +1,7 @@
 package com.kikichante.server;
 
+import com.kikichante.utils.ColorOutput;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,10 +34,17 @@ public class CommandServer extends Thread {
 
     public void handle(String cmd) {
         if (cmd.equals("clients")){
-            System.out.println("Liste des clients : ");
+            System.out.println("\nListe des clients : ");
             for (ClientServer c : activeClient) {
-                System.out.print(c.getUsernameFromBdd() + " - ");
+                System.out.print(ColorOutput.ANSI_WHITE + c.getUsernameFromBdd() + ColorOutput.ANSI_RESET + " - ");    //Print username
+                System.out.print((c.isInListGame() ? ColorOutput.ANSI_GREEN_BACKGROUND : ColorOutput.ANSI_RED_BACKGROUND) + "isInListGame" + ColorOutput.ANSI_RESET + " ");
+                System.out.print((c.isReady() ? ColorOutput.ANSI_GREEN_BACKGROUND : ColorOutput.ANSI_RED_BACKGROUND) + "isReady" + ColorOutput.ANSI_RESET + " ");
+                System.out.print((c.isInGame() ? ColorOutput.ANSI_GREEN_BACKGROUND : ColorOutput.ANSI_RED_BACKGROUND) + "isInGame" + ColorOutput.ANSI_RESET + " ");
+                System.out.print((c.isHaveReceivedMusic() ? ColorOutput.ANSI_GREEN_BACKGROUND : ColorOutput.ANSI_RED_BACKGROUND) + "haveReceivedMusic" + ColorOutput.ANSI_RESET + " ");
+                System.out.println("");
+                //System.out.println(c.getUsernameFromBdd() + " - ");
             }
+            System.out.println("");
         } else if (cmd.equals("games")) {
             System.out.println("Listes des parties : ");
             for (GameServer game : activeGames) {

@@ -45,9 +45,7 @@ public class ControllerWaitingRoom {
         try {
             var message = client.readLine();
             if (message.startsWith("LISTCURRENTPLAYERINWAITINGROOM")) {
-                //TODO -> Traiter la liste de joueurs
                 messageToListPlayer(message);
-                //System.out.println("message = " + message);
             }
             listenner.start();
         } catch (IOException e) {
@@ -63,7 +61,6 @@ public class ControllerWaitingRoom {
             while (listen) {
                 try {
                     var message = client.readLine();
-                    System.out.println("message = " + message);
                     if (message.startsWith("LEAVEGAME"))
                         break;
                     handleLine(message);
@@ -77,6 +74,8 @@ public class ControllerWaitingRoom {
     public void handleLine(String message) {
         if (message.startsWith("UPDATECURRENTPLAYER"))
             messageToListPlayer(message);
+        else if (message.startsWith("STARTGAME"))
+            switchSceneToInGame();
     }
 
     public void messageToListPlayer(String message) {
@@ -134,6 +133,33 @@ public class ControllerWaitingRoom {
 
     /******************************************************************************************************************/
 
+    public void switchSceneToInGame() {
+        this.client.println("EXIT"); //QUITTER MON THREAD
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Stage primaryStage = (Stage)VBoxRowClient.getScene().getWindow();
+
+                    FXMLLoader inGameLoader = new FXMLLoader(Application.class.getResource("ViewJoinListGame.fxml"));
+                    Scene viewInGame = new Scene(inGameLoader.load());
+
+                    ControllerInGame controllerInGame = (ControllerInGame) inGameLoader.getController();
+                    //controllerListGame.setClient(client);
+                    //controllerListGame.getActiveGames();
+
+                    //client.goInListGame();
+
+                    primaryStage.setScene(viewInGame);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /******************************************************************************************************************/
+
     public void switchSceneListGame(Stage primaryStage) {
         try {
             FXMLLoader listGameLoader = new FXMLLoader(Application.class.getResource("ViewListGame.fxml"));
@@ -142,6 +168,8 @@ public class ControllerWaitingRoom {
             ControllerListGame controllerListGame = (ControllerListGame) listGameLoader.getController();
             controllerListGame.setClient(client);
             controllerListGame.getActiveGames();
+
+            client.goInListGame();
 
             primaryStage.setScene(viewListGame);
         } catch (IOException e ) {

@@ -18,7 +18,10 @@ public class ClientServer {
     private ArrayList<ClientServer> activeClient;
     private ArrayList<GameServer> activeGame;
     private GameServer game;
+    private boolean isInListGame = false;
     private boolean isReady = false;
+    private boolean isInGame = false;
+    private boolean haveReceivedMusic = false;
 
     public ClientServer(Socket socket, ArrayList<ClientServer> activeClient, ArrayList<GameServer> activeGame) throws IOException {
         this.socket = socket;
@@ -74,6 +77,36 @@ public class ClientServer {
 
     public void setUsernameFromBdd(String usernameFromBdd) {
         this.usernameFromBdd = usernameFromBdd;
+    }
+
+    /**************************/
+
+    public boolean isInListGame() {
+        return isInListGame;
+    }
+
+    public void setInListGame(boolean inListGame) {
+        isInListGame = inListGame;
+    }
+
+    /**************************/
+
+    public boolean isInGame() {
+        return isInGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        isInGame = inGame;
+    }
+
+    /**************************/
+
+    public boolean isHaveReceivedMusic() {
+        return haveReceivedMusic;
+    }
+
+    public void setHaveReceivedMusic(boolean haveReceivedMusic) {
+        this.haveReceivedMusic = haveReceivedMusic;
     }
 
     /**************************/

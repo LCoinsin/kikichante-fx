@@ -60,6 +60,8 @@ public class ControllerMenu implements Initializable {
             controllerListGame.setClient(client);
             controllerListGame.getActiveGames();
 
+            client.goInListGame();
+
             primaryStage.setScene(viewListGame);
            // primaryStage.setFullScreen(true);
         } catch (IOException e) {
@@ -111,7 +113,7 @@ public class ControllerMenu implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*
+
         Media media;
         media = new Media(new File("src/main/resources/video/fond.mp4").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
@@ -124,6 +126,6 @@ public class ControllerMenu implements Initializable {
         mediaView.setPreserveRatio(true);
         player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
         player.play();
-         */
+
     }
 }

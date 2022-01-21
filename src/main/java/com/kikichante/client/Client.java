@@ -86,4 +86,15 @@ public class Client {
         String message = "SETREADY:KO";
         println(message);
     }
+
+    public void goInListGame() {
+        String message = "GOVIEWLISTGAME:OK";
+        println(message);
+    }
+
+    public void goOutListGame() {
+        String message = "GOOUTVIEWLISTGAME";
+        println(message);
+    }
+
 }

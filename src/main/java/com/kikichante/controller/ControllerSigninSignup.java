@@ -124,6 +124,7 @@ public class ControllerSigninSignup {
     public void onClickConnexion(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)VBoxTextFieldConnexion.getScene().getWindow();
         primaryStage.setResizable(false);
+
         if(textfieldConnexionUsername.getText() != "" && textfieldConnexionPassword.getText() != "") {
             client.connexion(textfieldConnexionUsername.getText(), textfieldConnexionPassword.getText());
             boolean isConnected = false;
