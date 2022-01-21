@@ -85,6 +85,7 @@ public class GameServer {
     public void startGame() {
         this.isAccessible = false;
         for (ClientServer c : currentPlayer) {
+            c.setReady(false);
             c.setInGame(true);
             c.println("STARTGAME");
         }
