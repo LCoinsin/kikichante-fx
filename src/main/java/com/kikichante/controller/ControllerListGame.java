@@ -10,10 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -116,6 +114,7 @@ public class ControllerListGame implements Initializable {
         else {
             //TODO -> Faire une erreur visuel pour le client
         }
+
     }
 
     /******************************************************************************************************************/
