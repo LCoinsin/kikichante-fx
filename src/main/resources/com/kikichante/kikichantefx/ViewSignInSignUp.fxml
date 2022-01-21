@@ -9,10 +9,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="998.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerSigninSignup">
+<AnchorPane prefHeight="656.0" prefWidth="1147.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerSigninSignup">
     <children>
-        <Button layoutX="294.0" layoutY="772.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="560.0" styleClass="buttonStyle, buttonSmall, buttonWhite" text="Jouer en tant qu'invité ..." />
         <VBox fx:id="VBoxTextFieldConnexion" layoutX="253.0" layoutY="142.0" prefHeight="176.0" prefWidth="642.0">
             <children>
                 <TextField fx:id="textfieldConnexionUsername" onKeyReleased="#deleteErrorKey" onMouseClicked="#deleteErrorMouse" prefHeight="65.0" prefWidth="642.0" promptText="Username" styleClass="textfieldBig, textfieldWhite, textfieldStyle">
@@ -65,8 +65,14 @@
                     <VBox.margin>
                         <Insets bottom="10.0" />
                     </VBox.margin>
+               <font>
+                  <Font name="Cooper Black" size="12.0" />
+               </font>
                 </Button>
-                <Button id="switchToInscription" mnemonicParsing="false" onAction="#onClickSwitchToInscription" prefHeight="50.0" prefWidth="758.0" styleClass="buttonMedium, buttonYellow, buttonStyle" text="Inscription" />
+                <Button id="switchToInscription" mnemonicParsing="false" onAction="#onClickSwitchToInscription" prefHeight="50.0" prefWidth="758.0" styleClass="buttonMedium, buttonYellow, buttonStyle" text="Inscription">
+               <font>
+                  <Font name="Cooper Black" size="12.0" />
+               </font></Button>
             </children>
         </VBox>
 
@@ -80,7 +86,7 @@
                 <Button id="switchToConnexion" mnemonicParsing="false" onAction="#onClickSwicthToConnexion" prefHeight="50.0" prefWidth="758.0" styleClass="buttonMedium, buttonYellow, buttonStyle" text="Connexion" />
             </children>
         </VBox>
-      <ImageView fx:id="imageCode" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageCode" fitHeight="108.0" fitWidth="143.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../video/logo%20kikichante.png" />
          </image>
