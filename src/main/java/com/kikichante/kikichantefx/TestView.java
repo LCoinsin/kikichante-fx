@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class TestView extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Application.class.getResource("ViewListGame.fxml"));
+        FXMLLoader loader = new FXMLLoader(Application.class.getResource("ViewJoinListGame.fxml"));
         Scene view = new Scene(loader.load());
 
         //ControllerListGame controllerListGame = (ControllerListGame) loader.getController();
