@@ -16,7 +16,6 @@ public class ControllerCreateGame {
     @FXML
     private TextField textfieldGameName;
 
-    private Scene sceneBack;
     private Client client;
 
     /******************************************************************************************************************/
@@ -25,16 +24,22 @@ public class ControllerCreateGame {
         this.client = client;
     }
 
-    public void setSceneBack(Scene sceneBack) {
-        this.sceneBack = sceneBack;
-    }
-
     /******************************************************************************************************************/
 
     public void onClickReturn(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(this.sceneBack);
-       // primaryStage.setFullScreen(true);
+
+        try {
+            FXMLLoader menuLoader = new FXMLLoader(Application.class.getResource("ViewMenu.fxml"));
+            Scene viewMenu = new Scene(menuLoader.load());
+
+            ControllerMenu controllerMenu = (ControllerMenu) menuLoader.getController();
+            controllerMenu.setClient(client);
+
+            primaryStage.setScene(viewMenu);
+        } catch (IOException e ) {
+            e.printStackTrace();
+        }
     }
 
     /******************************************************************************************************************/
@@ -48,12 +53,10 @@ public class ControllerCreateGame {
             Scene viewWaitingRoom = new Scene(waitingRoomLoader.load());
 
             ControllerWaitingRoom controllerWaitingRoom = (ControllerWaitingRoom)waitingRoomLoader.getController();
-            Scene currentScene = textfieldGameName.getScene();
-            controllerWaitingRoom.setSceneBack(currentScene);
             controllerWaitingRoom.setClient(client);
+            controllerWaitingRoom.getPlayerInit();
 
             primaryStage.setScene(viewWaitingRoom);
-           // primaryStage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
         }

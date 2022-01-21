@@ -1,6 +1,7 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import com.kikichante.kikichantefx.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -26,17 +27,12 @@ public class ControllerWaitingRoom {
     @FXML
     private VBox VBoxRowClient;
 
-    private Scene sceneBack;
     private Client client;
     private boolean listen = true;
     private List<String> listPlayers = new ArrayList<>();
     private boolean isReady = false;
 
     /******************************************************************************************************************/
-
-    public void setSceneBack(Scene sceneBack) {
-        this.sceneBack = sceneBack;
-    }
 
     public void setClient(Client client) {
         this.client = client;
@@ -138,12 +134,26 @@ public class ControllerWaitingRoom {
 
     /******************************************************************************************************************/
 
+    public void switchSceneListGame(Stage primaryStage) {
+        try {
+            FXMLLoader listGameLoader = new FXMLLoader(Application.class.getResource("ViewListGame.fxml"));
+            Scene viewListGame = new Scene(listGameLoader.load());
+
+            ControllerListGame controllerListGame = (ControllerListGame) listGameLoader.getController();
+            controllerListGame.setClient(client);
+            controllerListGame.getActiveGames();
+
+            primaryStage.setScene(viewListGame);
+        } catch (IOException e ) {
+            e.printStackTrace();
+        }
+    }
+
     public void onClickReturn(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         client.leaveGame();
         listen = false;
-        primaryStage.setScene(this.sceneBack);
-       // primaryStage.setFullScreen(true);
+        switchSceneListGame(primaryStage);
     }
 
 }
