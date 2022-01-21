@@ -20,7 +20,7 @@ public class ControllerInGame implements Initializable {
     @FXML
     private Label lbl;
 
-    private int x = 5;
+    private int compteARebours = 5;
 
     private Timer timer;
 
@@ -28,36 +28,16 @@ public class ControllerInGame implements Initializable {
 
     }
 
-    public void countDown() {
-//        TextField rb = new TextField();
-        System.out.println(x);
-//        hBox.getChildren().add(tF);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-//                Hbox.getChildren().clear();
-
-                while (x > 0 ) {
-                    System.out.println("x = " + x);
-                    lbl.setText(String.valueOf(x));
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception e) {}
-                    x--;
-                }
-            }
-        });
-    }
 
     public void setTimer() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                if(x > 0)
+                if(compteARebours > 0)
                 {
-                    Platform.runLater(() -> lbl.setText((String.valueOf(x))));
-                    System.out.println(x);
-                    x--;
+                    Platform.runLater(() -> lbl.setText((String.valueOf(compteARebours))));
+                    System.out.println(compteARebours);
+                    compteARebours--;
                 }
                 else
                     timer.cancel();
