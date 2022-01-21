@@ -1,21 +1,20 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import com.kikichante.kikichantefx.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class ControllerStatistique {
 
-    private Scene sceneBack;
     private Client client;
 
     /******************************************************************************************************************/
-
-    public void setSceneBack(Scene sceneBack) {
-        this.sceneBack = sceneBack;
-    }
 
     public void setClient(Client client) {
         this.client = client;
@@ -25,7 +24,19 @@ public class ControllerStatistique {
 
     public void onClickGotoMenu(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(this.sceneBack);
+
+        try {
+            FXMLLoader menuLoader = new FXMLLoader(Application.class.getResource("ViewMenu.fxml"));
+            Scene viewMenu = new Scene(menuLoader.load());
+
+            ControllerMenu controllerMenu = (ControllerMenu) menuLoader.getController();
+            controllerMenu.setClient(client);
+
+            primaryStage.setScene(viewMenu);
+        } catch (IOException e ) {
+            e.printStackTrace();
+        }
+
     }
 
 }
