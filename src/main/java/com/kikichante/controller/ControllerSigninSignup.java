@@ -159,6 +159,7 @@ public class ControllerSigninSignup {
     public void onClickInscription(ActionEvent actionEvent) {
         if (textfieldInscriptionUsername.getText()!="" && textfieldInscriptionPassword.getText()!="" && textfieldInscriptionPasswordConfirm.getText()!="" && textfieldInscriptionPassword.getText().equals(textfieldInscriptionPasswordConfirm.getText()))  {
             client.inscription(textfieldInscriptionUsername.getText(), textfieldInscriptionPassword.getText());
+
             boolean isInscription = false;
             try {
                 String res = client.readLine();
