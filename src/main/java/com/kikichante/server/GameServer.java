@@ -91,8 +91,19 @@ public class GameServer {
         }
     }
 
+    public void updateListPlayerInGame(ClientServer clientServer) {
+        String message = "UPDATELISTCURRENTPLAYER";
+        System.out.println("message = " + message);
+        /*
+        for (ClientServer client : currentPlayer) {
+            message = message.concat(":"+client.getUsernameFromBdd());
+        }
+        for (ClientServer c : currentPlayer ) {
+            c.println(message);
+        }
+         */
+    }
+
     /******************************************************************************************************************/
-
-
 
 }

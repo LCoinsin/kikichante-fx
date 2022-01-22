@@ -24,6 +24,7 @@ public class ClientServer {
     private boolean isReady = false;
     private boolean isInGame = false;
     private boolean haveReceivedMusic = false;
+    private int score = 0;
 
     public ClientServer(Socket socket, ArrayList<ClientServer> activeClient, ArrayList<GameServer> activeGame) throws IOException {
         this.socket = socket;
@@ -75,6 +76,16 @@ public class ClientServer {
 
     public String getUserId() {
         return userId;
+    }
+
+    /**************************/
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     /**************************/

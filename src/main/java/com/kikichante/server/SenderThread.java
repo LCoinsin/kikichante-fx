@@ -150,9 +150,18 @@ public class SenderThread extends Thread {
             }
         }
         //IN GAME
+        else if (message.startsWith("CLIENTLEAVEGAME")) {
+            clientServer.getGame().removeClient(clientServer);
+            if(clientServer.getGame().getCurrentPlayer().size() < 1) {
+                activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
+                updateListGames();
+            } else {
+                this.clientServer.getGame().updateListPlayerInGame(this.clientServer);
+            }
+            clientServer.println("EXIT");
+        }
         else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
             updateCurrentPlayerInGame();
-
         }
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
@@ -190,7 +199,7 @@ public class SenderThread extends Thread {
     public void updateCurrentPlayerInGame() {
         String messageCurrentPlayer = "LISTCURRENTPLAYERINGAME";
         for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
-            messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() );
+            messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() + "-" + client.getScore() );
         }
         this.clientServer.println(messageCurrentPlayer);
     }

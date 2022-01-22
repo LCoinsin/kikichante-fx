@@ -3,15 +3,23 @@ package com.kikichante.controller;
 import com.kikichante.client.Client;
 import com.kikichante.utils.ColorOutput;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import org.controlsfx.control.action.Action;
 import javafx.scene.text.Font;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -28,18 +36,24 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
     private List<String> listPlayers = new ArrayList<>();
     private Client client;
-
-    private int compteARebours = 6;
-
+    private int compteARebours = 5;
     private Timer timer;
+
+    /******************************************************************************************************************/
 
     public void setClient(Client client) {
         this.client = client;
     }
-    public void joinGame() {
 
+    /******************************************************************************************************************/
+
+    public void getPlayerInit() {
+        ColorOutput.blueMessage("Scene in InGame");
+        client.getListPlayerInGame();
+        listenner.start();
     }
 
+    /******************************************************************************************************************/
 
     public void setTimer() {
         timer = new Timer();
@@ -57,16 +71,11 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         }, 1000,1000);
     }
 
-    public void onClickReturn() {
-
+    public void onClickReturn(ActionEvent actionEvent) {
+        client.leaveInGame();//CLIENTLEAVEGAME
     }
 
-    public void getPlayerInit() {
-        ColorOutput.blueMessage("Scene in InGame");
-        client.getListPlayerInGame();
-        listenner.start();
-    }
-
+    /******************************************************************************************************************/
 
     Thread listenner = new Thread() {
         @Override
@@ -118,25 +127,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         });
     }
 
-
-
-
+    /******************************************************************************************************************/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTimer();
-
-//        Media media;
-//        media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
-//        MediaPlayer player = new MediaPlayer(media);
-//        mediaView.setMediaPlayer(player);
-//        DoubleProperty mvw = mediaView.fitWidthProperty();
-//        DoubleProperty mvh = mediaView.fitHeightProperty();
-//        mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
-//        //System.out.println(mvh);
-//        mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
-//        mediaView.setPreserveRatio(true);
-//        player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
-//        player.play();
     }
 }
