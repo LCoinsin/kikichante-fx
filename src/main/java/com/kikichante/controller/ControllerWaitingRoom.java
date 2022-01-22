@@ -142,12 +142,13 @@ public class ControllerWaitingRoom {
                     Stage primaryStage = (Stage)VBoxRowClient.getScene().getWindow();
 
                     FXMLLoader inGameLoader = new FXMLLoader(Application.class.getResource("ViewJoinListGame.fxml"));
-                    Scene viewInGame = new Scene(inGameLoader.load());
+                    Scene viewInGame = new Scene(inGameLoader.load()); // .load charger la scene et lance initializabe
 
                     ControllerInGame controllerInGame = (ControllerInGame) inGameLoader.getController();
                     //controllerListGame.setClient(client);
                     //controllerListGame.getActiveGames();
-
+                    controllerInGame.setClient(client);
+                    controllerInGame.getPlayerInit();
                     //client.goInListGame();
 
                     primaryStage.setScene(viewInGame);

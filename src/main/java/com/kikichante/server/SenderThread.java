@@ -148,6 +148,15 @@ public class SenderThread extends Thread {
                 System.out.println("la partie existe pas !!");
                 this.clientServer.println("JOINGAME:KO");
             }
+        }//GAME
+        else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
+
+            String messageCurrentPlayer = "LISTCURRENTPLAYERINGAME";
+            for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
+                messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() );
+            }
+            this.clientServer.println(messageCurrentPlayer);
+            System.out.println(messageCurrentPlayer);
         }
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
@@ -180,6 +189,7 @@ public class SenderThread extends Thread {
         else {
             System.out.println("message = " + message);
         }
+
     }
 
     public void updateListGames() {

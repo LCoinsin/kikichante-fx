@@ -67,27 +67,23 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
     public void getPlayerInit() {
         client.getListPlayerInGame();
-        try {
-            var message = client.readLine();
-            if (message.startsWith("GETCURRENTPLAYERINGAME")) {
-                messageToListPlayer(message);
-            }
-            listenner.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("get player init ok");
+        listenner.start();
     }
 
 
     Thread listenner = new Thread() {
         @Override
         public void run() {
+            System.out.println("run thread ok");
             while (true) {
                 try {
-                    System.out.println("1");
+                    System.out.println("thread while true  ok");
                     var message = client.readLine();
+                    System.out.println(message);
                     if (message.startsWith("LEAVEGAME"))
                         break;
+                    System.out.println("thread ok ");
                     handleLine(message);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -99,8 +95,11 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     public void handleLine(String message) {
         if (message.startsWith("UPDATECURRENTPLAYER"))
             System.out.println("ok");
-        else if (message.startsWith("STARTGAME"))
+        else if (message.startsWith("LISTCURRENTPLAYERINGAME")) {
             messageToListPlayer(message);
+            System.out.println("ok2");
+        }
+        System.out.println(message);
     }
 
     public void messageToListPlayer(String message) {
@@ -135,7 +134,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTimer();
-        getPlayerInit();
+
 //        Media media;
 //        media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
 //        MediaPlayer player = new MediaPlayer(media);
