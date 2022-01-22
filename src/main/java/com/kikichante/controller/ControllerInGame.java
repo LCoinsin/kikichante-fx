@@ -76,12 +76,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     Thread listenner = new Thread() {
         @Override
         public void run() {
-            System.out.println("run thread ok");
             while (true) {
                 try {
                     System.out.println("thread while true  ok");
                     var message = client.readLine();
-                    System.out.println(message);
                     if (message.startsWith("LEAVEGAME"))
                         break;
                     System.out.println("thread ok ");

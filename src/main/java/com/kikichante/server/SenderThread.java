@@ -151,11 +151,8 @@ public class SenderThread extends Thread {
         }
         //IN GAME
         else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
-            String messageCurrentPlayer = "LISTCURRENTPLAYERINGAME";
-            for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
-                messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() );
-            }
-            this.clientServer.println(message);
+            updateCurrentPlayerInGame();
+
         }
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
@@ -189,6 +186,13 @@ public class SenderThread extends Thread {
             System.out.println("message = " + message);
         }
 
+    }
+    public void updateCurrentPlayerInGame() {
+        String messageCurrentPlayer = "LISTCURRENTPLAYERINGAME";
+        for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
+            messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() );
+        }
+        this.clientServer.println(messageCurrentPlayer);
     }
 
     public void updateListGames() {
