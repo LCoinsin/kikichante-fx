@@ -1,6 +1,6 @@
 package com.kikichante.server;
 
-public class GameThread extends Thread {
+public class  GameThread extends Thread {
 
     private GameServer game;
 

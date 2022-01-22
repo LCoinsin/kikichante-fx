@@ -1,29 +1,45 @@
 package com.kikichante.controller;
 
+import com.kikichante.client.Client;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
-public class ControllerInGame implements Initializable {
+public class ControllerInGame<randomMusicChoice> implements Initializable {
 
     @FXML
-    private HBox hBox;
+    private VBox test;
 
     @FXML
     private Label lbl;
+    @FXML
+    private MediaView mediaView;
+
+    private List<String> listPlayers = new ArrayList<>();
+    private Client client;
 
     private int compteARebours = 5;
 
     private Timer timer;
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
     public void joinGame() {
 
     }
@@ -49,8 +65,88 @@ public class ControllerInGame implements Initializable {
 
     }
 
+    public void getPlayerInit() {
+        client.getListPlayerInGame();
+        try {
+            var message = client.readLine();
+            if (message.startsWith("GETCURRENTPLAYERINGAME")) {
+                messageToListPlayer(message);
+            }
+            listenner.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    Thread listenner = new Thread() {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    System.out.println("1");
+                    var message = client.readLine();
+                    if (message.startsWith("LEAVEGAME"))
+                        break;
+                    handleLine(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    public void handleLine(String message) {
+        if (message.startsWith("UPDATECURRENTPLAYER"))
+            System.out.println("ok");
+        else if (message.startsWith("STARTGAME"))
+            messageToListPlayer(message);
+    }
+
+    public void messageToListPlayer(String message) {
+        String[] resListPlayer = message.split(":");
+        resListPlayer = Arrays.copyOfRange(resListPlayer, 1 , resListPlayer.length);
+        listPlayers = Arrays.asList(resListPlayer);
+        printList(listPlayers);
+        System.out.println("resListPlayer = " + listPlayers);
+    }
+
+
+    public void printList(List<String> playersList) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                for (String name : playersList) {
+                    Label label = new Label(name);
+                    label.setAlignment(Pos.CENTER);
+                    label.prefHeight(60);
+                    label.prefWidth(120);
+                    test.getChildren().add(label);
+
+                }
+            }
+        });
+    }
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        setTimer();
+        getPlayerInit();
+//        Media media;
+//        media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
+//        MediaPlayer player = new MediaPlayer(media);
+//        mediaView.setMediaPlayer(player);
+//        DoubleProperty mvw = mediaView.fitWidthProperty();
+//        DoubleProperty mvh = mediaView.fitHeightProperty();
+//        mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+//        //System.out.println(mvh);
+//        mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+//        mediaView.setPreserveRatio(true);
+//        player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
+//        player.play();
     }
 }

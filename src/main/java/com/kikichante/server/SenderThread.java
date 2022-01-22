@@ -1,6 +1,7 @@
 package com.kikichante.server;
 
 import com.kikichante.client.Client;
+import com.kikichante.exception.ClientDisconnectedException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class SenderThread extends Thread {
                 var line = this.clientServer.readLine();
                 handleLine(line);
             }
-        } catch (IOException e) {
+        } catch (ClientDisconnectedException e) {
             //disconnect
             e.printStackTrace();
         }

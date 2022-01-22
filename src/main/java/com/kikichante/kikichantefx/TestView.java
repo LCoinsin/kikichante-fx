@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class TestView extends javafx.application.Application {
 
@@ -30,7 +32,7 @@ public class TestView extends javafx.application.Application {
         stage.setScene(view);
         stage.show();
         controllerInGame.setTimer();
-//        countDown();
+
     }
 
     public static void main(String[] args) {
