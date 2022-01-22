@@ -6,7 +6,7 @@ public class GameServer {
 
     private String gameName;
     private ArrayList<ClientServer> currentPlayer = new ArrayList<ClientServer>();
-    private final int numberMiniLaunchGame = 2;
+    private final int numberMiniLaunchGame = 1;
     private boolean isAccessible = true;
 
     /******************************************************************************************************************/
@@ -73,7 +73,7 @@ public class GameServer {
     }
 
     public boolean canLaunchGame() {
-        if (currentPlayer.size() >= 2) {
+        if (currentPlayer.size() >= numberMiniLaunchGame) {
             for (ClientServer c : currentPlayer) {
                 if (!c.isReady())
                     return false;

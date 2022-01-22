@@ -57,7 +57,7 @@ public class ClientServer {
                     }
                 }
 
-//            throw new IOException("Client disconnected");
+            throw new IOException("Client disconnected");
 
             }
             return line;

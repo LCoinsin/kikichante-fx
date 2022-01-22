@@ -19,4 +19,13 @@ public class ColorOutput {
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+
+    public static void redMessage(String message) {
+        System.out.println(ANSI_RED + message + ANSI_RESET);
+    }
+
+    public static void blueMessage(String message) {
+        System.out.println(ANSI_BLUE + message + ANSI_RESET);
+    }
+
 }

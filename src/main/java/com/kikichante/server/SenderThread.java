@@ -124,7 +124,7 @@ public class SenderThread extends Thread {
             }
             else
                 clientServer.getGame().updateListPlayerWaitingRoom(clientServer);
-            clientServer.println("LEAVEGAME");
+            clientServer.println("EXIT");
         }
         else if (message.startsWith("JOINGAME")) {
             //TODO -> Rejoindre une game
@@ -148,15 +148,14 @@ public class SenderThread extends Thread {
                 System.out.println("la partie existe pas !!");
                 this.clientServer.println("JOINGAME:KO");
             }
-        }//GAME
+        }
+        //IN GAME
         else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
-
             String messageCurrentPlayer = "LISTCURRENTPLAYERINGAME";
             for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
                 messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() );
             }
-            this.clientServer.println(messageCurrentPlayer);
-            System.out.println(messageCurrentPlayer);
+            this.clientServer.println(message);
         }
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {

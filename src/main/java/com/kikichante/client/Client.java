@@ -101,4 +101,9 @@ public class Client {
         println(message);
     }
 
+    public void leaveInGame() {
+        String message = "CLIENTLEAVEGAME";
+        println(message);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.kikichante.controller;
 
 import com.kikichante.client.Client;
 import com.kikichante.kikichantefx.Application;
+import com.kikichante.utils.ColorOutput;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -41,6 +42,7 @@ public class ControllerWaitingRoom {
     /******************************************************************************************************************/
 
     public void getPlayerInit() {
+        ColorOutput.blueMessage("Scene in waiting room");
         client.getListPlayerInWaitingRoom();
         try {
             var message = client.readLine();
@@ -61,8 +63,10 @@ public class ControllerWaitingRoom {
             while (listen) {
                 try {
                     var message = client.readLine();
-                    if (message.startsWith("LEAVEGAME"))
+                    if (message.startsWith("EXIT")) {
+                        ColorOutput.redMessage("Scene out waitingRoom");
                         break;
+                    }
                     handleLine(message);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -145,8 +149,6 @@ public class ControllerWaitingRoom {
                     Scene viewInGame = new Scene(inGameLoader.load()); // .load charger la scene et lance initializabe
 
                     ControllerInGame controllerInGame = (ControllerInGame) inGameLoader.getController();
-                    //controllerListGame.setClient(client);
-                    //controllerListGame.getActiveGames();
                     controllerInGame.setClient(client);
                     controllerInGame.getPlayerInit();
                     //client.goInListGame();

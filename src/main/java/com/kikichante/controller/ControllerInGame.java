@@ -1,6 +1,7 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import com.kikichante.utils.ColorOutput;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -52,7 +53,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                 if(compteARebours > 0)
                 {
                     Platform.runLater(() -> lbl.setText((String.valueOf(compteARebours))));
-                    System.out.println(compteARebours);
+                    //System.out.println(compteARebours);
                     compteARebours--;
                 }
                 else
@@ -66,8 +67,8 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     }
 
     public void getPlayerInit() {
+        ColorOutput.blueMessage("Scene in InGame");
         client.getListPlayerInGame();
-        System.out.println("get player init ok");
         listenner.start();
     }
 
