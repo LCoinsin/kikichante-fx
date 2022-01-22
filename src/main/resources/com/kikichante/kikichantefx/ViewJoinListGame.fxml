@@ -4,8 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -23,12 +21,24 @@
       </VBox>
       <HBox layoutX="122.0" layoutY="158.0" prefHeight="402.0" prefWidth="761.0" spacing="25.0" AnchorPane.rightAnchor="84.99999999999989">
          <children>
-            <TableView prefHeight="402.0" prefWidth="194.0">
-              <columns>
-                <TableColumn id="Joueurs" fx:id="palyerInGame" prefWidth="100.79998397827148" text="Joueurs" />
-                <TableColumn id="Score" fx:id="scoreInGame" prefWidth="92.80000915527344" text="Scores" />
-              </columns>
-            </TableView>
+            <VBox fx:id="vboxListPlayer" prefHeight="402.0" prefWidth="190.0" spacing="10.0">
+               <children>
+                  <HBox prefHeight="42.0" prefWidth="190.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Joueur" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Cooper Black" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Score" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Cooper Black" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="354.0" prefWidth="456.0" spacing="90.0">
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
@@ -66,6 +76,5 @@
             </Label>
          </children>
       </HBox>
-      <VBox fx:id="test" layoutX="62.0" layoutY="446.0" prefHeight="200.0" prefWidth="100.0" />
    </children>
 </AnchorPane>

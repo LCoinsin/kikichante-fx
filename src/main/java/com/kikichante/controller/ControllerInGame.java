@@ -3,20 +3,15 @@ package com.kikichante.controller;
 import com.kikichante.client.Client;
 import com.kikichante.utils.ColorOutput;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Font;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -24,7 +19,7 @@ import java.util.*;
 public class ControllerInGame<randomMusicChoice> implements Initializable {
 
     @FXML
-    private VBox test;
+    private VBox vboxListPlayer;
 
     @FXML
     private Label lbl;
@@ -34,7 +29,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     private List<String> listPlayers = new ArrayList<>();
     private Client client;
 
-    private int compteARebours = 5;
+    private int compteARebours = 6;
 
     private Timer timer;
 
@@ -78,11 +73,9 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         public void run() {
             while (true) {
                 try {
-                    System.out.println("thread while true  ok");
                     var message = client.readLine();
                     if (message.startsWith("LEAVEGAME"))
                         break;
-                    System.out.println("thread ok ");
                     handleLine(message);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -92,13 +85,9 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     };
 
     public void handleLine(String message) {
-        if (message.startsWith("UPDATECURRENTPLAYER"))
-            System.out.println("ok");
-        else if (message.startsWith("LISTCURRENTPLAYERINGAME")) {
+         if (message.startsWith("LISTCURRENTPLAYERINGAME")) {
             messageToListPlayer(message);
-            System.out.println("ok2");
         }
-        System.out.println(message);
     }
 
     public void messageToListPlayer(String message) {
@@ -115,11 +104,14 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
             @Override
             public void run() {
                 for (String name : playersList) {
+                    HBox hboxNamePlayer = new HBox ();
                     Label label = new Label(name);
                     label.setAlignment(Pos.CENTER);
+                    label.setFont(Font.font("Cooper Black", 15));
                     label.prefHeight(60);
                     label.prefWidth(120);
-                    test.getChildren().add(label);
+                    vboxListPlayer.getChildren().add(hboxNamePlayer);
+                    hboxNamePlayer.getChildren().add(label);
 
                 }
             }
