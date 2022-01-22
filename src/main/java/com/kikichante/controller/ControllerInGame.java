@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import org.controlsfx.control.action.Action;
 import javafx.scene.text.Font;
 
@@ -32,7 +33,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     @FXML
     private Label lbl;
     @FXML
-    private MediaView mediaView;
+    private MediaView bgView;
 
     private List<String> listPlayers = new ArrayList<>();
     private Client client;
@@ -126,11 +127,13 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                     labelName.setFont(Font.font("Cooper Black", 15));
                     labelName.prefHeight(18);
                     labelName.prefWidth(190);
+                    labelName.setTextFill(Color.web("#f2efef"));
 
                     labelScore.setAlignment(Pos.TOP_LEFT);
                     labelScore.setFont(Font.font("Cooper Black", 15));
                     labelScore.prefHeight(18);
                     labelScore.prefWidth(190);
+                    labelScore.setTextFill(Color.web("#f2efef"));
                     vboxListPlayer.getChildren().add(hboxNamePlayer);
                     hboxNamePlayer.getChildren().add(labelName);
                     hboxNamePlayer.getChildren().add(labelScore);
@@ -145,5 +148,17 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTimer();
+        Media media;
+        media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        bgView.setMediaPlayer(player);
+        DoubleProperty mvw = bgView.fitWidthProperty();
+        DoubleProperty mvh = bgView.fitHeightProperty();
+        mvw.bind(Bindings.selectDouble(bgView.sceneProperty(), "width"));
+        //System.out.println(mvh);
+        mvh.bind(Bindings.selectDouble(bgView.sceneProperty(), "height"));
+        bgView.setPreserveRatio(true);
+        player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
+        player.play();
     }
 }

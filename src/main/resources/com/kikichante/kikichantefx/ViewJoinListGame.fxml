@@ -11,7 +11,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="692.0" prefWidth="909.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerInGame">
+<AnchorPane prefHeight="465.0" prefWidth="909.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerInGame">
    <children>
         <MediaView fx:id="bgView" />
       <VBox layoutX="7.0" layoutY="14.0" prefHeight="42.0" prefWidth="90.0">
@@ -19,18 +19,18 @@
                 <Button id="buttonRetour" mnemonicParsing="false" onAction="#onClickReturn" prefHeight="38.0" prefWidth="82.0" text="Retour" />
          </children>
       </VBox>
-      <HBox layoutX="122.0" layoutY="158.0" prefHeight="402.0" prefWidth="761.0" spacing="25.0" AnchorPane.rightAnchor="84.99999999999989">
+      <HBox layoutX="80.0" layoutY="83.0" prefHeight="370.0" prefWidth="761.0" spacing="25.0" AnchorPane.rightAnchor="68.0">
          <children>
-            <VBox fx:id="vboxListPlayer" prefHeight="402.0" prefWidth="190.0" spacing="10.0">
+            <VBox fx:id="vboxListPlayer" prefHeight="361.0" prefWidth="190.0" spacing="10.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="190.0">
                      <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Joueur" textAlignment="JUSTIFY">
+                        <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Joueur" textAlignment="JUSTIFY" textFill="#f2efef">
                            <font>
                               <Font name="Cooper Black" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Score" textAlignment="JUSTIFY">
+                        <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Score" textAlignment="JUSTIFY" textFill="#f2efef">
                            <font>
                               <Font name="Cooper Black" size="15.0" />
                            </font>
@@ -67,9 +67,9 @@
             </VBox>
          </children>
       </HBox>
-      <HBox fx:id="hBox" layoutX="374.0" layoutY="35.0" prefHeight="100.0" prefWidth="200.0">
+      <HBox fx:id="hBox" layoutX="455.0" layoutY="8.0" prefHeight="66.0" prefWidth="145.0">
          <children>
-            <Label fx:id="lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="14.0" prefHeight="47.0" prefWidth="140.0" textAlignment="JUSTIFY">
+            <Label fx:id="lbl" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="149.0" textAlignment="JUSTIFY">
                <font>
                   <Font name="Arial Nova Cond Light" size="60.0" />
                </font>
