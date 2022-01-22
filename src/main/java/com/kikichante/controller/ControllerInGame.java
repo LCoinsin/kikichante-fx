@@ -112,15 +112,28 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                for (String name : playersList) {
+                for (String nameandScore : playersList) {
+                    String[] playerScore = nameandScore.split("-");
+                    String name = playerScore[0];
+                    String score=("            "+playerScore[1]);
+                    System.out.println(playerScore[1]);
                     HBox hboxNamePlayer = new HBox ();
-                    Label label = new Label(name);
-                    label.setAlignment(Pos.CENTER);
-                    label.setFont(Font.font("Cooper Black", 15));
-                    label.prefHeight(60);
-                    label.prefWidth(120);
+                    hboxNamePlayer.prefHeight(43);
+                    hboxNamePlayer.prefWidth(190);
+                    Label labelName = new Label(name);
+                    Label labelScore = new Label(score);
+                    labelName.setAlignment(Pos.TOP_LEFT);
+                    labelName.setFont(Font.font("Cooper Black", 15));
+                    labelName.prefHeight(18);
+                    labelName.prefWidth(190);
+
+                    labelScore.setAlignment(Pos.TOP_LEFT);
+                    labelScore.setFont(Font.font("Cooper Black", 15));
+                    labelScore.prefHeight(18);
+                    labelScore.prefWidth(190);
                     vboxListPlayer.getChildren().add(hboxNamePlayer);
-                    hboxNamePlayer.getChildren().add(label);
+                    hboxNamePlayer.getChildren().add(labelName);
+                    hboxNamePlayer.getChildren().add(labelScore);
 
                 }
             }

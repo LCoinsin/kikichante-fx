@@ -23,7 +23,7 @@
          <children>
             <VBox fx:id="vboxListPlayer" prefHeight="402.0" prefWidth="190.0" spacing="10.0">
                <children>
-                  <HBox prefHeight="42.0" prefWidth="190.0">
+                  <HBox alignment="CENTER" prefHeight="43.0" prefWidth="190.0">
                      <children>
                         <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Joueur" textAlignment="JUSTIFY">
                            <font>
