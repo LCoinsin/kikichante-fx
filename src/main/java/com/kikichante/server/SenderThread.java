@@ -204,7 +204,7 @@ public class SenderThread extends Thread {
 
             if (winner) {
                 for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
-                    c.println("STOPMUSICWITHWINNER");
+                    c.println("STOPMUSICWITHWINNER:"+clientServer.getUsernameFromBdd());
                     updateCurrentPlayerInGame();
                 }
             } else {

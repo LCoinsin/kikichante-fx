@@ -68,6 +68,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         client.getListPlayerInGame();
         client.askMusic();
         listenner.start();
+        setTimer();
     }
 
     /******************************************************************************************************************/
@@ -82,8 +83,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                     //System.out.println(compteARebours);
                     compteARebours--;
                 }
-                else
+                else {
                     timer.cancel();
+                    client.haveMusic();
+                }
             }
         }, 1000,1000);
     }
@@ -140,7 +143,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         }
          else if (message.startsWith("RECEIVEDMUSIC")) {
              rebuildMusic(message);
-             client.haveMusic();
+             //client.haveMusic();
          }
          else if (message.startsWith("PLAYMUSIC")) {
              String path = "src/main/resources/musiques/out.mp3";
@@ -209,6 +212,16 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
     /******************************************************************************************************************/
 
+    public void canSendAnswer() {
+
+    }
+
+    public void cantSendAnswer() {
+
+    }
+
+    /******************************************************************************************************************/
+
     public void rebuildMusic(String message) {
         String[] resMessage = message.split(":");
         String messageByte = resMessage[1];
@@ -227,7 +240,6 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setTimer();
         Media media;
         media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
