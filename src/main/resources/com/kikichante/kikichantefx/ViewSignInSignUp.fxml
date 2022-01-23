@@ -23,7 +23,7 @@
                         <Insets bottom="15.0" />
                     </VBox.margin>
                 </TextField>
-            <PasswordField fx:id="textfieldConnexionPassword" onKeyReleased="#deleteErrorKey" onMouseClicked="#deleteErrorMouse" prefHeight="65.0" prefWidth="642.0" promptText="Password">
+            <PasswordField fx:id="textfieldConnexionPassword" onAction="#onClickConnexion" onKeyReleased="#deleteErrorKey" onMouseClicked="#deleteErrorMouse" prefHeight="65.0" prefWidth="642.0" promptText="Password">
                <styleClass>
                   <String fx:value="textfieldBig" />
                   <String fx:value="textfieldWhite" />
