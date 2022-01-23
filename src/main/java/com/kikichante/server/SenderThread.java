@@ -1,7 +1,7 @@
 package com.kikichante.server;
 
 import com.kikichante.client.Client;
-import com.kikichante.exception.ClientDisconnectedException;
+import com.kikichante.utils.ColorOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,14 +23,11 @@ public class SenderThread extends Thread {
 
     @Override
     public void run() {
-        try {
-            while (!isLeaved) {
-                var line = this.clientServer.readLine();
-                handleLine(line);
-            }
-        } catch (ClientDisconnectedException e) {
-            //disconnect
-            e.printStackTrace();
+        while (!isLeaved) {
+            var line = this.clientServer.readLine();
+            if (line.startsWith("CLIENTLEAVED"))
+                break;
+            handleLine(line);
         }
     }
 
@@ -98,7 +95,7 @@ public class SenderThread extends Thread {
                 }
             }
             if (createGame) {
-                GameServer game = new GameServer(messageCreateGame[1]);
+                GameServer game = new GameServer(messageCreateGame[1], bdd);
                 this.activeGame.add(game);
                 this.clientServer.setGame(game);
                 game.addClient(this.clientServer);
@@ -163,6 +160,24 @@ public class SenderThread extends Thread {
         else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
             updateCurrentPlayerInGame();
         }
+        else if (message.startsWith("MUSIQUEDJ")) {
+            this.clientServer.getGame().sendMusic(this.clientServer);
+        }
+        else if (message.startsWith("YESIHAVEMUSIC")) {
+            clientServer.setHaveReceivedMusic(true);
+            boolean send = true;
+            for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
+                if (!c.isHaveReceivedMusic())
+                    send = false;
+            }
+            if (send) {
+                for (ClientServer c : clientServer.getGame().getCurrentPlayer())
+                    c.println("PLAYMUSIC");
+            }
+        }
+        else if (message.startsWith("SUPPOSEANSWER")) {
+            ColorOutput.redMessage(message);
+        }
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
             String messageCurrentPlayer = "LISTCURRENTPLAYERINWAITINGROOM";
@@ -173,7 +188,6 @@ public class SenderThread extends Thread {
         }
         else if (message.startsWith("SETREADY")) {
             String[] resMessage = message.split(":");
-            System.out.println("SETREADY");
             if (resMessage[1].equals("OK")) {
                 clientServer.setReady(true);
                 this.clientServer.getGame().updateListPlayerStateWaitingRoom();
@@ -192,7 +206,8 @@ public class SenderThread extends Thread {
             this.clientServer.println("EXIT");
         }
         else {
-            System.out.println("message = " + message);
+            ColorOutput.greenMessage("message : " + message);
+            //System.out.println("message = " + message);
         }
 
     }

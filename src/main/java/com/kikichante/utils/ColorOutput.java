@@ -28,4 +28,8 @@ public class ColorOutput {
         System.out.println(ANSI_BLUE + message + ANSI_RESET);
     }
 
+    public static void greenMessage(String message) {
+        System.out.println(ANSI_GREEN + message + ANSI_RESET);
+    }
+
 }

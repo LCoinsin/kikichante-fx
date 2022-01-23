@@ -1,7 +1,5 @@
 package com.kikichante.server;
 
-import com.kikichante.exception.ClientDisconnectedException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,7 +33,7 @@ public class ClientServer {
     }
 
     // !! WARNING !! if IOException -> disconnect
-    public String readLine() throws ClientDisconnectedException {
+    public String readLine() {
         try {
             var line = this.reader.readLine();
             if (line == null) {
@@ -58,14 +56,14 @@ public class ClientServer {
                     }
                 }
 
-            throw new IOException("Client disconnected");
+                throw new IOException("Client disconnected");
 
             }
             return line;
-        }catch (IOException e){
-            throw new ClientDisconnectedException();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
+        return "CLIENTLEAVED";
     }
 
     /**************************/

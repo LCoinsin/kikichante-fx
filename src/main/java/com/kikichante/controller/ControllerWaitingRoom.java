@@ -80,6 +80,8 @@ public class ControllerWaitingRoom {
             messageToListPlayer(message);
         else if (message.startsWith("STARTGAME"))
             switchSceneToInGame();
+        else
+            System.out.println("message = " + message);
     }
 
     public void messageToListPlayer(String message) {

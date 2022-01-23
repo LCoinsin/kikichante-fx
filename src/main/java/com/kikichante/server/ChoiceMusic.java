@@ -13,10 +13,6 @@ public class ChoiceMusic {
      public ChoiceMusic() {
         try
         {
-            //étape 1: charger la classe de driver
-            //Class.forName("com.mysql.jdbc.Driver");
-
-            //étape 2: créer l'objet de connexion
             this.con = DriverManager.getConnection("jdbc:mysql://cl401116-001.eu.clouddb.ovh.net:35686/test?characterEncoding=latin1", "Mysql", "9PmXX46ev");
         }
         catch(Exception e){

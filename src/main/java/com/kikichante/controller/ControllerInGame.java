@@ -34,6 +34,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     private Label lbl;
     @FXML
     private MediaView bgView;
+    @FXML
+    private TextField author;
+    @FXML
+    private TextField songName;
 
     private List<String> listPlayers = new ArrayList<>();
     private Client client;
@@ -51,6 +55,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     public void getPlayerInit() {
         ColorOutput.blueMessage("Scene in InGame");
         client.getListPlayerInGame();
+        client.askMusic();
         listenner.start();
     }
 
@@ -73,7 +78,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     }
 
     public void onClickReturn(ActionEvent actionEvent) {
-        client.leaveInGame();//CLIENTLEAVEGAME
+        //client.leaveInGame();//CLIENTLEAVEGAME
     }
 
     /******************************************************************************************************************/
@@ -98,6 +103,15 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
          if (message.startsWith("LISTCURRENTPLAYERINGAME")) {
             messageToListPlayer(message);
         }
+         else if (message.startsWith("RECEIVEDMUSIC")) {
+             client.haveMusic();
+         }
+         else if (message.startsWith("PLAYMUSIC")) {
+             ColorOutput.greenMessage("Vas-y dj c'est ton moment !!");
+         }
+         else {
+             System.out.println("message = " + message);
+         }
     }
 
     public void messageToListPlayer(String message) {
@@ -160,5 +174,14 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         bgView.setPreserveRatio(true);
         player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
         player.play();
+    }
+
+    public void sendAnswer(ActionEvent actionEvent) {
+        if (!author.getText().equals("") || !songName.getText().equals("")) {
+            client.sendAnswer(
+                    (author.getText().equals("") ? null : author.getText()),
+                    (songName.getText().equals("") ? null : songName.getText())
+            );
+        }
     }
 }

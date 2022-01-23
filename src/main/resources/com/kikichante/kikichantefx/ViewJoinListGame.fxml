@@ -43,19 +43,19 @@
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
-                        <TextField prefHeight="100.0" prefWidth="214.0" promptText="interprète">
+                        <TextField fx:id="author" prefHeight="100.0" prefWidth="214.0" promptText="interprète">
                            <font>
                               <Font name="Arial Nova Light" size="32.0" />
                            </font>
                         </TextField>
-                        <TextField prefHeight="100.0" prefWidth="211.0" promptText="Titre">
+                        <TextField fx:id="songName" prefHeight="100.0" prefWidth="211.0" promptText="Titre">
                            <font>
                               <Font name="Arial Nova Cond Light" size="30.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="222.0" text="Valider">
+                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="222.0" onAction="#sendAnswer" text="Valider">
                      <font>
                         <Font name="Cooper Black" size="12.0" />
                      </font></Button>

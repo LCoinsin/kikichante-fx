@@ -1,6 +1,11 @@
 package com.kikichante.server;
 
+import com.kikichante.utils.ColorOutput;
+import com.kikichante.utils.Convert;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GameServer {
 
@@ -8,11 +13,15 @@ public class GameServer {
     private ArrayList<ClientServer> currentPlayer = new ArrayList<ClientServer>();
     private final int numberMiniLaunchGame = 1;
     private boolean isAccessible = true;
+    private boolean selectedMusic = false;
+    private Bdd bdd = null;
+    private Music music = null;
 
     /******************************************************************************************************************/
 
-    public GameServer(String gameName) {
+    public GameServer(String gameName, Bdd bdd) {
         this.gameName = gameName;
+        this.bdd = bdd;
     }
 
     /******************************************************************************************************************/
@@ -27,6 +36,10 @@ public class GameServer {
 
     public boolean isAccessible() {
         return isAccessible;
+    }
+
+    public Music getMusic() {
+        return music;
     }
 
     /******************************************************************************************************************/
@@ -84,11 +97,25 @@ public class GameServer {
 
     public void startGame() {
         this.isAccessible = false;
+        if (!selectedMusic)
+            selectOneMusic();
         for (ClientServer c : currentPlayer) {
             c.setReady(false);
             c.setInGame(true);
             c.println("STARTGAME");
         }
+    }
+
+    private void selectOneMusic() {
+        music = bdd.querySelectMusic();
+        ColorOutput.redMessage("Musique selected !!!");
+        this.selectedMusic = true;
+    }
+
+    public void sendMusic(ClientServer c) {
+        byte[] musicArray = Convert.fileToByteArray("src/main/resources/musiques/musTest.mp3");
+        String message = "RECEIVEDMUSIC:"+ Arrays.toString(musicArray);
+        c.println(message);
     }
 
     public void updateListPlayerInGame(ClientServer clientServer) {
