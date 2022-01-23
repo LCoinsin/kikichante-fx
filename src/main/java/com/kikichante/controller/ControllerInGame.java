@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -39,6 +40,8 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     private TextField author;
     @FXML
     private TextField songName;
+    @FXML
+    private ProgressBar songProgressBar;
 
     private List<String> listPlayers = new ArrayList<>();
     private Client client;
@@ -47,6 +50,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     private File file = new File("src/main/resources/musiques/out.mp3");
     private Media song;
     private MediaPlayer player;
+
+    private Timer timerProgressBar;
+    private TimerTask task;
+    private boolean running;
 
     /******************************************************************************************************************/
 
@@ -81,6 +88,30 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         }, 1000,1000);
     }
 
+    public void musicDuration(){
+        timer = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                running = true;
+                double current = player.getCurrentTime().toSeconds();
+                double end = song.getDuration().toSeconds();
+                System.out.println(current/end);
+                songProgressBar.setProgress(current/end);
+
+                if(current/end == 1){
+                    cancelTimer();
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, 1000);
+    }
+
+    public void cancelTimer(){
+        running = false;
+        timer.cancel();
+    }
+
     public void onClickReturn(ActionEvent actionEvent) {
         //client.leaveInGame();//CLIENTLEAVEGAME
     }
@@ -90,16 +121,16 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     Thread listenner = new Thread() {
         @Override
         public void run() {
-            while (true) {
-                try {
-                    var message = client.readLine();
-                    if (message.startsWith("LEAVEGAME"))
-                        break;
-                    handleLine(message);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        while (true) {
+            try {
+                var message = client.readLine();
+                if (message.startsWith("LEAVEGAME"))
+                    break;
+                handleLine(message);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
         }
     };
 
@@ -208,6 +239,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         mvh.bind(Bindings.selectDouble(bgView.sceneProperty(), "height"));
         bgView.setPreserveRatio(true);
         player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
+        musicDuration();
         player.play();
     }
 
