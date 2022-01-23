@@ -149,6 +149,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
              String path = "src/main/resources/musiques/out.mp3";
              song = new Media(new File(path).toURI().toString());
              player = new MediaPlayer(song);
+             musicDuration();
              player.play();
              ColorOutput.greenMessage("Vas-y dj c'est ton moment !!");
          }
@@ -242,17 +243,17 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Media media;
         media = new Media(new File("src/main/resources/video/bg.mp4").toURI().toString());
-        MediaPlayer player = new MediaPlayer(media);
-        bgView.setMediaPlayer(player);
+        MediaPlayer playerBg = new MediaPlayer(media);
+        bgView.setMediaPlayer(playerBg);
         DoubleProperty mvw = bgView.fitWidthProperty();
         DoubleProperty mvh = bgView.fitHeightProperty();
         mvw.bind(Bindings.selectDouble(bgView.sceneProperty(), "width"));
         //System.out.println(mvh);
         mvh.bind(Bindings.selectDouble(bgView.sceneProperty(), "height"));
         bgView.setPreserveRatio(true);
-        player.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
-        musicDuration();
-        player.play();
+        playerBg.setCycleCount(javafx.scene.media.MediaPlayer.INDEFINITE);
+
+        playerBg.play();
     }
 
     public void sendAnswer(ActionEvent actionEvent) {
