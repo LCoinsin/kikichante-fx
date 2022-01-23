@@ -51,7 +51,7 @@
                         <Insets bottom="15.0" />
                     </VBox.margin>
                 </PasswordField>
-                <PasswordField fx:id="textfieldInscriptionPasswordConfirm" onKeyReleased="#deleteErrorKey" onMouseClicked="#deleteErrorMouse" prefHeight="65.0" prefWidth="642.0" promptText="Password confirmation" styleClass="textfieldBig, textfieldWhite, textfieldStyle">
+                <PasswordField fx:id="textfieldInscriptionPasswordConfirm" onAction="#onClickInscription" onKeyReleased="#deleteErrorKey" onMouseClicked="#deleteErrorMouse" prefHeight="65.0" prefWidth="642.0" promptText="Password confirmation" styleClass="textfieldBig, textfieldWhite, textfieldStyle">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
