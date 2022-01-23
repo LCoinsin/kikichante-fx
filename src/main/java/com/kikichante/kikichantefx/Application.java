@@ -15,7 +15,7 @@ import java.net.Socket;
 public class Application extends javafx.application.Application {
 
     static Client client = null;
-    static final String ADRESS = "18.195.102.21";   //18.195.102.21
+    static final String ADRESS = "localhost";   //18.195.102.21
     static final int PORT = 5000;
 
     @Override
