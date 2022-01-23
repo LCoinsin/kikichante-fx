@@ -5,6 +5,7 @@ import com.kikichante.utils.ColorOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 public class SenderThread extends Thread {
 
@@ -192,12 +193,13 @@ public class SenderThread extends Thread {
             }
             boolean winner = false;
             if (author!=null)
-                if (author.equalsIgnoreCase(this.clientServer.getGame().getMusic().getInterprete())) {
+                //if (author.equalsIgnoreCase(this.clientServer.getGame().getMusic().getInterprete())) {
+                if (new LevenshteinDistance().apply(author,this.clientServer.getGame().getMusic().getInterprete())<2) {
                     this.clientServer.setScore(clientServer.getScore()+1);
                     winner = true;
                 }
             if (songName!=null)
-                if (songName.equalsIgnoreCase(this.clientServer.getGame().getMusic().getTitre())) {
+                if (new LevenshteinDistance().apply(songName,this.clientServer.getGame().getMusic().getTitre())<2) {
                     this.clientServer.setScore(clientServer.getScore()+1);
                     winner = true;
                 }

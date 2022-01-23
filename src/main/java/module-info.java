@@ -10,6 +10,7 @@ module com.kikichante.kikichantefx {
     requires eu.hansolo.tilesfx;
     requires javafx.media;
     requires java.sql;
+    requires org.apache.commons.text;
 
     opens com.kikichante.kikichantefx to javafx.fxml;
     exports com.kikichante.kikichantefx;
