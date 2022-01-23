@@ -136,6 +136,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                vboxListPlayer.getChildren().clear();
                 for (String nameandScore : playersList) {
                     String[] playerScore = nameandScore.split("-");
                     String name = playerScore[0];

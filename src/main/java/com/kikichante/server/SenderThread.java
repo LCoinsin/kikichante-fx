@@ -205,6 +205,7 @@ public class SenderThread extends Thread {
             if (winner) {
                 for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
                     c.println("STOPMUSICWITHWINNER");
+                    updateCurrentPlayerInGame();
                 }
             } else {
                 clientServer.println("WRONGANSWER");
@@ -251,7 +252,10 @@ public class SenderThread extends Thread {
         for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
             messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() + "-" + client.getScore() );
         }
-        this.clientServer.println(messageCurrentPlayer);
+        for (ClientServer c : this.clientServer.getGame().getCurrentPlayer()) {
+            c.println(messageCurrentPlayer);
+        }
+        //this.clientServer.println(messageCurrentPlayer);
     }
 
     public void updateListGames() {
