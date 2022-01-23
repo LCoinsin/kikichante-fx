@@ -176,6 +176,41 @@ public class SenderThread extends Thread {
             }
         }
         else if (message.startsWith("SUPPOSEANSWER")) {
+            String[] messageAnswer = message.split(":");
+            String author = null;
+            String songName = null;
+
+            for (String answ : messageAnswer) {
+                if (answ.startsWith("author")) {
+                    String[] auth = answ.split("-");
+                    author = auth[1];
+                }
+                else if (answ.startsWith("song")) {
+                    String[] son = answ.split("-");
+                    songName = son[1];
+                }
+            }
+            boolean winner = false;
+            if (author!=null)
+                if (author.equalsIgnoreCase(this.clientServer.getGame().getMusic().getInterprete())) {
+                    this.clientServer.setScore(clientServer.getScore()+1);
+                    winner = true;
+                }
+            if (songName!=null)
+                if (songName.equalsIgnoreCase(this.clientServer.getGame().getMusic().getTitre())) {
+                    this.clientServer.setScore(clientServer.getScore()+1);
+                    winner = true;
+                }
+
+            if (winner) {
+                for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
+                    c.println("STOPMUSICWITHWINNER");
+                }
+            } else {
+                clientServer.println("WRONGANSWER");
+            }
+
+
             ColorOutput.redMessage(message);
         }
         //WAITING ROOM
@@ -209,8 +244,8 @@ public class SenderThread extends Thread {
             ColorOutput.greenMessage("message : " + message);
             //System.out.println("message = " + message);
         }
-
     }
+
     public void updateCurrentPlayerInGame() {
         String messageCurrentPlayer = "LISTCURRENTPLAYERINGAME";
         for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {

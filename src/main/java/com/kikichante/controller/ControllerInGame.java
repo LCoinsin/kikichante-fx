@@ -109,6 +109,15 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
          else if (message.startsWith("PLAYMUSIC")) {
              ColorOutput.greenMessage("Vas-y dj c'est ton moment !!");
          }
+         else if (message.startsWith("STOPMUSICWITHOUTWINNER")) {
+             ColorOutput.redMessage("Eclater le DJ");
+         }
+         else if (message.startsWith("STOPMUSICWITHWINNER")) {
+             ColorOutput.greenMessage("Bien vue xxxxxxx");
+         }
+         else if (message.startsWith("WRONGANSWER")) {
+             ColorOutput.redMessage("T'es nul !!");
+         }
          else {
              System.out.println("message = " + message);
          }
