@@ -11,9 +11,11 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="465.0" prefWidth="909.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerInGame">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane fx:id="ingame" prefHeight="465.0" prefWidth="909.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerInGame">
    <children>
-        <MediaView fx:id="bgView" />
+      <MediaView fx:id="bgView" />
       <VBox layoutX="7.0" layoutY="14.0" prefHeight="42.0" prefWidth="90.0">
          <children>
                 <Button id="buttonRetour" mnemonicParsing="false" onAction="#onClickReturn" prefHeight="38.0" prefWidth="82.0" text="Retour" />

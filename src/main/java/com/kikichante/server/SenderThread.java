@@ -161,8 +161,11 @@ public class SenderThread extends Thread {
         }
         else if (message.startsWith("READYFORTHISROUND")) {
             this.clientServer.setReadyToRound(true);
+            updateCurrentPlayerInGame();
             if (clientServer.getGame().canStart()) {
                 clientServer.getGame().playRound();
+            } else {
+                updateCurrentPlayerInGame();
             }
         }
         else if (message.startsWith("SUPPOSEANSWER")) {
@@ -199,9 +202,17 @@ public class SenderThread extends Thread {
             }
 
             if (winner) {
-                for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
-                    c.println("STOPMUSICWITHWINNER:"+clientServer.getUsernameFromBdd());
-                    updateCurrentPlayerInGame();
+                if (clientServer.getScore() >= 1) {
+                    //Fin de partie
+                    for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
+                        c.println("ENDGAME");
+                        //updateCurrentPlayerInGame();
+                    }
+                } else {
+                    for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
+                        c.println("STOPMUSICWITHWINNER:"+clientServer.getUsernameFromBdd());
+                        updateCurrentPlayerInGame();
+                    }
                 }
                 this.clientServer.getGame().setMusic(null);
             } else {
@@ -215,90 +226,9 @@ public class SenderThread extends Thread {
                 c.println("STOPWITHOUTWINNER");
             }
         }
-        /*
-        else if (message.startsWith("CLIENTLEAVEGAME")) {
-            clientServer.getGame().removeClient(clientServer);
-            if(clientServer.getGame().getCurrentPlayer().size() < 1) {
-                activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
-                updateListGames();
-            } else {
-                this.clientServer.getGame().updateListPlayerInGame(this.clientServer);
-            }
-            clientServer.println("EXIT");
+        else if (message.startsWith("EXITENDGAME")) {
+            clientServer.println("EXITENDGAME");
         }
-        else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
-            updateCurrentPlayerInGame();
-        }
-        else if (message.startsWith("MUSIQUEDJ")) {
-            this.clientServer.getGame().sendMusic(this.clientServer);
-        }
-        else if (message.startsWith("YESIHAVEMUSIC")) {
-            clientServer.setHaveReceivedMusic(true);
-            boolean send = true;
-            for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
-                if (!c.isHaveReceivedMusic())
-                    send = false;
-            }
-            if (send) {
-                for (ClientServer c : clientServer.getGame().getCurrentPlayer())
-                    c.println("PLAYMUSIC");
-            }
-        }
-        else if (message.startsWith("SUPPOSEANSWER")) {
-            String[] messageAnswer = message.split(":");
-            String author = null;
-            String songName = null;
-
-            for (String answ : messageAnswer) {
-                if (answ.startsWith("author")) {
-                    String[] auth = answ.split("-");
-                    author = auth[1];
-                }
-                else if (answ.startsWith("song")) {
-                    String[] son = answ.split("-");
-                    songName = son[1];
-                }
-            }
-            boolean winner = false;
-            if (this.clientServer.getGame().getMusic() != null) {
-                if (author != null)
-                    //if (levenshteinDistance.apply(author, this.clientServer.getGame().getMusic().getInterprete()) < 2) {
-                    //if (new LevenshteinDistance().apply(author, this.clientServer.getGame().getMusic().getInterprete()) < 2) {
-                    if (author.equalsIgnoreCase(this.clientServer.getGame().getMusic().getInterprete())) {
-                        this.clientServer.setScore(clientServer.getScore() + 1);
-                        winner = true;
-                    }
-                if (songName != null)
-                    //if (levenshteinDistance.apply(songName, this.clientServer.getGame().getMusic().getTitre()) < 2) {
-                    //if (new LevenshteinDistance().apply(songName, this.clientServer.getGame().getMusic().getTitre()) < 2) {
-                    if (songName.equalsIgnoreCase(this.clientServer.getGame().getMusic().getTitre())) {
-                        this.clientServer.setScore(clientServer.getScore() + 1);
-                        winner = true;
-                    }
-            }
-
-            if (winner) {
-                for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
-                    c.println("STOPMUSICWITHWINNER:"+clientServer.getUsernameFromBdd());
-                    updateCurrentPlayerInGame();
-                }
-                this.clientServer.getGame().setMusic(null);
-
-                this.clientServer.getGame().selectOneMusic();
-                this.clientServer.getGame().sendMusic(clientServer);
-                //TODO -> Detection de victoire
-            } else {
-                clientServer.println("WRONGANSWER");
-            }
-
-
-            ColorOutput.redMessage(message);
-        }
-        else if (message.startsWith("MUSICNOTFOUND")) {
-            this.clientServer.println("STOPMUSICWITHOUTWINNER");
-            this.clientServer.setHaveReceivedMusic(false);
-        }
-        */
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
             String messageCurrentPlayer = "LISTCURRENTPLAYERINWAITINGROOM";
@@ -335,12 +265,11 @@ public class SenderThread extends Thread {
     public void updateCurrentPlayerInGame() {
         String messageCurrentPlayer = "LISTCURRENTPLAYERINGAME";
         for (ClientServer client : this.clientServer.getGame().getCurrentPlayer()) {
-            messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() + "-" + client.getScore() );
+            messageCurrentPlayer = messageCurrentPlayer.concat(":" + client.getUsernameFromBdd() + "-" + client.getScore() + "-"+client.isReadyToRound() );
         }
         for (ClientServer c : this.clientServer.getGame().getCurrentPlayer()) {
             c.println(messageCurrentPlayer);
         }
-        //this.clientServer.println(messageCurrentPlayer);
     }
 
     public void updateListGames() {
