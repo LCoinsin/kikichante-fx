@@ -48,7 +48,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
     private List<String> listPlayers = new ArrayList<>();
     private Client client;
-    private int compteARebours = 5;
+    private int compteARebours = 4;
     private Timer timer;
     private File file = new File("src/main/resources/musiques/out.mp3");
     private Media song;
@@ -57,6 +57,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     private Timer timerProgressBar;
     private TimerTask task;
     private boolean running;
+    private boolean winner = false;
 
     /******************************************************************************************************************/
 
@@ -67,12 +68,13 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     /******************************************************************************************************************/
 
     public void getPlayerInit() {
+        setButtonSend("Pret");
         ColorOutput.blueMessage("Scene in InGame");
         client.getListPlayerInGame();
         client.askMusic();
         listenner.start();
-        setTimer();
-        cantSendAnswer();
+        //setTimer();
+        //cantSendAnswer();
     }
 
     /******************************************************************************************************************/
@@ -89,7 +91,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                 }
                 else {
                     timer.cancel();
-                    client.haveMusic();
+                    player.play();
+                    musicDuration();
+                    canSendAnswer();
+                    compteARebours = 4;
                 }
             }
         }, 1000,1000);
@@ -108,6 +113,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
                 if(current/end == 1){
                     cancelTimer();
+                    player.stop();
                     client.println("MUSICNOTFOUND");
                 }
             }
@@ -145,25 +151,52 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     public void handleLine(String message) {
          if (message.startsWith("LISTCURRENTPLAYERINGAME")) {
             messageToListPlayer(message);
-        }
+         }
          else if (message.startsWith("RECEIVEDMUSIC")) {
              rebuildMusic(message);
+             client.haveMusic();
          }
          else if (message.startsWith("PLAYMUSIC")) {
+             setButtonSend("Valider");
+
              String path = "src/main/resources/musiques/out.mp3";
              song = new Media(new File(path).toURI().toString());
              player = new MediaPlayer(song);
-             musicDuration();
-             player.play();
-             canSendAnswer();
-             ColorOutput.greenMessage("Vas-y dj c'est ton moment !!");
+
+             setTimer();
          }
+         else if (message.startsWith("STOPMUSICWITHWINNER")) {
+             cancelTimer();
+             player.stop();
+             setButtonSend("Pret");
+             client.getListPlayerInGame();
+             client.askMusic();
+             songProgressBar.setProgress(0);
+             System.out.println("message = " + message); //TODO -> Afficher le vainqueur a l'ecran
+         }
+         else if (message.startsWith("STOPWITHOUTWINNER")) {
+             setButtonSend("Pret");
+             client.getListPlayerInGame();
+             client.askMusic();
+             songProgressBar.setProgress(0);
+         }
+         else {
+             System.out.println("message = " + message);
+         }
+
+         /*
          else if (message.startsWith("STOPMUSICWITHOUTWINNER")) {
              cantSendAnswer();
              ColorOutput.redMessage("Eclater le DJ");
+             client.askMusic();
+             setTimer();
+             winner = true;
          }
          else if (message.startsWith("STOPMUSICWITHWINNER")) {
              player.stop();
+             ColorOutput.blueMessage(message);
+             client.askMusic();
+             setTimer();
          }
          else if (message.startsWith("WRONGANSWER")) {
              ColorOutput.redMessage("T'es nul !!");
@@ -171,6 +204,8 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
          else {
              System.out.println("message = " + message);
          }
+
+          */
     }
 
     public void messageToListPlayer(String message) {
@@ -241,9 +276,20 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         }
 
         Convert.byteArrayToFile(bytes, file);
+
+        client.haveMusic();
     }
 
     /******************************************************************************************************************/
+
+    public void setButtonSend(String text) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                buttonSend.setText(text);
+            }
+        });
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -263,11 +309,17 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     }
 
     public void sendAnswer(ActionEvent actionEvent) {
-        if (!author.getText().equals("") || !songName.getText().equals("")) {
-            client.sendAnswer(
-                    (author.getText().equals("") ? null : author.getText()),
-                    (songName.getText().equals("") ? null : songName.getText())
-            );
+        if (buttonSend.getText().equals("Pret")) {
+            client.readyForThisRound();
+            cantSendAnswer();
+        }
+        else if (buttonSend.getText().equals("Valider")) {
+            if (!author.getText().equals("") || !songName.getText().equals("")) {
+                client.sendAnswer(
+                        (author.getText().equals("") ? null : author.getText()),
+                        (songName.getText().equals("") ? null : songName.getText())
+                );
+            }
         }
     }
 }

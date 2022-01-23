@@ -120,6 +120,11 @@ public class Client {
         println(message);
     }
 
+    public void readyForThisRound() {
+        String message=  "READYFORTHISROUND";
+        println(message);
+    }
+
     public void sendAnswer(String author, String songName) {
         String message = "SUPPOSEANSWER:" + (author!=null ? "author-"+author+":" : "") + (songName!=null ? "song-"+songName : "");
         println(message);

@@ -21,7 +21,9 @@ public class ClientServer {
     private boolean isInListGame = false;
     private boolean isReady = false;
     private boolean isInGame = false;
+    //INGAME
     private boolean haveReceivedMusic = false;
+    private boolean readyToRound = false;
     private int score = 0;
 
     public ClientServer(Socket socket, ArrayList<ClientServer> activeClient, ArrayList<GameServer> activeGame) throws IOException {
@@ -94,6 +96,16 @@ public class ClientServer {
 
     public void setUsernameFromBdd(String usernameFromBdd) {
         this.usernameFromBdd = usernameFromBdd;
+    }
+
+    /**************************/
+
+    public boolean isReadyToRound() {
+        return readyToRound;
+    }
+
+    public void setReadyToRound(boolean readyToRound) {
+        this.readyToRound = readyToRound;
     }
 
     /**************************/
