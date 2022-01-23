@@ -62,7 +62,7 @@ public class Bdd {
 
     public Music querySelectMusic() {
         Random r = new Random();
-        int n = r.nextInt(3);
+        int n = r.nextInt(10);
 
         boolean retour = false;
         ResultSet resultats = null;

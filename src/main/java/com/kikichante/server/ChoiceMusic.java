@@ -32,7 +32,7 @@ public class ChoiceMusic {
 
     public Music queryConnexionMusic() {
         Random r = new Random();
-        int n = r.nextInt(3);
+        int n = r.nextInt(10);
 
         boolean retour = false;
         ResultSet resultats = null;
