@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -22,6 +24,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import org.controlsfx.control.action.Action;
 import javafx.scene.text.Font;
+import org.controlsfx.control.cell.MediaImageCell;
 
 import java.io.File;
 import java.io.IOException;
@@ -225,13 +228,21 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                 for (String nameandScore : playersList) {
                     String[] playerScore = nameandScore.split("-");
                     String name = playerScore[0];
-                    String score=("            "+playerScore[1]);
+                    String score= playerScore[1];
+                    String state = playerScore[2];
                     //System.out.println(playerScore[1]);
                     HBox hboxNamePlayer = new HBox ();
                     hboxNamePlayer.prefHeight(43);
                     hboxNamePlayer.prefWidth(190);
                     Label labelName = new Label(name);
                     Label labelScore = new Label(score);
+
+                    String path = (state.equals("true") ? "src/main/resources/img/OK.png" : "src/main/resources/img/KO.png");
+                    Image check = new Image(new File(path).toURI().toString());
+                    ImageView imageState = new ImageView(check);
+
+                    imageState.setFitHeight(15);
+                    imageState.setFitWidth(15);
                     labelName.setAlignment(Pos.TOP_LEFT);
                     labelName.setFont(Font.font("Cooper Black", 15));
                     labelName.prefHeight(18);
@@ -243,7 +254,9 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                     labelScore.prefHeight(18);
                     labelScore.prefWidth(190);
                     labelScore.setTextFill(Color.web("#f2efef"));
+
                     vboxListPlayer.getChildren().add(hboxNamePlayer);
+                    hboxNamePlayer.getChildren().add(imageState);
                     hboxNamePlayer.getChildren().add(labelName);
                     hboxNamePlayer.getChildren().add(labelScore);
 
