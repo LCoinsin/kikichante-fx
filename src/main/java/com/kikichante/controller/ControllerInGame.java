@@ -1,6 +1,7 @@
 package com.kikichante.controller;
 
 import com.kikichante.client.Client;
+import com.kikichante.kikichantefx.Application;
 import com.kikichante.utils.ColorOutput;
 import com.kikichante.utils.Convert;
 import javafx.application.Platform;
@@ -8,8 +9,10 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -22,6 +25,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
 import javafx.scene.text.Font;
 import org.controlsfx.control.cell.MediaImageCell;
@@ -138,16 +142,22 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     Thread listenner = new Thread() {
         @Override
         public void run() {
-        while (true) {
-            try {
-                var message = client.readLine();
-                if (message.startsWith("LEAVEGAME"))
-                    break;
-                handleLine(message);
-            } catch (IOException e) {
-                e.printStackTrace();
+            String message = null;
+            while (true) {
+                try {
+                    message = client.readLine();
+                    if (message.startsWith("EXIT")) {
+                        ColorOutput.redMessage("BREAK");
+                        break;
+                    }
+                    handleLine(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+            if(message.startsWith("EXITENDGAME")) {
+                //switchToRanking();
+            }
         }
     };
 
@@ -183,32 +193,16 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
              client.askMusic();
              songProgressBar.setProgress(0);
          }
-         else {
-             System.out.println("message = " + message);
-         }
-
-         /*
-         else if (message.startsWith("STOPMUSICWITHOUTWINNER")) {
-             cantSendAnswer();
-             ColorOutput.redMessage("Eclater le DJ");
-             client.askMusic();
-             setTimer();
-             winner = true;
-         }
-         else if (message.startsWith("STOPMUSICWITHWINNER")) {
+         else if (message.startsWith("ENDGAME")) {
+             client.println("EXITENDGAME");
+             cancelTimer();
+             task.cancel();
              player.stop();
-             ColorOutput.blueMessage(message);
-             client.askMusic();
-             setTimer();
-         }
-         else if (message.startsWith("WRONGANSWER")) {
-             ColorOutput.redMessage("T'es nul !!");
+
          }
          else {
              System.out.println("message = " + message);
          }
-
-          */
     }
 
     public void messageToListPlayer(String message) {
@@ -263,6 +257,26 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                 }
             }
         });
+    }
+
+    /******************************************************************************************************************/
+
+    public void switchToRanking() {
+                try {
+                    Stage primaryStage = (Stage)bgView.getScene().getWindow();
+
+                    FXMLLoader rankingLoader = new FXMLLoader(Application.class.getResource("ViewRanking.fxml"));
+                    Scene viewRanking = new Scene(rankingLoader.load());
+
+                    ControllerRanking controllerRanking = (ControllerRanking) rankingLoader.getController();
+                    controllerRanking.setClient(client);
+                    controllerRanking.printScore();
+
+                    //primaryStage.setScene(viewRanking);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
     }
 
     /******************************************************************************************************************/

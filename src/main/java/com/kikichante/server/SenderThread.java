@@ -202,9 +202,17 @@ public class SenderThread extends Thread {
             }
 
             if (winner) {
-                for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
-                    c.println("STOPMUSICWITHWINNER:"+clientServer.getUsernameFromBdd());
-                    updateCurrentPlayerInGame();
+                if (clientServer.getScore() >= 1) {
+                    //Fin de partie
+                    for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
+                        c.println("ENDGAME");
+                        //updateCurrentPlayerInGame();
+                    }
+                } else {
+                    for (ClientServer c : clientServer.getGame().getCurrentPlayer() ) {
+                        c.println("STOPMUSICWITHWINNER:"+clientServer.getUsernameFromBdd());
+                        updateCurrentPlayerInGame();
+                    }
                 }
                 this.clientServer.getGame().setMusic(null);
             } else {
@@ -217,6 +225,9 @@ public class SenderThread extends Thread {
             for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
                 c.println("STOPWITHOUTWINNER");
             }
+        }
+        else if (message.startsWith("EXITENDGAME")) {
+            clientServer.println("EXITENDGAME");
         }
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
