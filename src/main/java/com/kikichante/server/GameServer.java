@@ -42,6 +42,10 @@ public class GameServer {
         return music;
     }
 
+    public void setMusic(Music music) {
+        this.music = music;
+    }
+
     /******************************************************************************************************************/
 
     public boolean addClient(ClientServer client) {
@@ -115,7 +119,7 @@ public class GameServer {
     public void sendMusic(ClientServer c) {
         //TODO CHANGER LA MUSIQUE EN FONCTION DE LA REPONSE DE LA BDD
         //byte[] musicArray = Convert.fileToByteArray("src/main/resources/musiques/5sd.mp3"); // src/main/resources/musiquesServeur/musiques
-        byte[] musicArray = Convert.fileToByteArray(music.getUrl().toString());
+        byte[] musicArray = Convert.fileToByteArray("src/main/resources/musiquesServeur/" + music.getUrl().toString());
         String message = "RECEIVEDMUSIC:"+ Arrays.toString(musicArray);
         c.println(message);
     }

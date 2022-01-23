@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
@@ -42,6 +43,8 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     private TextField songName;
     @FXML
     private ProgressBar songProgressBar;
+    @FXML
+    private Button buttonSend;
 
     private List<String> listPlayers = new ArrayList<>();
     private Client client;
@@ -69,6 +72,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         client.askMusic();
         listenner.start();
         setTimer();
+        cantSendAnswer();
     }
 
     /******************************************************************************************************************/
@@ -104,6 +108,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
                 if(current/end == 1){
                     cancelTimer();
+                    client.println("MUSICNOTFOUND");
                 }
             }
         };
@@ -143,7 +148,6 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
         }
          else if (message.startsWith("RECEIVEDMUSIC")) {
              rebuildMusic(message);
-             //client.haveMusic();
          }
          else if (message.startsWith("PLAYMUSIC")) {
              String path = "src/main/resources/musiques/out.mp3";
@@ -151,9 +155,11 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
              player = new MediaPlayer(song);
              musicDuration();
              player.play();
+             canSendAnswer();
              ColorOutput.greenMessage("Vas-y dj c'est ton moment !!");
          }
          else if (message.startsWith("STOPMUSICWITHOUTWINNER")) {
+             cantSendAnswer();
              ColorOutput.redMessage("Eclater le DJ");
          }
          else if (message.startsWith("STOPMUSICWITHWINNER")) {
@@ -185,7 +191,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                     String[] playerScore = nameandScore.split("-");
                     String name = playerScore[0];
                     String score=("            "+playerScore[1]);
-                    System.out.println(playerScore[1]);
+                    //System.out.println(playerScore[1]);
                     HBox hboxNamePlayer = new HBox ();
                     hboxNamePlayer.prefHeight(43);
                     hboxNamePlayer.prefWidth(190);
@@ -214,11 +220,11 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     /******************************************************************************************************************/
 
     public void canSendAnswer() {
-
+        buttonSend.setDisable(false);
     }
 
     public void cantSendAnswer() {
-
+        buttonSend.setDisable(true);
     }
 
     /******************************************************************************************************************/

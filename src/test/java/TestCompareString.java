@@ -6,7 +6,14 @@ public class TestCompareString {
 
     public static void main(String[] args) {
 
-        System.out.println(new LevenshteinDistance().apply("Angèle", "Engele"));
+        String author = "test";
+        String answer = "tet";
+
+        LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+
+        if (levenshteinDistance.apply(author, answer) < 2) {
+            System.out.println("ok");
+        }
 
     }
 

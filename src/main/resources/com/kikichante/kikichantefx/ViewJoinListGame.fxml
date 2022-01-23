@@ -55,7 +55,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="222.0" onAction="#sendAnswer" text="Valider">
+                  <Button fx:id="buttonSend" mnemonicParsing="false" prefHeight="66.0" prefWidth="222.0" onAction="#sendAnswer" text="Valider">
                      <font>
                         <Font name="Cooper Black" size="12.0" />
                      </font>
