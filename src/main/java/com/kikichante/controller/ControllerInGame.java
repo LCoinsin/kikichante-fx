@@ -156,7 +156,7 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                 }
             }
             if(message.startsWith("EXITENDGAME")) {
-                //switchToRanking();
+                switchToRanking();
             }
         }
     };
@@ -262,6 +262,9 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     /******************************************************************************************************************/
 
     public void switchToRanking() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
                 try {
                     Stage primaryStage = (Stage)bgView.getScene().getWindow();
 
@@ -272,10 +275,14 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                     controllerRanking.setClient(client);
                     controllerRanking.printScore();
 
-                    //primaryStage.setScene(viewRanking);
-                } catch (IOException e) {
+                    primaryStage.setScene(viewRanking);
+
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
 
     }
 

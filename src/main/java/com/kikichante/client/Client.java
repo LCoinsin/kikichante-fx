@@ -65,8 +65,14 @@ public class Client {
         String message = "GETCURRENTPLAYERINWAITINGROOM";
         println(message);
     }
+
     public void getListPlayerInGame() {
         String message = "GETCURRENTPLAYERINGAME";
+        println(message);
+    }
+
+    public void getScorePlayerEnGame() {
+        String message = "GETSCOREENDGAME";
         println(message);
     }
 

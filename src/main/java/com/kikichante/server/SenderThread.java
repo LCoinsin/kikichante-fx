@@ -148,7 +148,6 @@ public class SenderThread extends Thread {
                 this.clientServer.println("JOINGAME:KO");
             }
         }
-
         //IN GAME
         else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
             updateCurrentPlayerInGame();
@@ -228,6 +227,21 @@ public class SenderThread extends Thread {
         }
         else if (message.startsWith("EXITENDGAME")) {
             clientServer.println("EXITENDGAME");
+        }
+        //END GAME
+        else if (message.startsWith("GETSCOREENDGAME")) {
+            String resMessage = "SCORESCREEN:";
+
+            for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
+                resMessage = resMessage.concat(c.getUsernameFromBdd()+"-"+c.getScore());
+            }
+            clientServer.println(resMessage);
+            clientServer.getGame().removeClient(clientServer);
+            if(clientServer.getGame().getCurrentPlayer().size() < 1) {
+                activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
+                updateListGames();
+            }
+            clientServer.setInGame(false);
         }
         //WAITING ROOM
         else if (message.startsWith("GETCURRENTPLAYERINWAITINGROOM")) {
