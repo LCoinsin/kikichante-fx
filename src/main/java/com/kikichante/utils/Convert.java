@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Convert {
+
     public static byte[] fileToByteArray(String path) {
         byte[] musicByte = null;
         try {
@@ -15,8 +16,7 @@ public class Convert {
         return musicByte;
     }
 
-    public static void byteArrayToFile(byte[] bytesMusic, String path) {
-        File file = new File(path);
+    public static void byteArrayToFile(byte[] bytesMusic, File file) {
         OutputStream os = null;
         try {
             os = new FileOutputStream(file);

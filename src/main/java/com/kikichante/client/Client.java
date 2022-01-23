@@ -25,7 +25,11 @@ public class Client {
 
     public String readLine() throws IOException {
         var line = this.reader.readLine();
-        if (line == null) throw new IOException("Serveur disconnected");
+        if (line == null)  {
+            System.out.println("Serveur disconnected");
+            System.exit(0);
+            throw new IOException("Serveur disconnected");
+        }
         return line;
     }
 

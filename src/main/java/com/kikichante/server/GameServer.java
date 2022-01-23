@@ -113,7 +113,9 @@ public class GameServer {
     }
 
     public void sendMusic(ClientServer c) {
-        byte[] musicArray = Convert.fileToByteArray("src/main/resources/musiques/musTest.mp3");
+        //TODO CHANGER LA MUSIQUE EN FONCTION DE LA REPONSE DE LA BDD
+        //byte[] musicArray = Convert.fileToByteArray("src/main/resources/musiques/5sd.mp3");
+        byte[] musicArray = Convert.fileToByteArray("musiques/5sd.mp3");
         String message = "RECEIVEDMUSIC:"+ Arrays.toString(musicArray);
         c.println(message);
     }

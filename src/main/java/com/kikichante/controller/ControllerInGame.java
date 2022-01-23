@@ -2,6 +2,7 @@ package com.kikichante.controller;
 
 import com.kikichante.client.Client;
 import com.kikichante.utils.ColorOutput;
+import com.kikichante.utils.Convert;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -43,6 +44,9 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     private Client client;
     private int compteARebours = 5;
     private Timer timer;
+    private File file = new File("src/main/resources/musiques/out.mp3");
+    private Media song;
+    private MediaPlayer player;
 
     /******************************************************************************************************************/
 
@@ -104,9 +108,14 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
             messageToListPlayer(message);
         }
          else if (message.startsWith("RECEIVEDMUSIC")) {
+             rebuildMusic(message);
              client.haveMusic();
          }
          else if (message.startsWith("PLAYMUSIC")) {
+             String path = "src/main/resources/musiques/out.mp3";
+             song = new Media(new File(path).toURI().toString());
+             player = new MediaPlayer(song);
+             player.play();
              ColorOutput.greenMessage("Vas-y dj c'est ton moment !!");
          }
          else if (message.startsWith("STOPMUSICWITHOUTWINNER")) {
@@ -165,6 +174,22 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                 }
             }
         });
+    }
+
+    /******************************************************************************************************************/
+
+    public void rebuildMusic(String message) {
+        String[] resMessage = message.split(":");
+        String messageByte = resMessage[1];
+
+        String[] byteValues = messageByte.substring(1, messageByte.length() - 1).split(",");
+        byte[] bytes = new byte[byteValues.length];
+
+        for (int i=0, len=bytes.length; i<len; i++) {
+            bytes[i] = Byte.parseByte(byteValues[i].trim());
+        }
+
+        Convert.byteArrayToFile(bytes, file);
     }
 
     /******************************************************************************************************************/
