@@ -3,12 +3,15 @@ package com.kikichante.controller;
 import com.kikichante.client.Client;
 import com.kikichante.kikichantefx.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -36,6 +39,8 @@ public class ControllerSigninSignup {
     private VBox VBoxButtonConnexion;
     @FXML
     private VBox VBoxButtonInscription;
+    @FXML
+    private Button buttonConnexion;
 
     private Scene sceneMenu;
     private Client client;
@@ -121,7 +126,7 @@ public class ControllerSigninSignup {
         textfieldInscriptionPasswordConfirm.setText("");
     }
 
-    public void onClickConnexion(ActionEvent actionEvent) {
+    public void onClickConnexion() {
         Stage primaryStage = (Stage)VBoxTextFieldConnexion.getScene().getWindow();
         primaryStage.setResizable(false);
 

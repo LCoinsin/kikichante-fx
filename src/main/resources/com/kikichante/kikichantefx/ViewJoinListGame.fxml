@@ -48,7 +48,7 @@
                               <Font name="Arial Nova Light" size="32.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="songName" prefHeight="100.0" prefWidth="211.0" promptText="Titre">
+                        <TextField fx:id="songName" prefHeight="100.0" prefWidth="211.0" promptText="Titre" onAction="#sendAnswer">
                            <font>
                               <Font name="Arial Nova Cond Light" size="30.0" />
                            </font>
