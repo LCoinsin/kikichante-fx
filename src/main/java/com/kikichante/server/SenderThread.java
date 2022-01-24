@@ -149,6 +149,18 @@ public class SenderThread extends Thread {
             }
         }
         //IN GAME
+        else if (message.startsWith("LEAVEINGAME")) {
+            clientServer.println("EXIT");
+            clientServer.getGame().removeClient(clientServer);
+            if(clientServer.getGame().getCurrentPlayer().size() < 1) {
+                activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
+                updateListGames();
+            } else {
+                updateCurrentPlayerInGame();
+                clientServer.setScore(0);
+                clientServer.setGame(null);
+            }
+        }
         else if (message.startsWith("GETCURRENTPLAYERINGAME")) {
             updateCurrentPlayerInGame();
         }
@@ -168,6 +180,7 @@ public class SenderThread extends Thread {
             }
         }
         else if (message.startsWith("SUPPOSEANSWER")) {
+            ColorOutput.redMessage(message);
             String[] messageAnswer = message.split(":");
             String author = null;
             String songName = null;
@@ -201,7 +214,7 @@ public class SenderThread extends Thread {
             }
 
             if (winner) {
-                if (clientServer.getScore() >= 1) {
+                if (clientServer.getScore() >= 10) {
                     //Fin de partie
                     for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
                         c.println("ENDGAME");
@@ -213,7 +226,7 @@ public class SenderThread extends Thread {
                         updateCurrentPlayerInGame();
                     }
                 }
-                this.clientServer.getGame().setMusic(null);
+                this.clientServer.getGame().setSelectedMusic(false);
             } else {
                 clientServer.println("WRONGANSWER");
             }
@@ -224,8 +237,10 @@ public class SenderThread extends Thread {
             for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
                 c.println("STOPWITHOUTWINNER");
             }
+            this.clientServer.getGame().setSelectedMusic(false);
         }
         else if (message.startsWith("EXITENDGAME")) {
+            clientServer.setScore(0);
             clientServer.println("EXITENDGAME");
         }
         //END GAME

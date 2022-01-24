@@ -112,7 +112,7 @@ public class Client {
     }
 
     public void leaveInGame() {
-        String message = "CLIENTLEAVEGAME";
+        String message = "LEAVEINGAME";
         println(message);
     }
 

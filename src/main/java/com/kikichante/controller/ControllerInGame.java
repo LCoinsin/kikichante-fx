@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -134,7 +135,23 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
     }
 
     public void onClickReturn(ActionEvent actionEvent) {
-        //client.leaveInGame();//CLIENTLEAVEGAME
+        client.leaveInGame();
+        try {
+            Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+            FXMLLoader listGameLoader = new FXMLLoader(Application.class.getResource("ViewListGame.fxml"));
+            Scene viewListGame = new Scene(listGameLoader.load());
+
+            ControllerListGame controllerListGame = (ControllerListGame) listGameLoader.getController();
+            controllerListGame.setClient(client);
+            controllerListGame.getActiveGames();
+
+            client.goInListGame();
+
+            primaryStage.setScene(viewListGame);
+        } catch (IOException e ) {
+            e.printStackTrace();
+        }
     }
 
     /******************************************************************************************************************/
@@ -198,7 +215,6 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
              cancelTimer();
              task.cancel();
              player.stop();
-
          }
          else {
              System.out.println("message = " + message);

@@ -46,6 +46,10 @@ public class GameServer {
         this.music = music;
     }
 
+    public void setSelectedMusic(boolean selectedMusic) {
+        this.selectedMusic = selectedMusic;
+    }
+
     /******************************************************************************************************************/
 
     public boolean addClient(ClientServer client) {
