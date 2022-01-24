@@ -66,7 +66,7 @@ public class ControllerRanking {
 //for (var entry : monTreemap.entrySet())
 
      String first = monTreemap.lastEntry().getValue();
-        monTreemap.pollLastEntry();
+        //monTreemap.pollLastEntry();
         premier.getChildren().clear();
         Label labelName = new Label(first);
         premier.getChildren().add(labelName);
@@ -96,6 +96,7 @@ public class ControllerRanking {
     }
 
     public void retourMenu(ActionEvent actionEvent) {
+        client.println("LEAVESCORESCENE");
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
         try {

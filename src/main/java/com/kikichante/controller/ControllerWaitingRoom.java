@@ -152,7 +152,7 @@ public class ControllerWaitingRoom {
         } else {
             this.isReady = true;
             client.setReady();
-            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: #8FD14");
+            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: #8FD14F");
         }
     }
 
