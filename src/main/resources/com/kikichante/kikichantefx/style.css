@@ -54,6 +54,7 @@
     -fx-alignment: center;
     -fx-border-color: black;
     -fx-border-width: 3px;
+    -fx-font-weight: bold;
 }
 
 .textfieldError {
@@ -74,6 +75,7 @@
 
 .textfieldWhite {
     -fx-background-color: #11ffee00;
+    -fx-text-fill: #FFFFFF;
 }
 
 .buttonMenu {
