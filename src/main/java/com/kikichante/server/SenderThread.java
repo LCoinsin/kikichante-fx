@@ -207,14 +207,14 @@ public class SenderThread extends Thread {
             boolean winner = false;
             if (this.clientServer.getGame().getMusic() != null) {
                 if (author != null)
-                    if (levenshteinDistance.apply(author.toUpperCase(), this.clientServer.getGame().getMusic().getInterprete().toUpperCase()) < 2) {
+                    if (levenshteinDistance.apply(author.toUpperCase(), this.clientServer.getGame().getMusic().getInterprete().toUpperCase()) <= 2) {
                     //if (new LevenshteinDistance().apply(author, this.clientServer.getGame().getMusic().getInterprete()) < 2) {
                     //if (author.equalsIgnoreCase(this.clientServer.getGame().getMusic().getInterprete())) {
                         this.clientServer.setScore(clientServer.getScore() + 1);
                         winner = true;
                     }
                 if (songName != null)
-                    if (levenshteinDistance.apply(songName.toUpperCase(), this.clientServer.getGame().getMusic().getTitre().toUpperCase()) < 2) {
+                    if (levenshteinDistance.apply(songName.toUpperCase(), this.clientServer.getGame().getMusic().getTitre().toUpperCase()) <= 2) {
                     //if (new LevenshteinDistance().apply(songName, this.clientServer.getGame().getMusic().getTitre()) < 2) {
                     //if (songName.equalsIgnoreCase(this.clientServer.getGame().getMusic().getTitre())) {
                         this.clientServer.setScore(clientServer.getScore() + 1);
@@ -223,7 +223,7 @@ public class SenderThread extends Thread {
             }
 
             if (winner) {
-                if (clientServer.getScore() >= 10) {
+                if (clientServer.getScore() >= 2) {
                     //Fin de partie
                     for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
                         c.println("ENDGAME");
