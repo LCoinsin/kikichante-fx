@@ -202,12 +202,16 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
              client.getListPlayerInGame();
              client.askMusic();
              songProgressBar.setProgress(0);
+             author.setText("");
+             songName.setText("");
              System.out.println("message = " + message); //TODO -> Afficher le vainqueur a l'ecran
          }
          else if (message.startsWith("STOPWITHOUTWINNER")) {
              setButtonSend("Pret");
              client.getListPlayerInGame();
              client.askMusic();
+             author.setText("");
+             songName.setText("");
              songProgressBar.setProgress(0);
          }
          else if (message.startsWith("ENDGAME")) {

@@ -71,3 +71,9 @@
 .textfieldWhite {
     -fx-background-color: #11ffee00;
 }
+
+.buttonMenu {
+    -fx-min-width: 250px;
+    -fx-max-width: 250px;
+    -fx-pref-width: 250px;
+}
