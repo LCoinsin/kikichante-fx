@@ -1,11 +1,15 @@
 .root{
-    /*-fx-background-image: url("background_image.jpg");
-    -fx-background-size: stretch;*/
+
 }
 
 .buttonStyle {
     -fx-border-color: black;
     -fx-border-width: 3px;
+}
+
+.bgImage{
+    -fx-background-image: url("../../../video/gradienta.jpg");
+    -fx-background-size: stretch;
 }
 
 .buttonStyle2 {
