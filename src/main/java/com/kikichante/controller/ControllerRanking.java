@@ -49,38 +49,48 @@ public class ControllerRanking {
             printScoreFx(message);
         } else {
             System.out.println(message);
+            System.out.println("echec");
         }
     }
     public void printScoreFx(String message ){
         String[] messageT = message.split(":");
         messageT = Arrays.copyOfRange(messageT, 1 , messageT.length);
-        TreeMap<String, Integer> monTreemap = new TreeMap<>(){};
-
-        for (String joueur : messageT ){
-            String[] test = message.split("-");
-            monTreemap.put((test[0]),( Integer.valueOf(test[1])));
-
+        TreeMap<Integer, String> monTreemap = new TreeMap<>(){};
+        int i =0;
+        for ( String r : messageT){
+            i++;
+            String[] messageTT = r.split("-");
+            monTreemap.put(( Integer.valueOf(messageTT[1])),(messageTT[0]));
         }
-        String first = monTreemap.firstEntry().getKey();
-        monTreemap.pollFirstEntry();
+      System.out.println(monTreemap);
+//for (var entry : monTreemap.entrySet())
+
+     String first = monTreemap.lastEntry().getValue();
+        monTreemap.pollLastEntry();
         premier.getChildren().clear();
         Label labelName = new Label(first);
         premier.getChildren().add(labelName);
+     if (i>1){
+         monTreemap.pollLastEntry();
+         String second = monTreemap.lastEntry().getValue();
+         deuxieme.getChildren().clear();
+         Label labelName2 = new Label(second);
+         deuxieme.getChildren().add(labelName);
+     }
+        if (i>2){
+            monTreemap.pollLastEntry();
+            String troisi = monTreemap.lastEntry().getValue();
 
-        monTreemap.pollFirstEntry();
-        String deux = monTreemap.firstEntry().getKey();
-        deuxieme.getChildren().clear();
-        Label labelName2 = new Label(deux);
-        deuxieme.getChildren().add(labelName2);
+            troisieme.getChildren().clear();
+            Label labelName3 = new Label(troisi);
+            troisieme.getChildren().add(labelName);
+        }
 
-        monTreemap.pollFirstEntry();
-        String trois = monTreemap.firstEntry().getKey();
-        troisieme.getChildren().clear();
-        Label labelName3 = new Label(trois);
-        troisieme.getChildren().add(labelName3);
+       // String first = monTreemap.firstEntry().getKey();
 
-        deuxieme.getChildren().clear();
-        troisieme.getChildren().clear();
+
+       // monTreemap.pollFirstEntry();
+
 
 
     }
