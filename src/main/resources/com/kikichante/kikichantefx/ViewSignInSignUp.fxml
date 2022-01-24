@@ -33,7 +33,7 @@
             </children>
         </VBox>
 
-        <VBox fx:id="VBoxTextFieldInscription" disable="true" layoutX="447.0" layoutY="185.0" prefHeight="265.0" prefWidth="642.0" visible="false">
+        <VBox fx:id="VBoxTextFieldInscription" disable="true" layoutX="253.0" layoutY="142.0" prefHeight="176.0" prefWidth="642.0" visible="false">
             <children>
                 <TextField fx:id="textfieldInscriptionUsername" onKeyReleased="#deleteErrorKey" onMouseClicked="#deleteErrorMouse" prefHeight="65.0" prefWidth="642.0" promptText="Username" styleClass="textfieldBig, textfieldWhite, textfieldStyle">
                     <opaqueInsets>
@@ -76,7 +76,7 @@
             </children>
         </VBox>
 
-        <VBox fx:id="VBoxButtonInscription" disable="true" layoutX="389.0" layoutY="496.0" prefHeight="168.0" prefWidth="758.0" visible="false">
+        <VBox fx:id="VBoxButtonInscription" disable="true" layoutX="195.0" layoutY="418.0" prefHeight="168.0" prefWidth="758.0" visible="false">
             <children>
                 <Button fx:id="buttonIncription" alignment="CENTER" mnemonicParsing="false" onAction="#onClickInscription" prefHeight="88.0" prefWidth="758.0" styleClass="buttonGreen, buttonBig, buttonStyle" text="Incription" textAlignment="CENTER">
                     <VBox.margin>
