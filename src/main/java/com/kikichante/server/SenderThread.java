@@ -98,7 +98,12 @@ public class SenderThread extends Thread {
             }
             if (createGame) {
                 GameServer game = new GameServer(messageCreateGame[1], bdd);
-                game.generateListMusic();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        game.generateListMusic();
+                    }
+                }).start();
                 this.activeGame.add(game);
                 this.clientServer.setGame(game);
                 game.addClient(this.clientServer);
