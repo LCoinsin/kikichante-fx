@@ -116,7 +116,7 @@ public class ControllerWaitingRoom {
 
                         label.setText(playerName);
                         label.setAlignment(Pos.CENTER);
-                        label.setStyle("-fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 110; -fx-min-width: 110; -fx-pref-width: 110; -fx-end-margin: 10px; -fx-start-margin: 10px;");
+                        label.setStyle("-fx-padding: 3; -fx-border-insets: 3; -fx-background-insets: 3; -fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 110; -fx-min-width: 110; -fx-pref-width: 110;");
                         hBox.getChildren().add(label);
                         VBoxRowClient.getChildren().add(hBox);
                     } else {
@@ -134,7 +134,7 @@ public class ControllerWaitingRoom {
 
                         label.setText(playerName);
                         label.setAlignment(Pos.CENTER);
-                        label.setStyle("-fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 110; -fx-min-width: 110; -fx-pref-width: 110; -fx-end-margin: 10px; -fx-start-margin: 10px;");
+                        label.setStyle("-fx-padding: 3; -fx-border-insets: 3; -fx-background-insets: 3; -fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 110; -fx-min-width: 110; -fx-pref-width: 110; -fx-end-margin: 10px; -fx-start-margin: 10px;");
                         hBox.getChildren().add(label);
                     }
                 }
