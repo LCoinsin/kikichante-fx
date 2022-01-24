@@ -17,9 +17,9 @@
            <children>
             <VBox alignment="CENTER" prefHeight="116.0" prefWidth="376.0">
                <children>
-                      <Label fx:id="titleTest" alignment="CENTER" contentDisplay="CENTER" prefHeight="116.0" prefWidth="380.0" text="KIKICHANTE" textAlignment="CENTER" textFill="WHITE">
+                      <Label fx:id="titleTest" alignment="CENTER" contentDisplay="CENTER" prefHeight="76.0" prefWidth="428.0" text="KIKICHANTE" textAlignment="CENTER" textFill="WHITE">
                           <font>
-                              <Font name="HelveticaNeue-BlackCond" size="70.0" />
+                              <Font name="HelveticaNeue-BlackCond" size="50.0" />
                           </font>
                      <VBox.margin>
                         <Insets bottom="80.0" />
