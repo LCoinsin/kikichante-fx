@@ -223,7 +223,7 @@ public class SenderThread extends Thread {
             }
 
             if (winner) {
-                if (clientServer.getScore() >= 2) {
+                if (clientServer.getScore() >= 10) {
                     //Fin de partie
                     for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
                         c.println("ENDGAME");
