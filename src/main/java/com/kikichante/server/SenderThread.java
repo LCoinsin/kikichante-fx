@@ -14,7 +14,7 @@ public class SenderThread extends Thread {
     private ArrayList<GameServer> activeGame;
     private ArrayList<ClientServer> activeClient;
     private boolean isLeaved = false;
-    //private LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+    private LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
 
     public SenderThread (ClientServer clientServer, Bdd bdd, ArrayList<GameServer> activeGame, ArrayList<ClientServer> activeClient) {
         this.clientServer = clientServer;
@@ -204,16 +204,16 @@ public class SenderThread extends Thread {
             boolean winner = false;
             if (this.clientServer.getGame().getMusic() != null) {
                 if (author != null)
-                    //if (levenshteinDistance.apply(author, this.clientServer.getGame().getMusic().getInterprete()) < 2) {
+                    if (levenshteinDistance.apply(author, this.clientServer.getGame().getMusic().getInterprete()) < 2) {
                     //if (new LevenshteinDistance().apply(author, this.clientServer.getGame().getMusic().getInterprete()) < 2) {
-                    if (author.equalsIgnoreCase(this.clientServer.getGame().getMusic().getInterprete())) {
+                    //if (author.equalsIgnoreCase(this.clientServer.getGame().getMusic().getInterprete())) {
                         this.clientServer.setScore(clientServer.getScore() + 1);
                         winner = true;
                     }
                 if (songName != null)
-                    //if (levenshteinDistance.apply(songName, this.clientServer.getGame().getMusic().getTitre()) < 2) {
+                    if (levenshteinDistance.apply(songName, this.clientServer.getGame().getMusic().getTitre()) < 2) {
                     //if (new LevenshteinDistance().apply(songName, this.clientServer.getGame().getMusic().getTitre()) < 2) {
-                    if (songName.equalsIgnoreCase(this.clientServer.getGame().getMusic().getTitre())) {
+                    //if (songName.equalsIgnoreCase(this.clientServer.getGame().getMusic().getTitre())) {
                         this.clientServer.setScore(clientServer.getScore() + 1);
                         winner = true;
                     }

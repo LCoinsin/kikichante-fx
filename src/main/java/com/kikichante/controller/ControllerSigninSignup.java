@@ -11,13 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 
 public class ControllerSigninSignup {
@@ -41,6 +41,8 @@ public class ControllerSigninSignup {
     private VBox VBoxButtonInscription;
     @FXML
     private Button buttonConnexion;
+    @FXML
+    private Pane panelDrop;
 
     private Scene sceneMenu;
     private Client client;
