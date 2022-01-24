@@ -17,6 +17,9 @@ public class GameServer {
     private Bdd bdd = null;
     private Music music = null;
 
+    private ArrayList<Music> listMusic = new ArrayList<>();
+    private int round = 0;
+
     /******************************************************************************************************************/
 
     public GameServer(String gameName, Bdd bdd) {
@@ -48,6 +51,18 @@ public class GameServer {
 
     public void setSelectedMusic(boolean selectedMusic) {
         this.selectedMusic = selectedMusic;
+    }
+
+    public boolean isSelectedMusic() {
+        return selectedMusic;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
     }
 
     /******************************************************************************************************************/
@@ -134,8 +149,15 @@ public class GameServer {
         return true;
     }
 
+    public void generateListMusic() {
+        for (int i = 0; i<30; i++) {
+            listMusic.add(bdd.querySelectMusic());
+        }
+    }
+
     public void sendMusic(ClientServer c) {
-        if (music == null) selectOneMusic();
+        music = listMusic.get(round);
+        ColorOutput.blueMessage(music.getTitre());
         byte[] musicArray = Convert.fileToByteArray(music.getUrl().toString());
         String message = "RECEIVEDMUSIC:"+ Arrays.toString(musicArray);
         c.println(message);

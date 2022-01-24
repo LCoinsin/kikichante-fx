@@ -98,6 +98,7 @@ public class SenderThread extends Thread {
             }
             if (createGame) {
                 GameServer game = new GameServer(messageCreateGame[1], bdd);
+                game.generateListMusic();
                 this.activeGame.add(game);
                 this.clientServer.setGame(game);
                 game.addClient(this.clientServer);
@@ -226,14 +227,14 @@ public class SenderThread extends Thread {
                         updateCurrentPlayerInGame();
                     }
                 }
-                this.clientServer.getGame().setSelectedMusic(false);
+                clientServer.getGame().setRound(clientServer.getGame().getRound()+1);
             } else {
                 clientServer.println("WRONGANSWER");
             }
 
         }
         else if (message.startsWith("MUSICNOTFOUND")) {
-            this.clientServer.getGame().setMusic(null);
+            clientServer.getGame().setRound(clientServer.getGame().getRound()+1);
             for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
                 c.println("STOPWITHOUTWINNER");
             }

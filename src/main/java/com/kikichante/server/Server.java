@@ -22,11 +22,11 @@ public class Server {
         new CommandServer(bdd, activeClient, activeGames).start();
 
         //TODO -> Supprimer apres
-        activeGames.add(new GameServer("e", bdd));
-        activeGames.add(new GameServer("g", bdd));
-        activeGames.add(new GameServer("b", bdd));
-        activeGames.add(new GameServer("a", bdd));
-        activeGames.add(new GameServer("s", bdd));
+        //activeGames.add(new GameServer("e", bdd));
+        //activeGames.add(new GameServer("g", bdd));
+        //activeGames.add(new GameServer("b", bdd));
+        //activeGames.add(new GameServer("a", bdd));
+        //activeGames.add(new GameServer("s", bdd));
 
         try (ServerSocket serverSocket  = new ServerSocket(5000)) {
             while (true) {
