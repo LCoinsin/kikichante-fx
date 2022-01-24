@@ -38,6 +38,10 @@
     -fx-background-color: #8FD14F;
 }
 
+.buttonRed {
+    -fx-background-color: #ff2f2f;
+}
+
 .buttonYellow {
     -fx-background-color: #FAC710;
 }
@@ -53,7 +57,7 @@
 }
 
 .textfieldError {
-    -fx-border-color: red;
+    -fx-border-color: #ff2f2f;
 }
 
 .textfieldBig {

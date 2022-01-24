@@ -103,19 +103,38 @@ public class ControllerWaitingRoom {
                         hBox = new HBox();
                         hBox.setAlignment(Pos.CENTER);
                         Label label = new Label();
-                        //TODO => Set le style pour l'affichage des clients
-                        label.setText(playersList.get(i));
+
+                        String[] player = playersList.get(i).split("-");
+                        String playerName = player[0];
+                        String playerState = player[1];
+
+                        label.getStyleClass().add("buttonRed");
+                        if (playerState.equalsIgnoreCase("ok")) {
+                            label.getStyleClass().remove("buttonRed");
+                            label.getStyleClass().add("buttonGreen");
+                        }
+
+                        label.setText(playerName);
                         label.setAlignment(Pos.CENTER);
-                        label.prefHeight(60);
-                        label.prefWidth(120);
-                        label.setStyle("--fxbackground-color: red; -fx-border-color: transparent; -fx-border-width: 3;");
+                        label.setStyle("-fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 110; -fx-min-width: 110; -fx-pref-width: 110; -fx-end-margin: 10px; -fx-start-margin: 10px;");
                         hBox.getChildren().add(label);
                         VBoxRowClient.getChildren().add(hBox);
                     } else {
                         Label label = new Label();
-                        label.setText(playersList.get(i));
+
+                        String[] player = playersList.get(i).split("-");
+                        String playerName = player[0];
+                        String playerState = player[1];
+
+                        label.getStyleClass().add("buttonRed");
+                        if (playerState.equalsIgnoreCase("ok")) {
+                            label.getStyleClass().remove("buttonRed");
+                            label.getStyleClass().add("buttonGreen");
+                        }
+
+                        label.setText(playerName);
                         label.setAlignment(Pos.CENTER);
-                        label.setStyle("--fxbackground-color: red; -fx-border-color: transparent; -fx-border-width: 3;");
+                        label.setStyle("-fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 110; -fx-min-width: 110; -fx-pref-width: 110; -fx-end-margin: 10px; -fx-start-margin: 10px;");
                         hBox.getChildren().add(label);
                     }
                 }
@@ -129,11 +148,11 @@ public class ControllerWaitingRoom {
         if (isReady) {
             this.isReady = false;
             client.setNotReady();
-            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: red");
+            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: #ff2f2f");
         } else {
             this.isReady = true;
             client.setReady();
-            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: green");
+            ((Button) actionEvent.getSource()).setStyle("-fx-background-color: #8FD14");
         }
     }
 

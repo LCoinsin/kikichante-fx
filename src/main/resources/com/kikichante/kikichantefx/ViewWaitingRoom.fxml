@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerWaitingRoom">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kikichante.controller.ControllerWaitingRoom">
     <children>
         <VBox alignment="TOP_CENTER" layoutX="141.0" layoutY="42.0" prefHeight="282.0" prefWidth="412.0">
             <children>
@@ -18,21 +17,26 @@
                 <VBox fx:id="VBoxRowClient" alignment="CENTER" prefHeight="246.0" prefWidth="412.0" />
             </children>
         </VBox>
-        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickReturn" prefHeight="28.0" prefWidth="59.0" text="retour">
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickReturn" prefHeight="28.0" prefWidth="59.0" stylesheets="@style.css" text="Retour">
          <font>
             <Font name="Cooper Black" size="12.0" />
-         </font></Button>
-        <Button layoutX="198.0" layoutY="335.0" mnemonicParsing="false" onAction="#onClickReady" prefHeight="36.0" prefWidth="320.0" style="-fx-background-color: red" text="Pret">
+         </font>
+         <styleClass>
+            <String fx:value="buttonSmall" />
+            <String fx:value="buttonStyle" />
+            <String fx:value="buttonWhite" />
+         </styleClass></Button>
+        <Button layoutX="198.0" layoutY="335.0" mnemonicParsing="false" onAction="#onClickReady" prefHeight="36.0" prefWidth="320.0" style="-fx-background-color: red" styleClass="buttonStyle" text="Pret">
          <font>
             <Font name="Cooper Black" size="12.0" />
          </font>
       </Button>
-      <Text layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Règles:La personne qui trouve le plus vite la reponse gagne 1 point. " wrappingWidth="174.91406249999977">
+      <Text layoutX="17.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Règles:La personne qui trouve le plus vite la reponse gagne 1 point. " textAlignment="CENTER" wrappingWidth="140.91406249999977">
          <font>
             <Font name="Cooper Black" size="16.0" />
          </font>
       </Text>
-      <Text layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La partie se termine quand un joueur à n points." wrappingWidth="174.91406249999977">
+      <Text layoutX="17.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La partie se termine quand un joueur à 10 points." textAlignment="CENTER" wrappingWidth="124.91406249999977">
          <font>
             <Font name="Cooper Black" size="16.0" />
          </font>
