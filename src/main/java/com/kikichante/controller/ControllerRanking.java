@@ -62,20 +62,21 @@ public class ControllerRanking {
             String[] messageTT = r.split("-");
             monTreemap.put(( Integer.valueOf(messageTT[1])),(messageTT[0]));
         }
-      System.out.println(monTreemap);
+        System.out.println(monTreemap);
 //for (var entry : monTreemap.entrySet())
-
-     String first = monTreemap.lastEntry().getValue();
-        monTreemap.pollLastEntry();
         premier.getChildren().clear();
+        deuxieme.getChildren().clear();
+        troisieme.getChildren().clear();
+        String first = monTreemap.lastEntry().getValue();
+
         Label labelName = new Label(first);
         premier.getChildren().add(labelName);
-     if (i>1){
-         monTreemap.pollLastEntry();
-         String second = monTreemap.lastEntry().getValue();
-         deuxieme.getChildren().clear();
-         Label labelName2 = new Label(second);
-         deuxieme.getChildren().add(labelName);
+        if (i>1){
+            monTreemap.pollLastEntry();
+            String second = monTreemap.lastEntry().getValue();
+            deuxieme.getChildren().clear();
+            Label labelName2 = new Label(second);
+            deuxieme.getChildren().add(labelName2);
      }
         if (i>2){
             monTreemap.pollLastEntry();
@@ -83,13 +84,8 @@ public class ControllerRanking {
 
             troisieme.getChildren().clear();
             Label labelName3 = new Label(troisi);
-            troisieme.getChildren().add(labelName);
+            troisieme.getChildren().add(labelName3);
         }
-
-       // String first = monTreemap.firstEntry().getKey();
-
-
-       // monTreemap.pollFirstEntry();
 
 
 
