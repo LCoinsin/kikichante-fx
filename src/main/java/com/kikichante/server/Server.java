@@ -1,5 +1,6 @@
 package com.kikichante.server;
 
+import com.kikichante.utils.ColorOutput;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
 import java.io.IOException;
@@ -23,16 +24,9 @@ public class Server {
 
         new CommandServer(bdd, activeClient, activeGames).start();
 
-        //TODO -> Supprimer apres
-        //activeGames.add(new GameServer("e", bdd));
-        //activeGames.add(new GameServer("g", bdd));
-        //activeGames.add(new GameServer("b", bdd));
-        //activeGames.add(new GameServer("a", bdd));
-        //activeGames.add(new GameServer("s", bdd));
-
         try (ServerSocket serverSocket  = new ServerSocket(5000)) {
             while (true) {
-                System.out.println("Wainting new client");
+                ColorOutput.purpleMessage("En attente d'une nouvelle connexion ...");
                 Socket socket = serverSocket.accept();
                 ClientServer clientServer = new ClientServer(socket, activeClient, activeGames);
                 activeClient.add(clientServer);

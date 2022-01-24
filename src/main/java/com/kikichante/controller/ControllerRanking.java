@@ -45,7 +45,7 @@ public class ControllerRanking {
     }
 
     public void handleMessage(String message) {
-        if (message.startsWith("SCORESCREEN")) {
+        if(message.startsWith("SCORESCREEN")) {
             ColorOutput.blueMessage(message);
             printScoreFx(message);
         } else {
@@ -57,8 +57,7 @@ public class ControllerRanking {
     public void printScoreFx(String message) {
         String[] messageT = message.split(":");
         messageT = Arrays.copyOfRange(messageT, 1, messageT.length);
-        TreeMap<Integer, String> monTreemap = new TreeMap<>() {
-        };
+        TreeMap<Integer, String> monTreemap = new TreeMap<>() {};
         int i = 0;
         for (String r : messageT) {
             i++;
@@ -66,6 +65,7 @@ public class ControllerRanking {
             monTreemap.put((Integer.valueOf(messageTT[1])), (messageTT[0]));
         }
         System.out.println(monTreemap);
+//for (var entry : monTreemap.entrySet())
         premier.getChildren().clear();
         deuxieme.getChildren().clear();
         troisieme.getChildren().clear();

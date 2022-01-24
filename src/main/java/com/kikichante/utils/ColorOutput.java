@@ -32,4 +32,20 @@ public class ColorOutput {
         System.out.println(ANSI_GREEN + message + ANSI_RESET);
     }
 
+    public static void purpleMessage (String message) {
+        System.out.println(ANSI_PURPLE + message + ANSI_RESET);
+    }
+
+    public static void yellowMessage (String message) {
+        System.out.println(ANSI_YELLOW + message + ANSI_RESET);
+    }
+
+    public static void cyanMessage (String message) {
+        System.out.println(ANSI_CYAN + message + ANSI_RESET);
+    }
+
+    public static void redBgMessage (String message) {
+        System.out.println(ANSI_RED_BACKGROUND + message + ANSI_RESET);
+    }
+
 }

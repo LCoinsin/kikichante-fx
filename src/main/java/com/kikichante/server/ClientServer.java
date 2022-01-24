@@ -1,5 +1,7 @@
 package com.kikichante.server;
 
+import com.kikichante.utils.ColorOutput;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -63,7 +65,8 @@ public class ClientServer {
             }
             return line;
         } catch (IOException e) {
-            e.printStackTrace();
+            ColorOutput.redBgMessage("Deconnexion client : " + usernameFromBdd);
+            //e.printStackTrace();
         }
         return "CLIENTLEAVED";
     }

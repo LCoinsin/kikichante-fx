@@ -25,12 +25,14 @@ public class SenderThread extends Thread {
 
     @Override
     public void run() {
-        while (!isLeaved) {
+        while (true) {
             var line = this.clientServer.readLine();
             if (line.startsWith("CLIENTLEAVED"))
                 break;
             handleLine(line);
         }
+        ColorOutput.redBgMessage("Deconnexion client : " + clientServer.getUsernameFromBdd());
+        disconnecteClient();
     }
 
     public void handleLine(String message) {
@@ -44,7 +46,6 @@ public class SenderThread extends Thread {
             String password = messageConnexion[2];
 
             if (bdd.queryConnexion(username, password)) {
-                System.out.println("Connexion OK");
                 boolean isAlreadyConnected = false;
                 for (ClientServer c : activeClient) {
                     if (!(c.getUsernameFromBdd() == null))
@@ -53,13 +54,16 @@ public class SenderThread extends Thread {
                 }
                 if (isAlreadyConnected) {
                     this.clientServer.println("LOGIN:KO");
+                    ColorOutput.redMessage("Utilisateur deja connecté : " + username);
                 } else {
                     this.clientServer.setUsernameFromBdd(username);
                     this.clientServer.println("LOGIN:OK");
+                    ColorOutput.greenMessage("Succes connexion : " + username );
+
                 }
             } else {
-                System.out.println("Connexion KO");
                 this.clientServer.println("LOGIN:KO");
+                ColorOutput.redMessage("Erreur connexion : " + username);
             }
 
         }
@@ -69,11 +73,12 @@ public class SenderThread extends Thread {
             String password = messageInscription[2];
 
             if (bdd.queryInscription(username, password)) {
-                System.out.println("Nouvelle inscription : " + username);
+                ColorOutput.greenMessage("Nouvelle inscription : " + username);
+
                 this.clientServer.setUsernameFromBdd(username);
                 this.clientServer.println("INSCRIPTION:OK");
             } else {
-                System.out.println("ERROR inscription : " + username);
+                ColorOutput.redBgMessage("Erreur inscription : " + username);
                 this.clientServer.println("INSCRIPTION:KO");
             }
         }
@@ -98,6 +103,7 @@ public class SenderThread extends Thread {
             }
             if (createGame) {
                 GameServer game = new GameServer(messageCreateGame[1], bdd);
+                ColorOutput.blueMessage("Nouvelle partie : " + messageCreateGame[1]);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -108,7 +114,6 @@ public class SenderThread extends Thread {
                 this.clientServer.setGame(game);
                 game.addClient(this.clientServer);
                 new GameThread(game).start();
-                System.out.println("activeGame = " + activeGame);
                 this.clientServer.println("CREATEGAME:OK");
                 updateListGames();
             }
@@ -147,10 +152,8 @@ public class SenderThread extends Thread {
             }
 
             if (gameExist) {
-                System.out.println("Join game ok");
                 this.clientServer.println("JOINGAME:OK");
             } else {
-                System.out.println("la partie existe pas !!");
                 this.clientServer.println("JOINGAME:KO");
             }
         }
@@ -319,6 +322,26 @@ public class SenderThread extends Thread {
             if (c.isInListGame()) {
                 System.out.println(c.getUsernameFromBdd());
                 c.println(messageListGame);
+            }
+        }
+    }
+
+    private void disconnecteClient() {
+        for (ClientServer c : activeClient) {
+            if (c.getUserId().equals(clientServer.getUserId())) {
+                activeClient.remove(c);
+                break;
+            }
+        }
+        if (clientServer.getGame() != null) {
+            if (clientServer.getGame().getCurrentPlayer().size() <= 1) {
+                activeGame.removeIf(g -> g.getGameName().equals(clientServer.getGame().getGameName()));
+            }
+            for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
+                if (c.getUserId().equals(clientServer.getUserId())) {
+                    clientServer.getGame().removeClient(c);
+                    break;
+                }
             }
         }
     }
