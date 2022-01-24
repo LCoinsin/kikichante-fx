@@ -256,6 +256,8 @@ public class SenderThread extends Thread {
                 resMessage = resMessage.concat(c.getUsernameFromBdd()+"-"+c.getScore()+":");
             }
             clientServer.println(resMessage);
+        }
+        else if (message.startsWith("LEAVESCORESCENE")) {
             clientServer.getGame().removeClient(clientServer);
             if(clientServer.getGame().getCurrentPlayer().size() < 1) {
                 activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));

@@ -92,6 +92,7 @@ public class ControllerRanking {
     }
 
     public void retourMenu(ActionEvent actionEvent) {
+        client.println("LEAVESCORESCENE");
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
         try {
