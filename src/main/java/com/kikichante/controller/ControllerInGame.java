@@ -11,16 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,6 +29,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
 import javafx.scene.text.Font;
 import org.controlsfx.control.cell.MediaImageCell;
+import org.kordamp.bootstrapfx.scene.layout.Panel;
 
 import java.io.File;
 import java.io.IOException;
@@ -246,8 +246,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                     String state = playerScore[2];
                     //System.out.println(playerScore[1]);
                     HBox hboxNamePlayer = new HBox ();
-                    hboxNamePlayer.prefHeight(43);
-                    hboxNamePlayer.prefWidth(190);
+                    hboxNamePlayer.setStyle("-fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40");
+                    hboxNamePlayer.setStyle("-fx-max-width: 190; -fx-min-width: 190; -fx-pref-width: 190");
+                    hboxNamePlayer.setStyle("-fx-background-color: white; -fx-background-radius: 5px");
+
                     Label labelName = new Label(name);
                     Label labelScore = new Label(score);
 
@@ -255,24 +257,26 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
                     Image check = new Image(new File(path).toURI().toString());
                     ImageView imageState = new ImageView(check);
 
-                    imageState.setFitHeight(15);
-                    imageState.setFitWidth(15);
-                    labelName.setAlignment(Pos.TOP_LEFT);
+                    imageState.setFitHeight(20);
+                    imageState.setFitWidth(20);
+
+                    labelName.setStyle("-fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 120; -fx-min-width: 120; -fx-pref-width: 120; -fx-text-fill: black");
+                    labelName.setAlignment(Pos.CENTER_LEFT);
                     labelName.setFont(Font.font("Cooper Black", 15));
-                    labelName.prefHeight(18);
-                    labelName.prefWidth(190);
-                    labelName.setTextFill(Color.web("#f2efef"));
 
-                    labelScore.setAlignment(Pos.TOP_LEFT);
+                    labelScore.setStyle("-fx-max-height: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-width: 100; -fx-min-width: 100; -fx-pref-width: 100; -fx-text-fill: black");
+                    labelScore.setAlignment(Pos.CENTER);
                     labelScore.setFont(Font.font("Cooper Black", 15));
-                    labelScore.prefHeight(18);
-                    labelScore.prefWidth(190);
-                    labelScore.setTextFill(Color.web("#f2efef"));
 
-                    vboxListPlayer.getChildren().add(hboxNamePlayer);
+                    hboxNamePlayer.setAlignment(Pos.CENTER);
                     hboxNamePlayer.getChildren().add(imageState);
+                    Separator separator = new Separator();
+                    separator.setOrientation(Orientation.VERTICAL);
+                    hboxNamePlayer.getChildren().add(separator);
                     hboxNamePlayer.getChildren().add(labelName);
                     hboxNamePlayer.getChildren().add(labelScore);
+
+                    vboxListPlayer.getChildren().add(hboxNamePlayer);
 
                 }
             }

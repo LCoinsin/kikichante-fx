@@ -18,15 +18,15 @@
          <children>
             <VBox prefHeight="361.0" prefWidth="190.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="43.0" prefWidth="190.0" style="-fx-background-color: white; -fx-border-radius: 5px">
+                  <HBox alignment="CENTER" maxWidth="400.0" minWidth="190.0" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: white; -fx-border-radius: 5px; -fx-background-radius: 10px;">
                      <children>
-                        <Label maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" text="X" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Joueur" textAlignment="CENTER" textFill="#f2efef">
+                        <Label alignment="CENTER" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="190.0" text="Joueur" textAlignment="CENTER">
                            <font>
                               <Font name="Cooper Black" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="190.0" text="Score" textAlignment="JUSTIFY" textFill="#f2efef">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="190.0" text="Score" textAlignment="JUSTIFY">
                            <font>
                               <Font name="Cooper Black" size="15.0" />
                            </font>

@@ -220,7 +220,7 @@ public class SenderThread extends Thread {
             }
 
             if (winner) {
-                if (clientServer.getScore() >= 10) {
+                if (clientServer.getScore() >= 2) {
                     //Fin de partie
                     for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
                         c.println("ENDGAME");
@@ -246,7 +246,6 @@ public class SenderThread extends Thread {
             this.clientServer.getGame().setSelectedMusic(false);
         }
         else if (message.startsWith("EXITENDGAME")) {
-            clientServer.setScore(0);
             clientServer.println("EXITENDGAME");
         }
         //END GAME
@@ -254,7 +253,7 @@ public class SenderThread extends Thread {
             String resMessage = "SCORESCREEN:";
 
             for (ClientServer c : clientServer.getGame().getCurrentPlayer()) {
-                resMessage = resMessage.concat(c.getUsernameFromBdd()+"-"+c.getScore());
+                resMessage = resMessage.concat(c.getUsernameFromBdd()+"-"+c.getScore()+":");
             }
             clientServer.println(resMessage);
             clientServer.getGame().removeClient(clientServer);
@@ -262,6 +261,7 @@ public class SenderThread extends Thread {
                 activeGame.removeIf(game -> game.getGameName().equals(clientServer.getGame().getGameName()));
                 updateListGames();
             }
+            clientServer.setScore(0);
             clientServer.setInGame(false);
         }
         //WAITING ROOM
