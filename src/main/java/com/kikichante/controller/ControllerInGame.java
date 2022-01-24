@@ -297,9 +297,10 @@ public class ControllerInGame<randomMusicChoice> implements Initializable {
 
                     ControllerRanking controllerRanking = (ControllerRanking) rankingLoader.getController();
                     controllerRanking.setClient(client);
-                    controllerRanking.printScore();
 
                     primaryStage.setScene(viewRanking);
+
+                    controllerRanking.printScore();
 
 
                 } catch (Exception e) {
