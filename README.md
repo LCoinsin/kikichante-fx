@@ -7,7 +7,7 @@ __Posseder IntelliJ de présence afin de récupérer le projet github sans souci
 ## Serveur  
 Il existe deux façons de lancer le serveur (en local):
  - Depuis ___IntelliJ___ :  Il suffit de lancer _Server.java_ (Il se trouve le package _kikichanteFx_)
- - Si le serveur est en .jar, il faudrat verifier la présence du dossier ___musiques___ ...ainsi qu'efectuer la commande suivante pour l'executer :
+ - Si le serveur est en .jar, il faudrat verifier la présence du dossier ___musiques___ à la racine du .jar ainsi qu'efectuer la commande suivante pour l'executer :
 ```bash
 java -jar kikichante-fx.jar
 ```
